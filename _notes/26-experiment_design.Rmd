@@ -60,7 +60,7 @@ head(data)
 # Also:
 
 sigma2_e <- 1
-sigma2_block <- sigma2_block
+sigma2_block <- .8
 sigma2_wp <- .2
 ```
 
