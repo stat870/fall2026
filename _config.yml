@@ -17,7 +17,7 @@ title: Messy Data # change
 tagline: STAT 870 # change
 description: Analysis of Messy Data
 author: Josefina Lacasa
-baseurl: '/fall2025' # the subpath of your site, e.g. /blog change
+baseurl: '/fall2026' # the subpath of your site, e.g. /blog change
 url: 'https://stat870.github.io' # the base hostname & protocol for your site, e.g. http://example.com change
 exclude: ["Gemfile", "Gemfile.lock", "LICENSE"]
 
