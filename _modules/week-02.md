@@ -2,20 +2,19 @@
 title: Applied Linear Mixed Models & Inference
 ---
   
-Sept. 8  
+Sept. 14  
 : Linear mixed models applied to designed experiments  
-  : [html](https://stat870.github.io/fall2025/notes/linear-mixed-models.html)
+  : [](https://stat870.github.io/fall2026/notes/linear-mixed-models.html)
 
-Sept. 10  
+Sept. 16  
 : Linear mixed models applied to designed experiments & Kahoot!  
-  : [**HW 2 due**](https://stat870.github.io/fall2025/assignments/Assignment2_YourLastName.pdf){: .label .label-red } 
-  : [html](https://stat870.github.io/fall2025/notes/linear-mixed-models-1.html)
+  : [](https://stat870.github.io/fall2026/notes/linear-mixed-models-1.html)
   
-Sept. 15 
+Sept. 21 
 : Linear mixed models 
   : **HW 3**{: .label .label-green } 
-  : [html](https://stat870.github.io/fall2025/notes/linear-mixed-models-3.html)
+  : [](https://stat870.github.io/fall2026/notes/linear-mixed-models-3.html)
     
-Sept. 17 
+Sept. 23 
 : Generalized linear mixed models 
-  : [html](https://stat870.github.io/fall2025/notes/generalized-linear-mixed-models.html)
+  : [](https://stat870.github.io/fall2026/notes/generalized-linear-mixed-models.html)

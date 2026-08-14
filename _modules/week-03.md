@@ -2,26 +2,19 @@
 title: Applied Linear Mixed Models & Inference
 ---
   
-Sept. 22  
-: Hypothesis tests, Contrasts, Estimability 
-  : [html](https://stat870.github.io/fall2025/notes/inference-estimability-degrees-of-freedom-hypothesis-tests-contrasts.html)
+Sept. 28  
+: Repeated measures I   
+  : [](https://stat870.github.io/fall2026/notes/repeated-measures-i.html)
 
-Sept. 24  
-: Practice  
-  : [html](https://stat870.github.io/fall2025/notes/practice.html)
+Sept. 30  
+: Repeated measures II   
+  : [](https://stat870.github.io/fall2026/notes/repeated-measures-ii.html)
   
-Sept. 29 
-: Repeated measures I  
-  : [html](https://stat870.github.io/fall2025/notes/repeated-measures-practice-ii.html)
+October 5 
+: Practice  
+  : [](https://stat870.github.io/fall2026/notes/practice.html)
     
-October 1  
-: Repeated measures II  
-  : [html](https://stat870.github.io/fall2025/notes/repeated-measures-ii.html)
+October 7  
+: Practice II  
+  : [](https://stat870.github.io/fall2026/notes/practice-ii.html)
 
-October 3  
-: Repeated measures III  
-  : [html](https://stat870.github.io/fall2025/notes/repeated-measures-iii.html)
-
-October 8  
-: Spatial patterns   
-  : [html](https://stat870.github.io/fall2025/notes/modeling-designed-experiments-in-the-presence-of-spatial-variability.html)

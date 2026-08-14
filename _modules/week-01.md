@@ -1,23 +1,32 @@
 ---
-title: Intro & Designed Experiments Review  
+title: Intro & Review  
 ---
 
-August 25 
+August 24 
 : Welcome! 
-  : [html](https://stat870.github.io/fall2025/notes/)
-  : [**HW 1**](https://stat870.github.io/fall2025/assignments/Assignment1_YourLastName.pdf){: .label .label-green } 
+  : [html](https://stat870.github.io/fall2026/notes/)
+  : [**HW 1**](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf){: .label .label-green } 
 
-August 27 
-: Designed experiments (CRD, RCBD, split-plot designs) & Kahoot! 
-  : [html](https://stat870.github.io/fall2025/notes/designed-experiments-review.html)
+August 26 
+: Statistical modeling & Inference
+  : []()
 
-Sept. 1 
-: Labor day 
-  : [](#)
-
-Sept. 3 
-: Designed experiments (split-plot designs, strip-plot designs) 
-  : [html](https://stat870.github.io/fall2025/notes/designed-experiments-review-1.html) | [in-class R code](../scripts/09032025_splitplot_inclass.Rmd)  
+August 31 
+: Statistical modeling & Inference II
+  : []()
 : [](#)
-  : [**HW 1 due**](https://stat870.github.io/fall2025/assignments/Assignment1_YourLastName.pdf){: .label .label-red } 
-  : [**HW 2**](https://stat870.github.io/fall2025/assignments/Assignment2_YourLastName.pdf){: .label .label-green } 
+  : [**HW 1 due**](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf){: .label .label-red } 
+  : [**HW 2**](https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf){: .label .label-green } 
+
+Sept. 2 
+: Designed experiments (CRD, RCBD, split-plot designs) & Kahoot! 
+  : [](https://stat870.github.io/fall2026/notes/designed-experiments-review.html)
+
+Sept. 7 
+: Labor day -- no class! 
+
+Sept. 9 
+: Designed experiments (split-plot designs, strip-plot designs) 
+  : [](https://stat870.github.io/fall2026/notes/designed-experiments-review-1.html) | [in-class R code](../scripts/09032025_splitplot_inclass.Rmd)  
+: [](#)
+  : [**HW 2 due**](https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf){: .label .label-red } 

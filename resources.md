@@ -6,11 +6,12 @@ nav_order: 6
 ---
 
 **Required Textbooks:**
+- Milliken, G.A., & Johnson, D.E. (2009). Analysis of Messy Data Volume 1: Designed Experiments, Second Edition (2nd ed.). Chapman and Hall/CRC. [[link](https://doi.org/10.1201/EBK1584883340)]
 - Stroup, W.W., Ptukhina, M., & Garai, J. (2024). Generalized Linear Mixed Models: Modern Concepts, Methods and Applications (2nd ed.). Chapman and Hall/CRC. [[link](https://www.routledge.com/Generalized-Linear-Mixed-Models-Modern-Concepts-Methods-and-Applications/Stroup-Ptukhina-Garai/p/book/9781498755566?srsltid=AfmBOop80SBSwTFMCIzkiTtYe-5uir_Xnw2KVZxa1oXb4LJWrLRx0Wwq)] | *Note: First edition of this book has a very nicely written Chapter 2!* 
 - Wood, S.N. (2017). Generalized Additive Models. Chapman and Hall/CRC. [[link](https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood)] 
 
 **Recommended Textbooks:** 
-- Milliken, G.A., & Johnson, D.E. (2009). Analysis of Messy Data Volume 1: Designed Experiments, Second Edition (2nd ed.). Chapman and Hall/CRC. [[link](https://doi.org/10.1201/EBK1584883340)]
+- •	McElreath, R. (2020). Statistical rethinking: A Bayesian course with examples in R and STAN (2nd ed.). Chapman and Hall/CRC. 
 
 **Recommended software-related resources:**
 - R Core Team (2023) R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing. [[link](https://cran.r-project.org/)]
