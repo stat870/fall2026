@@ -11,6 +11,10 @@ Broadly, projects are expected to (i) identify a research problem, (ii) develop 
 
 ## Partial deadlines
 
+```{r echo=FALSE, fig.cap="Project deadlines", out.width = '80%', fig.align='center'}
+knitr::include_graphics("../../calendar870.jpg")
+```
+
 ### Project proposal - Due September 17 at 11:59pm CT 
 Write a page-long project proposal that states your research problem and the objective of your project. An example of an appropriate project proposal can be found [here](https://stat870.github.io/fall2025/assignments/proposal_example.pdf).
 
@@ -26,6 +30,8 @@ Presentations should include at least:
 
 - Motivation,  
 - Methods, including a clear and complete description of the statistical model and code, 
+- Results, including uncertainty estimates,
+- Discussion and interpretation of results, 
 - Discussion of strengths and weaknesses. 
 
 ### FINAL written report - Due Friday December 13 at 11:59pm CT  

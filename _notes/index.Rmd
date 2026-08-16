@@ -41,7 +41,7 @@ ggsave("../figures/students.jpg")
 - Rough mindmap of the course (on whiteboard)  
 - [Semester project](https://stat870.github.io/fall2026/notes/semester-project.html)   
 - Grades: A (100-89.999999999(!!!)), B (89.99-79.99), C (79.99-69.99), D (69.99-59.99), F (<59.99).
-- Attendance policies & kahoots  
+- Attendance policies, kahoots, in-class exercises  
 
 ## Learning goals   
 
@@ -57,6 +57,12 @@ By the end of this course, you should be able to:
 ```{r echo=FALSE, fig.cap="Mindmap", out.width = '80%', fig.align='center'}
 knitr::include_graphics("../figures/mindmap_1.jpg")
 ```
+
+## What advice would you give to future students of this course?
+
+- "As soon as you begin class, start looking for a class project and working on it too, because time flies, and before you know it, the semester is over. Starting your class project early will definitely help you benefit the most from the class as you work on your project concurrently with learning important concepts in class." 
+- "don't skip class" 
+- "Make sure to take advantage of office hours and read the material in the texts"
 
 ## What is messy data anyways?
 
