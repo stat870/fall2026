@@ -11,7 +11,7 @@ November 4
   : [](https://stat870.github.io/fall2025/notes/zero-inflated-models-practice.html)
 
 November 9 
-: Zero-inflated models III 
+: Zero-inflated models practice 
   : []()
 
 November 11 
@@ -23,8 +23,8 @@ November 16
   : [](https://stat870.github.io/fall2025/notes/missing-values.html)
 
 November 18 
-: Including environmental covariates   
-  : [](https://stat870.github.io/fall2025/notes/integrating-multi-environment-trials-with-weather-data.html)
+: Missing data problems practice 
+  : [](https://stat870.github.io/fall2025/notes/missing-values.html)
 
 November 23 
 : Fall Break -- no class 
@@ -35,8 +35,8 @@ November 25
   : []()
 
 November 30 
-: TBD 
-  : []()
+: Including environmental covariates   
+  : [](https://stat870.github.io/fall2025/notes/integrating-multi-environment-trials-with-weather-data.html)
   
 December 2 
 : TBD 

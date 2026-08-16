@@ -1,12 +1,12 @@
 --- 
 title: "STAT 870 - Analysis of Messy Data"
 author: "Josefina Lacasa"
-date: Fall 2025 #"`r Sys.Date()`"
+date: Fall 2026 #"`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
 # Welcome to STAT 870!  
-August 25th, 2025  
+August 24th, 2026  
 
 ## About this course:  
 
@@ -35,11 +35,11 @@ ggsave("../figures/students.jpg")
 
 ### Logistics  
 
-- [Website](https://stat870.github.io/fall2025/)
+- [Website](https://stat870.github.io/fall2026/)
 - Syllabus 
 - Statistical programming requirements  
 - Rough mindmap of the course (on whiteboard)  
-- [Semester project](https://stat870.github.io/fall2025/notes/semester-project.html)   
+- [Semester project](https://stat870.github.io/fall2026/notes/semester-project.html)   
 - Grades: A (100-89.999999999(!!!)), B (89.99-79.99), C (79.99-69.99), D (69.99-59.99), F (<59.99).
 - Attendance policies & kahoots  
 
@@ -138,7 +138,6 @@ knitr::include_graphics("../figures/stroup_distributions.jpg")
 ## Homework & Announcements  
 
 - Install R and RStudio. 
-- Submit [Assignment 1](https://stat870.github.io/fall2025/assignments/Assignment1_YourLastName.pdf) by next Monday. 
+- Submit [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) by next Monday. 
 - Read Chapter 2 in Stroup et al. (2024) 
-- [Applied Linear Mixed Models Workshop - Sept 13 & 14](https://kstate.qualtrics.com/jfe/form/SV_bJIjdCz50Lw7hR4) 
 

@@ -1,12 +1,20 @@
 ---
-title: Software implementation 
+title: Statistical Inference  
 ---
+  
+October 5 
+: Marginal means, contrasts, and derived quantities ((Online)) 
+  : []()
+  
+October 7  
+: Marginal means, contrasts, and derived quantities in unbalanced cases ((Online))
+  : []()
 
 October 12  
-: R implementation I ((Online))  
-  : [](https://stat870.github.io/fall2026/notes/software-implementation-of-lmms.html)
+: Practice 
+  : []()
 
 October 14  
-: R implementation II ((Online))   
-  : [](https://stat870.github.io/fall2026/notes/software-implementation-of-lmms-1.html)
+: Practice 
+  : []()
   

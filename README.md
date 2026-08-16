@@ -9,7 +9,7 @@ seo:
 ---
 
 # STAT 870 - Analysis of Messy Data  
-Fall 2025   
+Fall 2026   
 Kansas State University
 
 **Instructor:** Dr. Josefina Lacasa  
