@@ -1,5 +1,5 @@
 ---
-title: Applied Linear Mixed Models
+title: Longitudinal Data & Repeated Measures
 ---
   
 Sept. 21 
