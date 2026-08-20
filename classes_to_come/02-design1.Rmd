@@ -1,5 +1,5 @@
 # Designed Experiments Review      
-August 27th  
+August 26th  
 
 ## Announcements
 
@@ -30,6 +30,7 @@ knitr::include_graphics("../figures/principles.jpg")
 ```{r echo=FALSE, fig.cap="Schematic representation of a one-way treatment structure.", out.width = '80%', fig.align='center'}
 knitr::include_graphics("../figures/trtdesigns_oneway.PNG")
 ```
+
 
 A one-way treatment structure means that the expected value of the observations, $y$, is affected by one treatment factor with $k$ levels:   
 

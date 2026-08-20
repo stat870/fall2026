@@ -1,7 +1,7 @@
+fig:unnamed-chunk-1
+fig:unnamed-chunk-4
 fig:unnamed-chunk-5
-fig:unnamed-chunk-7
-fig:unnamed-chunk-8
-fig:unnamed-chunk-9
+fig:unnamed-chunk-6
 welcome-to-stat-870
 about-this-course
 logistics
@@ -11,6 +11,7 @@ what-advice-would-you-give-to-future-students-of-this-course
 what-is-messy-data-anyways
 linear-models-review
 on-notation
+designed-experiments-review
 homework-announcements
 semester-project
 learning-objectives
