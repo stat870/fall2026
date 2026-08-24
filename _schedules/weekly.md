@@ -24,22 +24,22 @@ schedule:
       - name: Lecture
         start: 11:30 AM
         end: 12:45 PM
-        location: EH
+        location: Dickens
       - name: Office Hours
         start: 1:00 PM
         end: 2:00 PM
-        location: EH
+        location: Dickens
   - name: Tuesday
   - name: Wednesday
     events:
       - name: Lecture
         start: 11:30 AM
         end: 12:45 PM
-        location: EH
+        location: Dickens
       - name: Office Hours
         start: 1:00 PM
         end: 2:00 PM
-        location: EH
+        location: Dickens
   - name: Thursday
     events:
       - name: Zoom Office Hours
