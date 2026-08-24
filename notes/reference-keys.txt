@@ -2,6 +2,13 @@ fig:unnamed-chunk-1
 fig:unnamed-chunk-4
 fig:unnamed-chunk-5
 fig:unnamed-chunk-6
+fig:unnamed-chunk-7
+fig:unnamed-chunk-8
+fig:unnamed-chunk-9
+fig:unnamed-chunk-10
+fig:unnamed-chunk-11
+fig:unnamed-chunk-12
+fig:unnamed-chunk-13
 welcome-to-stat-870
 about-this-course
 logistics
@@ -13,6 +20,12 @@ linear-models-review
 on-notation
 designed-experiments-review
 homework-announcements
+designed-experiments-review-1
+announcements
+designed-experiments
+treatment-structure
+design-structure
+homework-announcements-1
 semester-project
 learning-objectives
 partial-deadlines
