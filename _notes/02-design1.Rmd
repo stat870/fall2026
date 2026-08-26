@@ -64,6 +64,20 @@ where:
 knitr::include_graphics("../figures/trtdesigns_threeway.PNG")
 ```
 
+
+
+Other treatment structures: 
+
+```{r echo=FALSE, fig.cap="Schematic representation of a two-way fractional factorial treatment structure.", out.width = '80%', fig.align='center'}
+knitr::include_graphics("../figures/trtdesigns_twowayfract.PNG")
+```
+
+
+```{r echo=FALSE, fig.cap="Schematic representation of a two-way factorial plus a control treatment structure.", out.width = '80%', fig.align='center'}
+knitr::include_graphics("../figures/trtdesigns_twoway_control.PNG")
+```
+
+
 ### Design structure  
 
 The experiment design describes the data generating process ("blueprint" of the data). 
