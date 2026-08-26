@@ -101,9 +101,18 @@ knitr::include_graphics("../figures/designs_rcbd.PNG")
 knitr::include_graphics("../figures/designs_splitplot.PNG")
 ```
 
+## Statistical models 
+
+- What are the sources of variability? 
+- What is the distribution of the data?
+- What is the structure in the data?
+
+
+```{r echo=FALSE, fig.cap="Schematic representation of the relationship between the experiment design and the statistical model.", out.width = '80%', fig.align='center'}
+knitr::include_graphics("../figures/mindmap2.jpg")
+```
 
 ## Homework & Announcements  
 
-- Submit [Assignment 1](https://stat870.github.io/fall2025/assignments/Assignment1_YourLastName.pdf) by next Wednesday. 
-- Applied Linear Mixed Models Workshop is full. Email me if you still want to join. 
+- Submit [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) by next Wednesday. 
 

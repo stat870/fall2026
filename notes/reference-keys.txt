@@ -9,6 +9,7 @@ fig:unnamed-chunk-10
 fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
+fig:unnamed-chunk-14
 welcome-to-stat-870
 about-this-course
 logistics
@@ -25,6 +26,7 @@ announcements
 designed-experiments
 treatment-structure
 design-structure
+statistical-models
 homework-announcements-1
 semester-project
 learning-objectives
