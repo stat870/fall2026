@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Day 3 Designed Experiments Review | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 3 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Day 3 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 3 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  
+  
+  
+
+<meta name="author" content="Josefina Lacasa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="designed-experiments-review-1.html"/>
+<link rel="next" href="semester-project-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STAT 870</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome to STAT 870!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-this-course"><i class="fa fa-check"></i><b>1.1</b> About this course:</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#logistics"><i class="fa fa-check"></i><b>1.1.1</b> Logistics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#learning-goals"><i class="fa fa-check"></i><b>1.2</b> Learning goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#overview-of-the-course"><i class="fa fa-check"></i><b>1.3</b> Overview of the course</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-advice-would-you-give-to-future-students-of-this-course"><i class="fa fa-check"></i><b>1.4</b> What advice would you give to future students of this course?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-is-messy-data-anyways"><i class="fa fa-check"></i><b>1.5</b> What is messy data anyways?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#linear-models-review"><i class="fa fa-check"></i><b>1.6</b> Linear Models review</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#on-notation"><i class="fa fa-check"></i><b>1.7</b> On notation</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#designed-experiments-review"><i class="fa fa-check"></i><b>1.8</b> Designed experiments review</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#homework-announcements"><i class="fa fa-check"></i><b>1.9</b> Homework &amp; Announcements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html"><i class="fa fa-check"></i><b>2</b> Designed Experiments Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#announcements"><i class="fa fa-check"></i><b>2.1</b> Announcements</a></li>
+<li class="chapter" data-level="2.2" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#designed-experiments"><i class="fa fa-check"></i><b>2.2</b> Designed experiments</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#treatment-structure"><i class="fa fa-check"></i><b>2.2.1</b> Treatment structure</a></li>
+<li class="chapter" data-level="2.2.2" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#design-structure"><i class="fa fa-check"></i><b>2.2.2</b> Design structure</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#statistical-models"><i class="fa fa-check"></i><b>2.3</b> Statistical models</a></li>
+<li class="chapter" data-level="2.4" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#homework-announcements-1"><i class="fa fa-check"></i><b>2.4</b> Homework &amp; Announcements</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html"><i class="fa fa-check"></i><b>3</b> Designed Experiments Review</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#announcements-1"><i class="fa fa-check"></i><b>3.1</b> Announcements</a></li>
+<li class="chapter" data-level="3.2" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#semester-project"><i class="fa fa-check"></i><b>3.2</b> Semester project</a></li>
+<li class="chapter" data-level="3.3" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#designed-experiments-1"><i class="fa fa-check"></i><b>3.3</b> Designed experiments</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#design-structures"><i class="fa fa-check"></i><b>3.3.1</b> Design structures</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#applied-example-fungicide-effects-on-barley-genotypes"><i class="fa fa-check"></i><b>3.4</b> Applied example: fungicide effects on barley genotypes</a></li>
+<li class="chapter" data-level="3.5" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#fixed-versus-random-effects"><i class="fa fa-check"></i><b>3.5</b> Fixed versus random effects</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#going-from-fixed-effects-to-fixedrandom-effects"><i class="fa fa-check"></i><b>3.5.1</b> Going from fixed effects to fixed+random effects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#generalities-on-mixed-models"><i class="fa fa-check"></i><b>3.6</b> Generalities on mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#random-effects"><i class="fa fa-check"></i><b>3.6.1</b> Random effects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#estimation-of-parameters"><i class="fa fa-check"></i><b>3.6.2</b> Estimation of parameters</a></li>
+<li class="chapter" data-level="3.6.3" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#fixed-effects-versus-random-effects"><i class="fa fa-check"></i><b>3.6.3</b> Fixed effects versus random effects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="designed-experiments-review-2.html"><a href="designed-experiments-review-2.html#homework-announcements-2"><i class="fa fa-check"></i><b>3.7</b> Homework &amp; Announcements</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="semester-project-1.html"><a href="semester-project-1.html"><i class="fa fa-check"></i><b>4</b> Semester Project</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="semester-project-1.html"><a href="semester-project-1.html#learning-objectives"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="semester-project-1.html"><a href="semester-project-1.html#partial-deadlines"><i class="fa fa-check"></i><b>4.2</b> Partial deadlines</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="semester-project-1.html"><a href="semester-project-1.html#project-proposal---due-september-17-at-1159pm-ct"><i class="fa fa-check"></i><b>4.2.1</b> Project proposal - Due September 17 at 11:59pm CT</a></li>
+<li class="chapter" data-level="4.2.2" data-path="semester-project-1.html"><a href="semester-project-1.html#written-report-for-peer-review---due-november-27-at-1159pm-ct-for-peer-review"><i class="fa fa-check"></i><b>4.2.2</b> Written report for peer review - Due November 27 at 11:59pm CT for peer review</a></li>
+<li class="chapter" data-level="4.2.3" data-path="semester-project-1.html"><a href="semester-project-1.html#peer-review---due-friday-december-4-at-1159pm"><i class="fa fa-check"></i><b>4.2.3</b> Peer review - Due Friday December 4 at 11:59pm</a></li>
+<li class="chapter" data-level="4.2.4" data-path="semester-project-1.html"><a href="semester-project-1.html#oral-presentation---somewhere-between-december-3---december-11"><i class="fa fa-check"></i><b>4.2.4</b> Oral presentation - Somewhere between December 3 - December 11</a></li>
+<li class="chapter" data-level="4.2.5" data-path="semester-project-1.html"><a href="semester-project-1.html#final-written-report---due-friday-december-13-at-1159pm-ct"><i class="fa fa-check"></i><b>4.2.5</b> FINAL written report - Due Friday December 13 at 11:59pm CT</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 870 - Analysis of Messy Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="designed-experiments-review-2" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Day 3</span> Designed Experiments Review<a href="designed-experiments-review-2.html#designed-experiments-review-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>September 3rd</p>
+<div id="announcements-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Announcements<a href="designed-experiments-review-2.html#announcements-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf">Assignment 1</a> is due today!</li>
+<li>Applied Linear Mixed Models Workshop 09/19-09/20.</li>
+<li>Read Chapter 2 of Stroup’s GLMM book (for this chapter only, 1ed is better than 2ed).</li>
+</ul>
+</div>
+<div id="semester-project" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Semester project<a href="designed-experiments-review-2.html#semester-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Proposal due September 17th – <a href="https://stat870.github.io/fall2026/assignments/proposal_example.pdf">see example 1</a> | <a href="https://stat870.github.io/fall2026/assignments/proposal_example2.pdf">see example 2</a></li>
+<li>Must contain: Background, Objectives.<br />
+</li>
+<li>Data for the project must be ready to go.</li>
+<li>Final product: Manuscript + Tutorial.</li>
+<li>Working in teams vs. solo.</li>
+<li>Start as soon as possible!</li>
+</ul>
+</div>
+<div id="designed-experiments-1" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Designed experiments<a href="designed-experiments-review-2.html#designed-experiments-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s review the basics of designed experiments:</p>
+<ul>
+<li>Research question</li>
+<li>Planning the experiment<br />
+</li>
+<li>Treatment structure - directly dependent on the research question</li>
+<li>Design structure - mostly depending on logistics. May depend on the research question.</li>
+</ul>
+<div id="design-structures" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Design structures<a href="designed-experiments-review-2.html#design-structures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>While the treatment structure defines what effects we will try and estimate as precisely as possible, the design structure tells us the story of <strong>how</strong> those treatments were applied.
+Some of the most common designed experiments include</p>
+<ul>
+<li>completely randomized design (CRD),</li>
+<li>randomized complete block design (RCBD),</li>
+<li>split-plot design,</li>
+<li>relevant variations to the designs above:
+<ul>
+<li>generalized randomized complete block design,</li>
+<li>strip-plot design,</li>
+<li>repeated measures designs.</li>
+</ul></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="../figures/designs_crd.PNG" alt="Schematic description of an experiment with a completely randomized design" width="100%" />
+<p class="caption">
+Figure 3.1: Schematic description of an experiment with a completely randomized design
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="../figures/designs_rcbd.PNG" alt="Schematic description of an experiment with a randomized complete block design" width="100%" />
+<p class="caption">
+Figure 3.2: Schematic description of an experiment with a randomized complete block design
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<img src="../figures/designs_splitplot.PNG" alt="Schematic description of a field experiment with a split-plot design" width="100%" />
+<p class="caption">
+Figure 3.3: Schematic description of a field experiment with a split-plot design
+</p>
+</div>
+</div>
+</div>
+<div id="applied-example-fungicide-effects-on-barley-genotypes" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Applied example: fungicide effects on barley genotypes<a href="designed-experiments-review-2.html#applied-example-fungicide-effects-on-barley-genotypes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s consider an experiment that aimed to study the effect of fungicide and barley genotypes on grain yield. The study includes two levels of fungicide, and 70 different genotypes, considering all their possible combinations.</p>
+<ul>
+<li>What is the treatment structure of the experiment?</li>
+<li>Do we know the design structure of the experiment?</li>
+</ul>
+<p>The statistical model for the split-plot can be described as</p>
+<p><span class="math display">\[y_{ijk} = \mu + F_i + G_j + F\times G_{ij} + b_k + w_{i(k)} + \varepsilon_{ijk}\]</span></p>
+<p><strong>Now, the actual experiment was run like this:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="designed-experiments-review-2.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="designed-experiments-review-2.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(agridat)</span>
+<span id="cb1-3"><a href="designed-experiments-review-2.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-4"><a href="designed-experiments-review-2.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="designed-experiments-review-2.html#cb2-1" tabindex="-1"></a>df_fungicide <span class="ot">&lt;-</span> agridat<span class="sc">::</span>durban.splitplot</span>
+<span id="cb2-2"><a href="designed-experiments-review-2.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="designed-experiments-review-2.html#cb2-3" tabindex="-1"></a>df_fungicide <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="designed-experiments-review-2.html#cb2-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(bed, row))<span class="sc">+</span></span>
+<span id="cb2-5"><a href="designed-experiments-review-2.html#cb2-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb2-6"><a href="designed-experiments-review-2.html#cb2-6" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> fung))<span class="sc">+</span></span>
+<span id="cb2-7"><a href="designed-experiments-review-2.html#cb2-7" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-20-1.png" alt="" width="672" /></p>
+<ul>
+<li>What is the treatment structure?</li>
+<li>What are the experimental units?</li>
+<li>How many independent observations per treatment factor?</li>
+<li>What is the design structure?</li>
+</ul>
+<p><a href="../scripts/09032025_splitplot.Rmd">Download R code</a></p>
+</div>
+<div id="fixed-versus-random-effects" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Fixed versus random effects<a href="designed-experiments-review-2.html#fixed-versus-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In what follows, we have a small elaboration of what it means to model that “structure in the data” (i.e., the groups of similarly generated points).</p>
+<div id="going-from-fixed-effects-to-fixedrandom-effects" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Going from fixed effects to fixed+random effects<a href="designed-experiments-review-2.html#going-from-fixed-effects-to-fixedrandom-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The data below were generated by an experiment that tested 18 sorghum genotypes in a randomized complete block design.</p>
+<ul>
+<li>Discuss the treatment structure</li>
+<li>Discuss the design structure</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="designed-experiments-review-2.html#cb3-1" tabindex="-1"></a>dat_blocked <span class="ot">&lt;-</span> agridat<span class="sc">::</span>omer.sorghum <span class="sc">|&gt;</span> <span class="fu">filter</span>(env <span class="sc">==</span> <span class="st">&quot;E3&quot;</span>)</span>
+<span id="cb3-2"><a href="designed-experiments-review-2.html#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="designed-experiments-review-2.html#cb3-3" tabindex="-1"></a><span class="fu">str</span>(dat_blocked)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    72 obs. of  4 variables:
+##  $ env  : Factor w/ 6 levels &quot;E1&quot;,&quot;E2&quot;,&quot;E3&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ rep  : Factor w/ 4 levels &quot;R1&quot;,&quot;R2&quot;,&quot;R3&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ gen  : Factor w/ 18 levels &quot;G01&quot;,&quot;G02&quot;,&quot;G03&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ yield: num  449 458 545 547 784 ...</code></pre>
+<p>Now, remember that the blocks are supposed to indicate “groups of similar experimental units”.
+Said “groups of similar experimental units” means that the assumption of independence would be kind of a stretch.
+In reality, all observations from the same block (are supposed to) have <em>something</em> in common.
+It’s not reasonable to assume that the observations are independent, because observations from the same field have more in common than observations from different fields.
+They share more similar soil and, with that, a baseline fertility and yield.</p>
+<p>Basically, we expect the genotypes relative performance to be similar across fields, but the baseline (a.k.a., the intercept) to be field-specific. Then, we could say<br />
+<span class="math display">\[y_{ij} = \beta_{0j} + G_i + \varepsilon_{ij}, \\ \varepsilon_{ij} \sim N(0, \sigma^2),\]</span><br />
+where <span class="math inline">\(\beta_{0j}\)</span> is a block-specific intercept, and <span class="math inline">\(G_i\)</span> is the genotype effect.<br />
+Now, there are different ways to model that block-specific intercept.</p>
+<p>This is a big forking path in statistical modeling.
+All-fixed models estimate the effects of <strong>everything</strong>.
+Mixed-effects models indicate <em>what is similar to what</em> via random effects.</p>
+<p><strong>Fixed effects</strong></p>
+<p>We could define an all-fixed model,</p>
+<p><span class="math display">\[y_{ij} = \beta_{0j} + G_i + \varepsilon_{ij}, \\ \beta_{0j} = \beta_0 + u_j \\ \varepsilon_{ij} \sim N(0, \sigma^2),\]</span></p>
+<p>where <span class="math inline">\(u_j\)</span> is the effect of the <span class="math inline">\(j\)</span>th block on the intercept (i.e., on the baseline).
+In this case, <span class="math inline">\(u_j\)</span> is a fixed effect, which means it may be estimated via least squares estimation or maximum likelihood estimation.
+Under both least squares and maximum likelihood (assuming normal distribution), we may estimate the parameters by computing</p>
+<p><span class="math display">\[\hat{\boldsymbol{\beta}}_{ML} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y},\]</span></p>
+<p>which yields the minimum variance unbiased estimate of <span class="math inline">\(\boldsymbol{\beta}\)</span>.</p>
+<p>We still have <span class="math display">\[\boldsymbol{\Sigma} =
+\begin{bmatrix} \sigma_{\varepsilon}^2 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; \sigma_{\varepsilon}^2 &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; \sigma_{\varepsilon}^2 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \sigma_{\varepsilon}^2 &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\  
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; \sigma_{\varepsilon}^2 \end{bmatrix}\]</span>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="designed-experiments-review-2.html#cb5-1" tabindex="-1"></a>m_fixed <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> rep, <span class="at">data =</span> dat_blocked)</span>
+<span id="cb5-2"><a href="designed-experiments-review-2.html#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="designed-experiments-review-2.html#cb5-3" tabindex="-1"></a><span class="fu">summary</span>(m_fixed)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ gen + rep, data = dat_blocked)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -349.66  -81.58   -1.08   78.47  318.59 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   672.03      86.46   7.773 3.29e-10 ***
+## genG02        -66.52     113.20  -0.588 0.559393    
+## genG03        223.07     113.20   1.971 0.054201 .  
+## genG04        167.40     113.20   1.479 0.145336    
+## genG05         61.05     113.20   0.539 0.591996    
+## genG06       -267.20     113.20  -2.361 0.022111 *  
+## genG07        355.20     113.20   3.138 0.002826 ** 
+## genG08        159.53     113.20   1.409 0.164820    
+## genG09        231.31     113.20   2.043 0.046198 *  
+## genG10        156.66     113.20   1.384 0.172393    
+## genG11        146.29     113.20   1.292 0.202071    
+## genG12        -42.87     113.20  -0.379 0.706453    
+## genG13        243.18     113.20   2.148 0.036467 *  
+## genG14          1.06     113.20   0.009 0.992565    
+## genG15         64.72     113.20   0.572 0.570007    
+## genG16         22.81     113.20   0.201 0.841122    
+## genG17       -296.66     113.20  -2.621 0.011534 *  
+## genG18        448.28     113.20   3.960 0.000233 ***
+## repR2        -150.83      53.36  -2.827 0.006704 ** 
+## repR3         -85.66      53.36  -1.605 0.114592    
+## repR4        -124.21      53.36  -2.328 0.023936 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 160.1 on 51 degrees of freedom
+## Multiple R-squared:  0.6748, Adjusted R-squared:  0.5473 
+## F-statistic: 5.291 on 20 and 51 DF,  p-value: 7.64e-07</code></pre>
+<p><strong>Random effects</strong></p>
+<p>We could also assume that the effects of the <span class="math inline">\(j\)</span>th block (i.e., <span class="math inline">\(u_j\)</span>) arise from a random distribution.
+The most common assumption (and the default in most statistical software) is that</p>
+<p><span class="math display">\[u_j \sim N(0, \sigma^2_b).\]</span></p>
+<p>Now, we don’t estimate the effect, but the variance <span class="math inline">\(\sigma^2_b\)</span>.
+Note that there are <span class="math inline">\(J\)</span> levels of the random effects, meaning that a random effect is always <strong>categorical</strong>.<br />
+Also, now</p>
+<p><span class="math display">\[\hat{\boldsymbol{\beta}}_{REML} = (\mathbf{X}^T \mathbf{V}^{-1} \mathbf{X})^{-1}\mathbf{X}^T \mathbf{V}^{-1} \mathbf{y},\]</span></p>
+<p>where <span class="math inline">\(\mathbf{V} = Var(\mathbf{y})\)</span> is the variance-covariance matrix of <span class="math inline">\(\mathbf{y}\)</span>,
+including residual variance and random-effects variance. Note that this formula yields
+the same point estimate for <span class="math inline">\(\boldsymbol{\beta}\)</span>, but with a different confidence interval.</p>
+<p>Now, the variance-covariance matrix <span class="math inline">\(\boldsymbol{\Sigma}\)</span> of the marginal distribution has changed.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="designed-experiments-review-2.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb7-2"><a href="designed-experiments-review-2.html#cb7-2" tabindex="-1"></a>m_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>rep), <span class="at">data =</span> dat_blocked)</span>
+<span id="cb7-3"><a href="designed-experiments-review-2.html#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="designed-experiments-review-2.html#cb7-4" tabindex="-1"></a><span class="fu">summary</span>(m_mixed)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: yield ~ gen + (1 | rep)
+##    Data: dat_blocked
+## 
+## REML criterion at convergence: 729.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -1.99895 -0.58043 -0.01854  0.52108  1.92022 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  rep      (Intercept)  2906     53.91  
+##  Residual             25627    160.09  
+## Number of obs: 72, groups:  rep, 4
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)   581.86      84.46   6.889
+## genG02        -66.52     113.20  -0.588
+## genG03        223.07     113.20   1.971
+## genG04        167.40     113.20   1.479
+## genG05         61.05     113.20   0.539
+## genG06       -267.20     113.20  -2.361
+## genG07        355.20     113.20   3.138
+## genG08        159.53     113.20   1.409
+## genG09        231.31     113.20   2.043
+## genG10        156.66     113.20   1.384
+## genG11        146.29     113.20   1.292
+## genG12        -42.87     113.20  -0.379
+## genG13        243.18     113.20   2.148
+## genG14          1.06     113.20   0.009
+## genG15         64.72     113.20   0.572
+## genG16         22.81     113.20   0.201
+## genG17       -296.66     113.20  -2.621
+## genG18        448.28     113.20   3.960</code></pre>
+<pre><code>## 
+## Correlation matrix not shown by default, as p = 18 &gt; 12.
+## Use print(x, correlation=TRUE)  or
+##     vcov(x)        if you need it</code></pre>
+</div>
+</div>
+<div id="generalities-on-mixed-models" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Generalities on mixed models<a href="designed-experiments-review-2.html#generalities-on-mixed-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mixed models combine fixed effects and random effects.
+Generally speaking, we can write out a mixed-effects model using the model equation form, as</p>
+<p><span class="math display">\[\mathbf{y} = \mathbf{X} \boldsymbol{\beta} + \mathbf{Z}\mathbf{u} + \boldsymbol{\varepsilon}, \\
+\begin{bmatrix}\mathbf{u} \\ \boldsymbol{\varepsilon} \end{bmatrix} \sim \left(
+\begin{bmatrix}\boldsymbol{0} \\ \boldsymbol{0} \end{bmatrix},
+\begin{bmatrix}\mathbf{G} &amp; \boldsymbol{0} \\
+\boldsymbol{0} &amp; \mathbf{R} \end{bmatrix}
+\right),\]</span></p>
+<p>where <span class="math inline">\(\mathbf{y}\)</span> is the observed response,
+<span class="math inline">\(\mathbf{X}\)</span> is the matrix with the explanatory variables,
+<span class="math inline">\(\mathbf{Z}\)</span> is the design matrix,
+<span class="math inline">\(\boldsymbol{\beta}\)</span> is the vector containing the fixed-effects,
+<span class="math inline">\(\mathbf{u}\)</span> is the vector containing the random effects,
+<span class="math inline">\(\boldsymbol{\varepsilon}\)</span> is the vector containing the residuals,
+<span class="math inline">\(\mathbf{G}\)</span> is the variance-covariance matrix of the random effects,
+and <span class="math inline">\(\mathbf{R}\)</span> is the variance-covariance matrix of the residuals.
+Note that <span class="math inline">\(\mathbf{X} \boldsymbol{\beta}\)</span> is the fixed effects part of the model, and
+<span class="math inline">\(\mathbf{Z}\mathbf{u}\)</span> is the random effects part of the model.</p>
+<p>Using the probability distribution form, we can then say that <span class="math inline">\(E(\mathbf{y}) = \mathbf{X}\boldsymbol{\beta}\)</span>
+and <span class="math inline">\(Var(\mathbf{y}) = \mathbf{V} = \mathbf{Z}\mathbf{G}\mathbf{Z}&#39; + \mathbf{R}\)</span>.
+Usually, we assume <span class="math display">\[\mathbf{G} = \sigma^2_u
+\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; \dots 0 \\
+0 &amp; 1 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 1
+\end{bmatrix}\]</span> and <span class="math display">\[\mathbf{R} = \sigma^2
+\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 1
+\end{bmatrix} \]</span>.</p>
+<p>Then,</p>
+<p><span class="math display">\[\mathbf{y} \sim N(\boldsymbol{\mu}, \Sigma), \\
+\Sigma = \begin{bmatrix} \sigma^2 + \sigma^2_u &amp; \sigma^2_u &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp;\dots &amp; 0\\
+\sigma^2_u &amp; \sigma^2 + \sigma^2_u &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; \sigma^2 + \sigma^2_u &amp; \sigma^2_u  &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; \sigma^2_u &amp; \sigma^2 + \sigma^2_u  &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \sigma^2 + \sigma^2_u &amp; \sigma^2_u  &amp; \dots &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \sigma^2_u &amp; \sigma^2 + \sigma^2_u  &amp; \dots &amp; \vdots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; \sigma^2 + \sigma^2_u
+\end{bmatrix}.\]</span></p>
+<p>Take your time to digest the variance-covariance matrix above. What type of data do you think generated it?</p>
+<div id="random-effects" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Random effects<a href="designed-experiments-review-2.html#random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>By definition, random effects are regression coefficients that arise from a random distribution.</li>
+<li>Typically, a random effect <span class="math inline">\(u \sim N(0, \sigma^2_u)\)</span>.<br />
+</li>
+<li>Note that this model for the parameter may result in shrinkage.</li>
+<li>We estimate the variance <span class="math inline">\(\sigma^2_u\)</span>.<br />
+</li>
+<li>Calculating degrees of freedom can get much more complex than in all-fixed effects models (e.g., with unbalanced data, spatio-temporally correlated data, or non-normal data).<br />
+</li>
+<li>In the context of designed experiments, random effects are assumed to be independent to each other and independent to the residual.</li>
+</ul>
+</div>
+<div id="estimation-of-parameters" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Estimation of parameters<a href="designed-experiments-review-2.html#estimation-of-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>“Estimation” is a term held mostly exclusive to fixed effects and variance components.
+Restricted maximum likelihood estimation (REML) is the default in most mixed effects models because, for small data (aka most experimental data), maximum likelihood (ML) provides variance estimates that are downward biased.
+- In REML, the likelihood is maximized after accounting for the model’s fixed effects.</p>
+<ul>
+<li>In ML, <span class="math inline">\(\ell_{ML}(\boldsymbol{\sigma; \boldsymbol{\beta}, \mathbf{y}}) = - (\frac{n}{2}) \log(2\pi)-(\frac{1}{2}) \log ( \vert \mathbf{V}(\boldsymbol\sigma) \vert ) - (\frac{1}{2}) (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^T[\mathbf{V}(\boldsymbol\sigma)]^{-1}(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})\)</span><br />
+</li>
+<li>In REML, <span class="math inline">\(\ell_{REML}(\boldsymbol{\sigma};\mathbf{y}) = - (\frac{n-p}{2}) \log (2\pi) - (\frac{1}{2}) \log ( \vert \mathbf{V}(\boldsymbol\sigma) \vert ) - (\frac{1}{2})log \left(  \vert \mathbf{X}^T[\mathbf{V}(\boldsymbol\sigma)]^{-1}\mathbf{X} \vert \right) - (\frac{1}{2})\mathbf{r}[\mathbf{V}(\boldsymbol\sigma)]^{-1}\mathbf{r}\)</span>,
+where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="math inline">\(\mathbf{r} = \mathbf{y}-\mathbf{X}\hat{\boldsymbol{\beta}}_{ML}\)</span>.
+<ul>
+<li>Start with initial values for <span class="math inline">\(\boldsymbol{\sigma}\)</span>, <span class="math inline">\(\tilde{\boldsymbol{\sigma}}\)</span>.<br />
+</li>
+<li>Compute <span class="math inline">\(\mathbf{G}(\tilde{\boldsymbol{\sigma}})\)</span> and <span class="math inline">\(\mathbf{R}(\tilde{\boldsymbol{\sigma}})\)</span>.<br />
+</li>
+<li>Obtain <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\mathbf{b}\)</span>.<br />
+</li>
+<li>Update <span class="math inline">\(\tilde{\boldsymbol{\sigma}}\)</span>.<br />
+</li>
+<li>Repeat until convergence.</li>
+</ul></li>
+</ul>
+</div>
+<div id="fixed-effects-versus-random-effects" class="section level3 hasAnchor" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> Fixed effects versus random effects<a href="designed-experiments-review-2.html#fixed-effects-versus-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What is behind a random effect:</p>
+<ul>
+<li>$ N ( , (^T ^{-1} )^{-1} ) $</li>
+<li><span class="math inline">\(u_j \sim N(0, \sigma^2_u)\)</span></li>
+<li>What process is being studied?<br />
+</li>
+<li>How were the levels selected? (randomly, carefully selected)<br />
+</li>
+<li>How many levels does the factor have, vs. how many did we observe?<br />
+</li>
+<li>BLUEs versus BLUPs.</li>
+</ul>
+<p>Read more in in Gelman (2005, page 20), “Analysis of variance—why it is more important than ever” [<a href="https://projecteuclid.org/journals/annals-of-statistics/volume-33/issue-1/Analysis-of-variancewhy-it-is-more-important-than-ever/10.1214/009053604000001048.full">link</a>], and <a href="https://sites.stat.columbia.edu/gelman/arm/">Gelman and Hill (2006), page 245</a>.</p>
+</div>
+</div>
+<div id="homework-announcements-2" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Homework &amp; Announcements<a href="designed-experiments-review-2.html#homework-announcements-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf">Assignment 1</a> due Wednesday.</li>
+<li>Applied Linear Mixed Models Workshop is full. Email me if you still want to join.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="designed-experiments-review-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/stat870/fall2026/edit/main/03-LMM.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": "https://github.com/stat870/fall2026/blob/main/03-LMM.Rmd",
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

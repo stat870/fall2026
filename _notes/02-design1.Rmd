@@ -3,7 +3,7 @@ August 26th
 
 ## Announcements
 
-- [Assignment 1](https://stat870.github.io/fall2025/assignments/Assignment1_YourLastName.pdf) is due next Wednesday. 
+- [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) is due next Wednesday. 
 - Applied Linear Mixed Models Workshop 09/19-09/20.  
 
 ## Designed experiments  

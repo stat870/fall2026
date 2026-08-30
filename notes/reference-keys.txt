@@ -1,4 +1,5 @@
-fig:unnamed-chunk-2
+fig:unnamed-chunk-1
+fig:unnamed-chunk-4
 fig:unnamed-chunk-5
 fig:unnamed-chunk-6
 fig:unnamed-chunk-7
@@ -12,6 +13,8 @@ fig:unnamed-chunk-14
 fig:unnamed-chunk-15
 fig:unnamed-chunk-16
 fig:unnamed-chunk-17
+fig:unnamed-chunk-18
+fig:unnamed-chunk-24
 welcome-to-stat-870
 about-this-course
 logistics
@@ -30,7 +33,20 @@ treatment-structure
 design-structure
 statistical-models
 homework-announcements-1
+designed-experiments-connection-to-linear-mixed-models
+announcements-1
 semester-project
+designed-experiments-1
+design-structures
+fixed-versus-random-effects
+going-from-fixed-effects-to-fixedrandom-effects
+generalities-on-mixed-models
+random-effects
+estimation-of-parameters
+fixed-effects-versus-random-effects
+applied-example-fungicide-effects-on-barley-genotypes
+homework-announcements-2
+semester-project-1
 learning-objectives
 partial-deadlines
 project-proposal---due-september-17-at-1159pm-ct
