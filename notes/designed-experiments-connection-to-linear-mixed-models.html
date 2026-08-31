@@ -266,19 +266,19 @@ Some of the most common designed experiments include:</p>
 <li>repeated measures designs.</li>
 </ul></li>
 </ul>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
 <img src="../figures/designs_crd.PNG" alt="Schematic description of an experiment with a completely randomized design" width="100%" />
 <p class="caption">
 Figure 3.1: Schematic description of an experiment with a completely randomized design
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
 <img src="../figures/designs_rcbd.PNG" alt="Schematic description of an experiment with a randomized complete block design" width="100%" />
 <p class="caption">
 Figure 3.2: Schematic description of an experiment with a randomized complete block design
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
 <img src="../figures/designs_splitplot.PNG" alt="Schematic description of a field experiment with a split-plot design" width="100%" />
 <p class="caption">
 Figure 3.3: Schematic description of a field experiment with a split-plot design
@@ -476,6 +476,7 @@ Usually, we assume <span class="math display">\[\mathbf{G} = \sigma^2_u
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; \sigma^2 + \sigma^2_u
 \end{bmatrix}.\]</span></p>
 <p>Take your time to digest the variance-covariance matrix above. What type of data do you think generated it?</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-1.png" alt="" width="672" /></p>
 <div id="random-effects" class="section level3 hasAnchor" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Random effects<a href="designed-experiments-connection-to-linear-mixed-models.html#random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -517,7 +518,7 @@ where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="ma
 <h3><span class="header-section-number">3.5.3</span> Fixed effects versus random effects<a href="designed-experiments-connection-to-linear-mixed-models.html#fixed-effects-versus-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What is behind a random effect:</p>
 <ul>
-<li>$ N ( , (^T ^{-1} )^{-1} ) $</li>
+<li><span class="math inline">\(\hat{\boldsymbol{\beta}} \sim N \left( \boldsymbol{\beta}, (\mathbf{X}^T \mathbf{V}^{-1} \mathbf{X})^{-1} \right)\)</span></li>
 <li><span class="math inline">\(u_j \sim N(0, \sigma^2_u)\)</span></li>
 <li>What process is being studied?<br />
 </li>
@@ -551,7 +552,7 @@ where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="ma
 <span id="cb9-5"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb9-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
 <span id="cb9-6"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb9-6" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> fung))<span class="sc">+</span></span>
 <span id="cb9-7"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb9-7" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-23-1.png" alt="" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" alt="" width="672" /></p>
 <ul>
 <li>What is the treatment structure?</li>
 <li>What are the experimental units?</li>

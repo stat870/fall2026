@@ -196,6 +196,43 @@ $$\mathbf{y} \sim N(\boldsymbol{\mu}, \Sigma), \\
 
 Take your time to digest the variance-covariance matrix above. What type of data do you think generated it? 
 
+```{r echo=FALSE, message=FALSE, warning = FALSE}
+Z <- getME(m_mixed, "Z")
+sigma2_b <- 70
+sigma <- 160
+
+G <- diag(rep(sigma2_b^2, 4))
+
+Z %*% G %*% t(Z) %>%
+  as.matrix() %>% 
+  as.data.frame() %>% 
+  rownames_to_column("x") %>% 
+  pivot_longer(cols = -c(x), names_to = "y") %>%
+  mutate(x = as.numeric(x), y= as.numeric(y)) %>% 
+  
+  left_join(
+  diag(sigma^2, nrow = nrow(dat_blocked)) %>% 
+  as.data.frame() %>% 
+  rownames_to_column("x") %>% 
+  pivot_longer(cols = -c(x), names_to = "y") %>%
+  mutate(y = str_replace(y, "V", "") %>% as.numeric(),
+         x = as.numeric(x)) %>% 
+  rename(s2 = value)) %>% 
+
+  ggplot(aes(-x,y))+
+  geom_tile(aes(fill = value+s2))+
+  theme_minimal()+
+  scale_fill_viridis_c()+
+  labs(fill = "variance/covariance", 
+       title = "Variance-covariance matrix\nof the marginal distribution \nfor the data in the\nsorghum block example.")+
+  theme(aspect.ratio = 1, 
+        axis.text = element_blank(), 
+        legend.position = "bottom",
+        panel.grid = element_blank(), 
+        axis.title = element_blank(), 
+        axis.ticks = element_blank())
+```
+
 ### Random effects    
 
 - By definition, random effects are regression coefficients that arise from a random distribution. 
@@ -226,7 +263,7 @@ where $p = rank(\mathbf{X})$, $\mathbf{r} = \mathbf{y}-\mathbf{X}\hat{\boldsymbo
 
 What is behind a random effect:  
 
-- $\hat{\boldsymbol{\beta}} \sim N \left( \boldsymbol{\beta}, (\mathbf{X}^T \mathbf{V}^{-1} \mathbf{X})^{-1} \right) $ 
+- $\hat{\boldsymbol{\beta}} \sim N \left( \boldsymbol{\beta}, (\mathbf{X}^T \mathbf{V}^{-1} \mathbf{X})^{-1} \right)$ 
 - $u_j \sim N(0, \sigma^2_u)$ 
 - What process is being studied?  
 - How were the levels selected? (randomly, carefully selected)  
