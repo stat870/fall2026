@@ -12,8 +12,8 @@ August 26
   : [**HW 1**](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf){: .label .label-green } 
 
 August 31 
-: Designed experiments (CRD, RCBD, split-plot designs) & Kahoot! 
-  : [](https://stat870.github.io/fall2026/notes/designed-experiments-review.html)
+: Designed experiments & linear mixed models! 
+  : [html](https://stat870.github.io/fall2026/notes/designed-experiments-connection-to-linear-mixed-models.html)
 
 Sept. 2 
 : Linear mixed models applied to designed experiments & Kahoot! 
