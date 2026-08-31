@@ -4,7 +4,7 @@ August 31st
 
 ## Announcements
 
-- [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) is due today! 
+- [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) is due Wednesday! 
 - Applied Linear Mixed Models Workshop 09/19-09/20. [Registration](https://www.k-state.edu/digital-ag-advanced-analytics/events/linear-mixed-models-2026.html) 
 - Read Chapter 2 of the Stroup et al. GLMM book (for this chapter only, 1ed is better than 2ed).  
 
