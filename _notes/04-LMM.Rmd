@@ -1,60 +1,23 @@
-# Designed Experiments connection to Linear Mixed Models      
+# Linear mixed models  
 
-August 31st   
+September 2nd
 
-## Announcements
+## Announcements 
 
-- [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) is due Wednesday! 
 - Applied Linear Mixed Models Workshop 09/19-09/20. [Registration](https://www.k-state.edu/digital-ag-advanced-analytics/events/linear-mixed-models-2026.html) 
+- [How to learn hard things](https://www.youtube.com/watch?v=RrLKXRXVrKM) 
 - Read Chapter 2 of the Stroup et al. GLMM book (for this chapter only, 1ed is better than 2ed).  
 
-## Semester project 
+**Semester project**: 
 
-- Proposal [due September 17th](https://stat870.github.io/fall2026/notes/semester-project-1.html#partial-deadlines) -- [see example 1](https://stat870.github.io/fall2026/assignments/proposal_example.pdf) | [see example 2](https://stat870.github.io/fall2026/assignments/proposal_example2.pdf)
+- Proposal due September 17th -- [see example 1](https://stat870.github.io/fall2026/assignments/proposal_example.pdf) | [see example 2](https://stat870.github.io/fall2026/assignments/proposal_example2.pdf)
 - Must contain: Background, Objectives.  
 - Data for the project must be ready to go. 
 - Final product: Manuscript + Tutorial. 
 - Working in teams vs. solo. 
 - Start as soon as possible! 
 
-## Designed experiments  
-
-Let's review the basics of designed experiments:  
-
-- Research question 
-- Planning the experiment  
-- Treatment structure - directly dependent on the research question 
-- Design structure - mostly depending on logistics. May depend on the research question. 
-
-### Design structures  
-
-While the treatment structure defines what effects we will try and estimate as precisely as possible, the design structure tells us the story of **how** those treatments were applied. 
-Some of the most common designed experiments include: 
-
-- completely randomized design (CRD), 
-- randomized complete block design (RCBD), 
-- split-plot design, 
-- relevant variations to the designs above:  
-  - generalized randomized complete block design, 
-  - strip-plot design, 
-  - repeated measures designs. 
-
-```{r echo=FALSE, fig.cap="Schematic description of an experiment with a completely randomized design", out.width = '100%'}
-knitr::include_graphics("../figures/designs_crd.PNG")
-```
-
-
-```{r echo=FALSE, fig.cap="Schematic description of an experiment with a randomized complete block design", out.width = '100%'}
-knitr::include_graphics("../figures/designs_rcbd.PNG")
-```
-
-
-```{r echo=FALSE, fig.cap="Schematic description of a field experiment with a split-plot design", out.width = '100%'}
-knitr::include_graphics("../figures/designs_splitplot.PNG")
-```
-
-
-## Fixed versus random effects 
+## Review 
 
 In what follows, we have a brief elaboration of what it means to model that "structure in the data" (i.e., the groups of similarly generated points). 
 
@@ -273,8 +236,58 @@ What is behind a random effect:
 Read more in in Gelman (2005, page 20), "Analysis of variance—why it is more important than ever" [[link](https://projecteuclid.org/journals/annals-of-statistics/volume-33/issue-1/Analysis-of-variancewhy-it-is-more-important-than-ever/10.1214/009053604000001048.full)], and [Gelman and Hill (2006), page 245](https://sites.stat.columbia.edu/gelman/arm/). 
 
 
+### Standard errors 
 
-## Homework & Announcements  
+- Blocks as fixed: 
+  - $se(\hat{\mu_{i}}) = \sqrt{\frac{\sigma^2_\varepsilon}{\# blocks}}$
+  - $se(\widehat{\mu_{i}-\mu_{i'}}) = \sqrt{\frac{2\sigma^2_\varepsilon}{\# blocks}}$
 
-- [Assignment 1](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf) due Wednesday. 
-- Applied Linear Mixed Models Workshop. 
+- Blocks as random: 
+  - $se(\hat{\mu_{i}}) = \sqrt{\frac{\sigma^2_\varepsilon+\sigma^2_b}{\# blocks}}$
+  - $se(\widehat{\mu_{i}-\mu_{i'}}) = \sqrt{\frac{2(\sigma^2_\varepsilon+\sigma^2_b)}{\# blocks}}$
+
+
+## Applied example: fungicide effects on barley genotypes   
+
+Let's consider an experiment that aimed to study the effect of fungicide and barley genotypes on grain yield. The study includes two levels of fungicide, and 70 different genotypes, considering all their possible combinations. 
+
+- What is the treatment structure of the experiment?
+- Do we know the design structure of the experiment?
+
+
+The statistical model for the split-plot can be described as 
+
+$$y_{ijk} = \mu + F_i + G_j + F\times G_{ij} + b_k + w_{i(k)} + \varepsilon_{ijk}$$
+
+
+**Now, the actual experiment was run like this:** 
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(agridat)
+library(lme4)
+library(emmeans)
+```
+
+```{r echo=TRUE}
+df_fungicide <- agridat::durban.splitplot
+
+df_fungicide %>% 
+  ggplot(aes(bed, row))+
+  coord_fixed()+
+  geom_tile(aes(fill = fung))+
+  geom_tile(aes(), color = "black", fill = NA)
+```
+
+- What is the treatment structure? 
+- What are the experimental units? 
+- How many independent observations per treatment factor? 
+- What is the design structure? 
+
+
+[Download R code](../scripts/09022026_splitplot.Rmd)
+
+## For next week 
+
+- Read Ch 4 in Johnson and Milliken 
+- Read CH 2 in Stroup et al (2024)
