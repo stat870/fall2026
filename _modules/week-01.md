@@ -17,7 +17,7 @@ August 31
 
 Sept. 2 
 : Linear mixed models applied to designed experiments & Kahoot! 
-  : [](https://stat870.github.io/fall2026/notes/designed-experiments-review.html)
+  : [html](https://stat870.github.io/fall2026/notes/linear-mixed-models.html)
 : [](#)
   : [**HW 1 due**](https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf){: .label .label-red } 
   : [**HW 2**](https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf){: .label .label-green } 
