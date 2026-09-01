@@ -1,3 +1,11 @@
+---
+title: "Assignment 1"
+author: ""
+date: "2026-09-01"
+output: pdf_document
+---
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
