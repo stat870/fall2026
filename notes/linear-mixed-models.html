@@ -445,7 +445,7 @@ Usually, we assume <span class="math display">\[\mathbf{G} = \sigma^2_u
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; \sigma^2 + \sigma^2_u
 \end{bmatrix}.\]</span></p>
 <p>Take your time to digest the variance-covariance matrix above. What type of data do you think generated it?</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-32-1.png" alt="" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-1.png" alt="" width="672" /></p>
 <div id="random-effects-1" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Random effects<a href="linear-mixed-models.html#random-effects-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -510,7 +510,7 @@ where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="ma
 <li>Blocks as random:
 <ul>
 <li><span class="math inline">\(se(\hat{\mu_{i}}) = \sqrt{\frac{\sigma^2_\varepsilon+\sigma^2_b}{\# blocks}}\)</span></li>
-<li><span class="math inline">\(se(\widehat{\mu_{i}-\mu_{i&#39;}}) = \sqrt{\frac{2(\sigma^2_\varepsilon+\sigma^2_b)}{\# blocks}}\)</span></li>
+<li><span class="math inline">\(se(\widehat{\mu_{i}-\mu_{i&#39;}}) = \sqrt{\frac{2(\sigma^2_\varepsilon)}{\# blocks}}\)</span></li>
 </ul></li>
 </ul>
 </div>
@@ -536,7 +536,7 @@ where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="ma
 <span id="cb16-5"><a href="linear-mixed-models.html#cb16-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
 <span id="cb16-6"><a href="linear-mixed-models.html#cb16-6" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> fung))<span class="sc">+</span></span>
 <span id="cb16-7"><a href="linear-mixed-models.html#cb16-7" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-34-1.png" alt="" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" alt="" width="672" /></p>
 <ul>
 <li>What is the treatment structure?</li>
 <li>What are the experimental units?</li>

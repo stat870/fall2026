@@ -244,7 +244,7 @@ Read more in in Gelman (2005, page 20), "Analysis of variance—why it is more i
 
 - Blocks as random: 
   - $se(\hat{\mu_{i}}) = \sqrt{\frac{\sigma^2_\varepsilon+\sigma^2_b}{\# blocks}}$
-  - $se(\widehat{\mu_{i}-\mu_{i'}}) = \sqrt{\frac{2(\sigma^2_\varepsilon+\sigma^2_b)}{\# blocks}}$
+  - $se(\widehat{\mu_{i}-\mu_{i'}}) = \sqrt{\frac{2(\sigma^2_\varepsilon)}{\# blocks}}$
 
 
 ## Applied example: fungicide effects on barley genotypes   
