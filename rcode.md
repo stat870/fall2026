@@ -10,3 +10,7 @@ nav_order: 4
 
 Below is a list of R code divided by topic. 
 Keep in mid that all the code to generate this website and the class notes can be found on [GitHub](https://github.com/stat870/fall2026). 
+
+**Mixed effects models** 
+
+- Introduction (09/02) [get code](scripts/09022026_inclass.qmd)
