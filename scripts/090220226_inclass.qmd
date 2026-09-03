@@ -1,0 +1,53 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(lme4)
+library(emmeans)
+```
+
+```{r}
+dat_blocked <- agridat::omer.sorghum |> filter(env == "E3") |> dplyr::select(-env)
+
+str(dat_blocked)
+```
+
+
+```{r}
+m_fixed <- lm(yield ~ gen + rep , data = dat_blocked)
+
+DHARMa::simulateResiduals(m_fixed, plot=T)
+```
+
+```{r}
+emmeans(m_fixed, ~gen, 
+        contr = list(c(1, rep(0, 16), -1)))
+```
+
+
+```{r}
+m_mixed <- lmer(yield ~ gen +(1|rep), data = dat_blocked)
+head(dat_blocked)
+# DHARMa::simulateResiduals(m_mixed, plot = T)
+
+
+summary(m_mixed)
+getME(m_mixed, "X")[1:10,]
+getME(m_mixed, "Z")[1:10,]
+getME(m_mixed, "b")
+
+emmeans(m_mixed, ~gen, 
+        contr = list(c(1, rep(0, 16), -1)))
+
+```
+
+
+
+
+
+
+
+
