@@ -1,0 +1,49 @@
+---
+title: "In-class review"
+author: "STAT 870 - Fall 2026"
+date: "2026-09-09"
+output: pdf_document
+geometry: "top=0.75in, bottom=0.75in"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Answer in one sentence: what is the experimental unit?
+
+\vspace{1.5cm}
+
+2. What are the assumptions behind this model? 
+
+$$y_i \sim N(\mu_i, \sigma^2)$$
+
+\vspace{4cm}
+
+
+3. What could happen if we have more than one observation per experimental unit and don't specify this in the model?
+
+\vspace{4cm}
+
+4. Complete the table below. 
+
+\begin{table}[ht]
+\centering
+\caption{Fixed vs Random Effects}
+\renewcommand{\arraystretch}{1.5} % Adds vertical padding to match the HTML look
+\begin{tabular}{|p{7cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+& \textbf{Fixed effects} & \textbf{Random effects} \\
+\hline
+\textbf{Assumption about this effect} & & \\
+\hline
+\textbf{Affects the standard error of the marginal means (yes/no)} & & \\
+\hline
+\textbf{What parameter do we estimate?} & & \\
+\hline
+\textbf{Usually used to model (e.g. treatments, elements of design (any exceptions?))} & & \\
+\hline
+\textbf{Method of estimation} & & \\
+\hline
+\end{tabular}
+\end{table}
