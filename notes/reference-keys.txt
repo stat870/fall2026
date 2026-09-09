@@ -71,6 +71,7 @@ complete-pooling
 no-pooling-all-fixed-model
 partial-pooling-mixed-effects-model
 degrees-of-freedom
+reading
 semester-project-1
 learning-objectives
 partial-deadlines

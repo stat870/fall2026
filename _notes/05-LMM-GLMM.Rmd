@@ -137,3 +137,8 @@ $$\nu_2^\star \equiv \frac{(\sum_m c_m X_m^2)^2}{\sum_m\frac{(c_m X_m^2)}{df_m}}
 - KR somewhat more conservative and reliable than Satterthwaite ([source](https://link.springer.com/article/10.1198/108571102726)). 
 - Integrated in most statistical software. 
 
+## Reading 
+
+- Gelman and Hill (2006) Chapter 12 (multilevel modeling basics)
+- Stroup et al. (2024) Chapter 6 (statistical inference)
+
