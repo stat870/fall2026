@@ -7,7 +7,7 @@ Sept. 7
 
 Sept. 9 
 : Linear mixed models 
-  : []()  
+  : [html](https://stat870.github.io/fall2026/notes/linear-mixed-models-1.html)  
   : [**HW 2**](https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf){: .label .label-green } 
 
 Sept. 14  
