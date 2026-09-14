@@ -12,7 +12,7 @@ Sept. 9
 
 Sept. 14  
 : Generalized linear mixed models I 
-  : [](https://stat870.github.io/fall2026/notes/linear-mixed-models.html)
+  : [html](https://stat870.github.io/fall2026/notes/generalized-linear-mixed-models.html)
 
 Sept. 16  
 : Generalized linear mixed models II -- In-class exercise 
