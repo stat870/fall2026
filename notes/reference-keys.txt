@@ -83,6 +83,14 @@ no-pooling-all-fixed-model
 partial-pooling-mixed-effects-model
 degrees-of-freedom
 reading-1
+shrinkage-and-degrees-of-freedom
+announcements-5
+information-pooling-and-shrinkage-1
+complete-pooling-1
+no-pooling-all-fixed-model-1
+partial-pooling-mixed-effects-model-1
+degrees-of-freedom-1
+reading-2
 semester-project-1
 learning-objectives
 partial-deadlines

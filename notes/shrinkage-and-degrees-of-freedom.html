@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data</title>
-  <meta name="description" content="Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data" />
+  <title>Day 7 Shrinkage and degrees of freedom | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 7 Shrinkage and degrees of freedom | STAT 870 - Analysis of Messy Data" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:title" content="Day 7 Shrinkage and degrees of freedom | STAT 870 - Analysis of Messy Data" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data" />
+  <meta name="twitter:title" content="Day 7 Shrinkage and degrees of freedom | STAT 870 - Analysis of Messy Data" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linear-mixed-models-1.html"/>
-<link rel="next" href="shrinkage-and-degrees-of-freedom.html"/>
+<link rel="prev" href="generalized-linear-mixed-models.html"/>
+<link rel="next" href="semester-project-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -283,14 +283,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="generalized-linear-mixed-models" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Day 6</span> Generalized linear mixed models<a href="generalized-linear-mixed-models.html#generalized-linear-mixed-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>September 14th</p>
-<div id="announcements-4" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Announcements<a href="generalized-linear-mixed-models.html#announcements-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="shrinkage-and-degrees-of-freedom" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Day 7</span> Shrinkage and degrees of freedom<a href="shrinkage-and-degrees-of-freedom.html#shrinkage-and-degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>September 16th</p>
+<div id="announcements-5" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Announcements<a href="shrinkage-and-degrees-of-freedom.html#announcements-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><a href="https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf"><strong>HW 2</strong></a> is up and due next Wednesday</li>
-<li>Semester project</li>
+<li><a href="https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf"><strong>HW 2</strong></a> is due today</li>
+<li>Semester project due tomorrow</li>
 <li><a href="https://www.k-state.edu/digital-ag-advanced-analytics/events/linear-mixed-models-2026.html">Mixed models workshop</a>
 <ul>
 <li>“The mixed models workshops clearly improved my understanding of the material in STAT 870. Both the class and the workshops complemented each other very well. The positive aspect of this combination was that the workshops provided a very practical space to connect the theory from lectures with real data analysis in R. Working through examples step by step made the concepts much clearer.”</li>
@@ -299,85 +299,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="statistical-modeling-1" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Statistical modeling<a href="generalized-linear-mixed-models.html#statistical-modeling-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Statistical models combine deterministic (see step 1 below) and stochastic (see step 2 below) components</li>
-</ul>
-<div id="three-steps-to-modeling-data-1" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Three steps to modeling data<a href="generalized-linear-mixed-models.html#three-steps-to-modeling-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li>Define the linear predictor <span class="math inline">\(\boldsymbol\eta = \mathbf{X}\boldsymbol{\beta} + \mathbf{Z}\mathbf{u}\)</span>,</li>
-<li>Define the probability distribution for the data, <span class="math inline">\(\mathbf{y}|\mathbf{u}\)</span>,</li>
-<li>Define the link function <span class="math inline">\(g(\cdot)\)</span>, <span class="math inline">\(\boldsymbol\eta = g(\mathbf{y}|\mathbf{u})\)</span>.</li>
-</ol>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
-<img src="../figures/stroup_distributions.jpg" alt="Common variable distributions. Page 60 in Stroup et al. (2024)" width="80%" />
-<p class="caption">
-Figure 6.1: Common variable distributions. Page 60 in Stroup et al. (2024)
-</p>
-</div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-32"></span>
-<img src="../figures/dsitributions.png" alt="Common variable distributions." width="80%" />
-<p class="caption">
-Figure 6.2: Common variable distributions.
-</p>
-</div>
-</div>
-</div>
-<div id="estimation-of-variance-components-1" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Estimation of variance components<a href="generalized-linear-mixed-models.html#estimation-of-variance-components-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For any unknown parameter, there are multiple ways to estimate it. We call those the methods of estimation.</p>
-<div id="maximum-likelihood-estimation-mle-1" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Maximum Likelihood Estimation (MLE)<a href="generalized-linear-mixed-models.html#maximum-likelihood-estimation-mle-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Maximum Likelihood Estimation</strong> of variance components provides downward biased estimates for small data (most experimental data).
-<span class="math inline">\(\ell_{ML}(\boldsymbol{\sigma; \boldsymbol{\beta}, \mathbf{y}}) = - (\frac{n}{2}) \log(2\pi)-(\frac{1}{2}) \log ( \vert \mathbf{V}(\boldsymbol\sigma) \vert ) - (\frac{1}{2}) (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^T[\mathbf{V}(\boldsymbol\sigma)]^{-1}(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})\)</span></p>
-</div>
-<div id="restricted-maximum-likelihood-reml-1" class="section level3 hasAnchor" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> Restricted Maximum Likelihood (REML)<a href="generalized-linear-mixed-models.html#restricted-maximum-likelihood-reml-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Restricted Maximum Likelihood</strong> (REML) avoids MLE’s downward bias under small data and is thus is the default in most mixed effects models.</p>
-<ul>
-<li>In REML, the likelihood is maximized <strong>after</strong> accounting for the model’s fixed effects.<br />
-</li>
-<li>In REML, <span class="math inline">\(\ell_{REML}(\boldsymbol{\sigma};\mathbf{y}) = - (\frac{n-p}{2}) \log (2\pi) - (\frac{1}{2}) \log ( \vert \mathbf{V}(\boldsymbol\sigma) \vert ) - (\frac{1}{2})log \left(  \vert \mathbf{X}^T[\mathbf{V}(\boldsymbol\sigma)]^{-1}\mathbf{X} \vert \right) - (\frac{1}{2})\mathbf{r}[\mathbf{V}(\boldsymbol\sigma)]^{-1}\mathbf{r}\)</span>,
-where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="math inline">\(\mathbf{r} = \mathbf{y}-\mathbf{X}\hat{\boldsymbol{\beta}}_{ML}\)</span>.
-<ul>
-<li>Start with initial values for <span class="math inline">\(\boldsymbol{\sigma}\)</span>, <span class="math inline">\(\tilde{\boldsymbol{\sigma}}\)</span>.<br />
-</li>
-<li>Compute <span class="math inline">\(\mathbf{G}(\tilde{\boldsymbol{\sigma}})\)</span> and <span class="math inline">\(\mathbf{R}(\tilde{\boldsymbol{\sigma}})\)</span>.<br />
-</li>
-<li>Obtain <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\mathbf{b}\)</span>.<br />
-</li>
-<li>Update <span class="math inline">\(\tilde{\boldsymbol{\sigma}}\)</span>.<br />
-</li>
-<li>Repeat until convergence.<br />
-</li>
-</ul></li>
-<li>Variance components may be <span class="math inline">\(&lt;0\)</span>; in that case they are set to zero.</li>
-</ul>
-</div>
-<div id="method-of-moments-mom-1" class="section level3 hasAnchor" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> Method of moments (MoM)<a href="generalized-linear-mixed-models.html#method-of-moments-mom-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Method of moments</strong> (MoM) is derived from ANOVA tables that include the expected mean squares.</p>
-<ul>
-<li><p>Use actual sums of squares and expected mean squares (EMS) from ANOVA to clear for the different variance components.</p></li>
-<li><p>e.g., <span class="math inline">\(\tilde{\sigma}^2_{w} = \frac{SSw - SS_e}{c}\)</span> (See table above). However, if <span class="math inline">\(\tilde{\sigma}^2_{w} &lt; 0\)</span>, <span class="math inline">\(\hat{\sigma}^2_{w} = 0\)</span>.</p></li>
-<li><p>Issues with variance estimates equal to zero</p>
-<ul>
-<li>Type I error inflation</li>
-<li><a href="https://acsess.onlinelibrary.wiley.com/doi/10.1002/agj2.21570">Frey et al. (2024)</a></li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="information-pooling-and-shrinkage" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Information pooling and shrinkage<a href="generalized-linear-mixed-models.html#information-pooling-and-shrinkage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="information-pooling-and-shrinkage-1" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Information pooling and shrinkage<a href="shrinkage-and-degrees-of-freedom.html#information-pooling-and-shrinkage-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In mixed models, pooling refers to how much information is shared across different groups (or clusters) in the data when estimating parameters.</p>
 <p>The three pooling approaches represent different assumptions about the variance between these groups (<span class="math inline">\(\sigma^2_{b}\)</span>).</p>
 <p>To illustrate this concept, consider a scenario where we have yield observations <span class="math inline">\(y_{ij}\)</span> for the <span class="math inline">\(i\)</span>th observation of location <span class="math inline">\(j\)</span>. Then, <span class="math inline">\(i = 1, \dots, n_j\)</span> and <span class="math inline">\(j = 1, \dots, J\)</span>.
 We want to estimate a mean for each location <span class="math inline">\(L_j\)</span>.</p>
-<div id="complete-pooling" class="section level3 hasAnchor" number="6.4.1">
-<h3><span class="header-section-number">6.4.1</span> Complete pooling<a href="generalized-linear-mixed-models.html#complete-pooling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="complete-pooling-1" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Complete pooling<a href="shrinkage-and-degrees-of-freedom.html#complete-pooling-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>All groups (i.e., locations) are similar and there is no meaningful variation between them.</li>
 <li>The group (i.e., location) identifier <span class="math inline">\(j\)</span> contains no useful information.</li>
@@ -385,8 +314,8 @@ We want to estimate a mean for each location <span class="math inline">\(L_j\)</
 <li>The between-group (i.e., location) variance is assumed to be exactly zero (<span class="math inline">\(\sigma^2_{L} = 0\)</span>) and thus, if <span class="math inline">\(L_j \sim N(0, 0)\)</span>, all <span class="math inline">\(L_j =0\)</span>. Thus, all locations have the same mean <span class="math inline">\(\mu\)</span>.</li>
 </ul>
 </div>
-<div id="no-pooling-all-fixed-model" class="section level3 hasAnchor" number="6.4.2">
-<h3><span class="header-section-number">6.4.2</span> No pooling (all-fixed model)<a href="generalized-linear-mixed-models.html#no-pooling-all-fixed-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="no-pooling-all-fixed-model-1" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> No pooling (all-fixed model)<a href="shrinkage-and-degrees-of-freedom.html#no-pooling-all-fixed-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Each group is completely independent and unique (i.e., knowing something about Location 1 tells you absolutely nothing about Location 2).</li>
 <li>Equivalent to fitting a classical linear model with only fixed effects.</li>
@@ -395,8 +324,8 @@ We want to estimate a mean for each location <span class="math inline">\(L_j\)</
 <li>Think about this for an IBD!</li>
 </ul>
 </div>
-<div id="partial-pooling-mixed-effects-model" class="section level3 hasAnchor" number="6.4.3">
-<h3><span class="header-section-number">6.4.3</span> Partial pooling (mixed-effects model)<a href="generalized-linear-mixed-models.html#partial-pooling-mixed-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="partial-pooling-mixed-effects-model-1" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Partial pooling (mixed-effects model)<a href="shrinkage-and-degrees-of-freedom.html#partial-pooling-mixed-effects-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Groups are different, but they are all drawn from a common overarching population distribution.</p></li>
 <li><p>Information is shared across groups to improve the estimates for each individual group.</p></li>
@@ -414,8 +343,8 @@ We want to estimate a mean for each location <span class="math inline">\(L_j\)</
 </ul>
 </div>
 </div>
-<div id="degrees-of-freedom" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Degrees of freedom<a href="generalized-linear-mixed-models.html#degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="degrees-of-freedom-1" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Degrees of freedom<a href="shrinkage-and-degrees-of-freedom.html#degrees-of-freedom-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Mixed models do not trace to the classical concept of degrees of freedom. In hierarchical models, rigidly counting parameters for degrees of freedom is conceptually problematic.</p>
 <p>The independent pieces of information shift depending on group sizes and variance: a group-level coefficient modeled as a random effect does not consume exactly <span class="math inline">\(1\)</span> degree of freedom (as an unpooled fixed effect would), nor does it consume <span class="math inline">\(0\)</span> (as a completely pooled grand mean would). Instead, the effective degrees of freedom consumed by a set of random effects lies somewhere between <span class="math inline">\(1\)</span> and <span class="math inline">\(J\)</span> (where <span class="math inline">\(J\)</span> is the total number of groups).</p>
 <p>The effective degrees of freedom depend on the magnitude of between-group versus within-group variance: if group variation is high, degrees of freedom approach the number of groups; if low, they approach the total sample size.</p>
@@ -445,8 +374,8 @@ We want to estimate a mean for each location <span class="math inline">\(L_j\)</
 <li>Integrated in most statistical software.</li>
 </ul>
 </div>
-<div id="reading-1" class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Reading<a href="generalized-linear-mixed-models.html#reading-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reading-2" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Reading<a href="shrinkage-and-degrees-of-freedom.html#reading-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Gelman and Hill (2006) Chapter 12 (multilevel modeling basics)</li>
 <li>Stroup et al. (2024) Chapter 6 (statistical inference)</li>
@@ -459,8 +388,8 @@ We want to estimate a mean for each location <span class="math inline">\(L_j\)</
           </div>
         </div>
       </div>
-<a href="linear-mixed-models-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="shrinkage-and-degrees-of-freedom.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="generalized-linear-mixed-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -491,7 +420,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/stat870/fall2026/edit/main/06-GLMM.Rmd",
+    "link": "https://github.com/stat870/fall2026/edit/main/07-Pooling.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -499,7 +428,7 @@ gitbook.start({
     "text": null
   },
   "view": {
-    "link": "https://github.com/stat870/fall2026/blob/main/06-GLMM.Rmd",
+    "link": "https://github.com/stat870/fall2026/blob/main/07-Pooling.Rmd",
     "text": null
   },
   "download": null,
