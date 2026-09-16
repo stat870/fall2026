@@ -16,7 +16,7 @@ Sept. 14
 
 Sept. 16  
 : Shrinkage and degrees of freedom 
-  : [](https://stat870.github.io/fall2026/notes/shrinkage-and-degrees-of-freedom.html)
+  : [html](https://stat870.github.io/fall2026/notes/shrinkage-and-degrees-of-freedom.html)
 : [](#)
   : [**HW 2 due**](https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf){: .label .label-red } 
   
