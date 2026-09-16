@@ -14,3 +14,4 @@ Keep in mid that all the code to generate this website and the class notes can b
 **Mixed effects models** 
 
 - Introduction (09/02) [get code](scripts/09022026_inclass.qmd)
+- (09/14) [get code](scripts/09142026.qmd)

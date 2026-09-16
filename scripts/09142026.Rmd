@@ -1,0 +1,49 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+$$y_{ij} = \mu + T_i + b_j + \varepsilon_{ij}$$
+
+```{r}
+library(tidyverse) # data wrangling 
+library(glmmTMB) # generalized linear mixed models (+ repeated measures)
+library(lme4) # linear mixed models 
+library(DHARMa) # model diagnostics 
+ 
+# load data
+url <- "https://raw.githubusercontent.com/stat870/fall2025/refs/heads/main/data/fish_vaccines.csv"
+fish <- read.csv(url)
+
+# plot the data
+fish %>% 
+  ggplot(aes(day, wt))+
+  geom_point(aes(fill = factor(vaccine), 
+                 group = factor(vaccine)),
+             position = position_dodge(width = 60),
+             shape=21, size =3.5, alpha =.7)+
+  labs(y = expression(Weight~(g~fish^{-1})), x = "Time (days)")+
+  theme_classic()+
+  labs(fill="Vaccine treatment")+
+  theme(legend.position = "bottom")+
+  scico::scale_fill_scico_d()
+```
+
+
+```{r}
+# take a subset so that the data are not cloned 5 times
+fish_sub <- fish %>% filter(day == 901)
+
+# fit binomial model
+m_jaw <- glmmTMB(jaw ~ factor(vaccine) +,
+                 REML = TRUE,
+                 family = binomial(link = "logit"),
+                 data = fish_sub)
+m_jaw
+
+
+emmeans(m_jaw, ~vaccine, type = "response")
+# dispersion parameter
+sigma(m_jaw)
+```
+

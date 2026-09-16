@@ -1,0 +1,44 @@
+---
+title: "Untitled"
+author: "J Lacasa"
+date: "2026-09-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(lme4)
+```
+
+
+nitrogen level as the main plot, management practice as the sub-plot, and rice variety as the sub-sub plot
+ 
+```{r}
+df <- agridat::gomez.splitsplit
+
+m_mle <- 
+  lmer(yield ~ factor(nitro) * factor(management) * factor(gen) +
+         (1| rep / nitro / management), 
+      data = df, 
+      REML = F)
+
+m_reml <- 
+  lmer(yield ~ factor(nitro) * factor(management) * factor(gen) +
+         (1| rep / nitro / management), 
+      data = df, 
+      REML = T)
+
+glmmTMB::glmmTMB()
+```
+
+```{r}
+VarCorr(m_mle)
+VarCorr(m_reml)
+
+emmeans(m_reml, ~ gen)
+```
+
+
