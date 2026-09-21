@@ -91,6 +91,9 @@ no-pooling-all-fixed-model-1
 partial-pooling-mixed-effects-model-1
 degrees-of-freedom-1
 reading-2
+practice
+announcements-6
+in-class-activity
 semester-project-1
 learning-objectives
 partial-deadlines

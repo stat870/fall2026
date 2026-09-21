@@ -1,0 +1,59 @@
+---
+title: "Untitled"
+author: "J Lacasa"
+date: "2026-09-16"
+output: html_document
+---
+
+
+
+```{r}
+library(tidyverse)
+library(agridat)
+data("omer.sorghum")
+df <- omer.sorghum %>% filter(env == "E3")
+```
+
+Model 1 :
+
+$$y_{ij}=\mu_0 + G_i + b_j + \varepsilon_{ij}, \\ \varepsilon_{ij} \sim N(0, \sigma^2_\varepsilon)$$
+
+$$E(\hat{b_j}) = b_j$$
+
+```{r}
+model0 <- lm(yield ~ 1 + gen, data = df)
+
+model1 <- lm(yield ~ 1 + gen + rep, data = df)
+```
+
+Model 2: 
+
+$$b_j \sim N(0, \sigma^2_b)$$
+
+```{r}
+model2 <- lmer(yield ~ 1 + gen + (1|rep), data = df)
+```
+
+```{r}
+sigma(model1)^2
+sigma(model2)^2
+```
+
+
+```{r}
+emmeans(model1, ~rep)
+
+emmeans(model1, ~gen, contr = list(c(1, -1, rep(0, 16))))$contrast
+emmeans(model2, ~gen, contr = list(c(1, -1, rep(0, 16))))$contrast
+
+emmeans(model2, ~gen)
+```
+
+```{r}
+as.data.frame(emmeans(model1, ~rep))$emmean - mean(as.data.frame(emmeans(model1, ~rep))$emmean)
+```
+
+```{r}
+getME(model2, "b")
+```
+
