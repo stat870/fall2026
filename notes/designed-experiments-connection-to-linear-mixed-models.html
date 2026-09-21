@@ -454,16 +454,10 @@ Also, now</p>
 including residual variance and random-effects variance. Note that this formula yields
 the same point estimate for <span class="math inline">\(\boldsymbol{\beta}\)</span>, but with a different confidence interval.</p>
 <p>Now, the variance-covariance matrix <span class="math inline">\(\boldsymbol{\Sigma}\)</span> of the marginal distribution has changed.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Matrix&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
-## 
-##     expand, pack, unpack</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb9-1" tabindex="-1"></a>m_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>rep), <span class="at">data =</span> dat_blocked)</span>
-<span id="cb9-2"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb9-2" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb9-3" tabindex="-1"></a><span class="fu">summary</span>(m_mixed)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb5-2"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb5-2" tabindex="-1"></a>m_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>rep), <span class="at">data =</span> dat_blocked)</span>
+<span id="cb5-3"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="designed-experiments-connection-to-linear-mixed-models.html#cb5-4" tabindex="-1"></a><span class="fu">summary</span>(m_mixed)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: yield ~ gen + (1 | rep)
 ##    Data: dat_blocked

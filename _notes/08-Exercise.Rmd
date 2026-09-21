@@ -31,7 +31,7 @@ You are consultant statisticians. A researcher has come to you to request help a
 
 **FINISH BY 12:20PM \& class debate**
 
-1. Read the data, analyze it, and answer the researcher's questions. 
+1. Read the data, analyze it, and answer the researcher's questions. Draw the structure in your data. 
 2. Mention one way they could improve the power of their experiment to detect differences in final weight between treatments. 
 
 You may ask the researcher for missing information or for clarifications, if you think there's information missing (ask Josefina). 
