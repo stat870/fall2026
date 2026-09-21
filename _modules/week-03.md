@@ -5,11 +5,11 @@ title: Longitudinal Data & Repeated Measures
 Sept. 21 
 : In-class exercise   
   : [html](https://stat870.github.io/fall2026/notes/practice.html)
-  : **HW 3**{: .label .label-green } 
 
 Sept. 23 
 : Repeated measures I   
   : [](https://stat870.github.io/fall2026/notes/repeated-measures-i.html)
+  : **HW 3**{: .label .label-green } 
 
 Sept. 28  
 : Practice  
