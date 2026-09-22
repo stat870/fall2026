@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data</title>
-  <meta name="description" content="Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <title>Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:title" content="Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <meta name="twitter:title" content="Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="designed-experiments-connection-to-linear-mixed-models.html"/>
+<link rel="prev" href="practice.html"/>
+<link rel="next" href="semester-project-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -302,161 +302,404 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="designed-experiments-review-1" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Day 2</span> Designed Experiments Review<a href="designed-experiments-review-1.html#designed-experiments-review-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>August 26th</p>
-<div id="announcements" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Announcements<a href="designed-experiments-review-1.html#announcements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="repeated-measures-i" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Day 9</span> Repeated measures I<a href="repeated-measures-i.html#repeated-measures-i" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>September 23rd, 2026</p>
+<div id="announcements-7" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Announcements<a href="repeated-measures-i.html#announcements-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><a href="https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf">Assignment 1</a> is due next Wednesday.</li>
-<li>Applied Linear Mixed Models Workshop 09/19-09/20.</li>
+<li>Online classes on Oct 5, 7, 12, 14.</li>
+<li>Mixture of recordings and Zoom classes.</li>
 </ul>
 </div>
-<div id="designed-experiments" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Designed experiments<a href="designed-experiments-review-1.html#designed-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The golden rules of designed experiments:</p>
-<ul>
-<li>Replication</li>
-<li>Randomization</li>
-<li>Local control</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
-<img src="../figures/principles.jpg" alt="Principles for conducting valid and efficient experiments. From Box, Hunter and Hunter (2005)." width="80%" />
-<p class="caption">
-Figure 2.1: Principles for conducting valid and efficient experiments. From Box, Hunter and Hunter (2005).
-</p>
-</div>
-<ul>
-<li>About George Box I - A Conversation with George Box [<a href="https://projecteuclid.org/journals/statistical-science/volume-2/issue-3/A-Conversation-with-George-Box/10.1214/ss/1177013223.full">link</a>]</li>
-<li>About George Box II - An Accidental Statistician: The Life and Memories of George E. P. Box [<a href="https://www.amazon.com/Accidental-Statistician-Life-Memories-George/dp/1118400887">link</a>]</li>
-</ul>
-<div id="treatment-structure" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Treatment structure<a href="designed-experiments-review-1.html#treatment-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Solely about the treatment.</li>
-<li>Most likely connected to the research question and thus defined by the subject matter expert.</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
-<img src="../figures/trtdesigns_oneway.PNG" alt="Schematic representation of a one-way treatment structure." width="80%" />
-<p class="caption">
-Figure 2.2: Schematic representation of a one-way treatment structure.
-</p>
-</div>
-<p>A one-way treatment structure means that the expected value of the observations, <span class="math inline">\(y\)</span>, is affected by one treatment factor with <span class="math inline">\(k\)</span> levels:</p>
-<p><span class="math display">\[g(\mu_{ij}) = \eta_{ij} = \eta_{0} + T_i,\]</span>
+<div id="linear-mixed-models-review" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Linear mixed models review<a href="repeated-measures-i.html#linear-mixed-models-review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Considering the linear mixed model</p>
+<p><span class="math display">\[\mathbf{y} \sim N(\mathbf{X}\boldsymbol{\beta}, \mathbf{V}),\]</span>
 where:</p>
 <ul>
-<li><span class="math inline">\(\mu_{ij}\)</span> is the expected value of <span class="math inline">\(y_{ij}\)</span>, the observation of the <span class="math inline">\(i\)</span>th treatment and <span class="math inline">\(j\)</span>th repetition,</li>
-<li><span class="math inline">\(g(\cdot)\)</span> is the link function, that ensures that the mean is within the support of the chosen distribution,</li>
-<li><span class="math inline">\(\eta_{ij}\)</span> is the linear predictor of <span class="math inline">\(g(\mu_{ij})\)</span>,</li>
-<li><span class="math inline">\(\eta_{0}\)</span> is the overall mean, and</li>
-<li><span class="math inline">\(T_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th level of the treatment <span class="math inline">\(T\)</span>.</li>
+<li><span class="math inline">\(\mathbf{y}\)</span> is the vector of the response,</li>
+<li><span class="math inline">\(\mathbf{X}\)</span> is the model matrix (often containing treatment allocation),</li>
+<li><span class="math inline">\(\boldsymbol{\beta}\)</span> is a vector containing the estimates for the effects of all variables in <span class="math inline">\(\mathbf{X}\)</span>,</li>
+<li><span class="math inline">\(\mathbf{V}\)</span> is the variance covariance matrix for <span class="math inline">\(\mathbf{y}\)</span>.</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
-<img src="../figures/trtdesigns_twoway.PNG" alt="Schematic representation of a two-way factorial treatment structure." width="80%" />
+<p>The marginal distribution of <span class="math inline">\(\mathbf{y}\)</span> for a normal distribution can also be written as
+<span class="math display">\[\mathbf{y} \sim MVN(\mathbf{X}\boldsymbol{\beta}, \mathbf{ZGZ}&#39;+\mathbf{R}).\]</span></p>
+<p>The variance-covariance matrices below represent the variance/covariance of all <span class="math inline">\(y\)</span>s.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-33"></span>
+<img src="../figures/Var_matrix.jpg" alt="Illustrative example of the variance-covariance matrix." width="100%" />
 <p class="caption">
-Figure 2.3: Schematic representation of a two-way factorial treatment structure.
+Figure 9.1: Illustrative example of the variance-covariance matrix.
 </p>
 </div>
-<p>A two-way treatment structure is similar to a one-way treatment structure, only now the expected value is affected by two treatment factors:</p>
-<p><span class="math display">\[g(\mu_{ijk}) = \eta_{ijk} = \eta_{0} + T_i + G_j + (TG)_{ij} ,\]</span>
-where:</p>
+<p>We consider <strong>messy data</strong> the different dependence patterns in <span class="math inline">\(\mathbf{G}\)</span> and/or <span class="math inline">\(\mathbf{R}\)</span>.</p>
+<p>Note that, for all mixed models we have been handling so far,
+<span class="math display">\[\mathbf{G} = \sigma^2_u\mathbf{I} =
+\begin{bmatrix}
+\sigma^2_u &amp; 0 &amp; 0 &amp; &amp; 0\\
+0 &amp; \sigma^2_u &amp; 0 &amp;  &amp; 0\\
+0 &amp; 0 &amp; \sigma^2_u &amp;  &amp; 0\\
+&amp;  &amp;  &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; \sigma^2_u\\
+\end{bmatrix},\]</span>
+which, will result in some variation of the matrix above.</p>
+</div>
+<div id="repeated-measures" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Repeated measures<a href="repeated-measures-i.html#repeated-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="../figures/designs_repeated.PNG" alt="Schematic description of a field experiment with repeated measures" width="100%" />
+<p class="caption">
+Figure 9.2: Schematic description of a field experiment with repeated measures
+</p>
+</div>
+<div id="correlation-functions" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Correlation functions<a href="repeated-measures-i.html#correlation-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(\mathbf{v}_{i k}\)</span> be the vector for the <span class="math inline">\(k\)</span>th individual under the <span class="math inline">\(i\)</span>th vaccine treatment, at the different timepoints of the experiment.</p>
+<p><span class="math display">\[\mathbf{v}_{i k} \sim MVN(\boldsymbol{0}, \boldsymbol{\Sigma}_{ik})\]</span></p>
+<p><strong>Independent observations</strong></p>
+<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
+\sigma^2
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\\
+\end{bmatrix}\]</span></p>
+<p><strong>Compound symmetry</strong></p>
+<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
+\sigma^2
+\begin{bmatrix}
+1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
+\rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
+\rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
+\rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
+\rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
+\end{bmatrix}\]</span></p>
+<p>This could mean
+<span class="math display">\[\mathbf{G}_{ik} =
+\sigma_v^2
+\begin{bmatrix}
+1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
+\rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
+\rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
+\rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
+\rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
+\end{bmatrix}\]</span>
+or
+<span class="math display">\[\mathbf{R}_{ik} =
+\sigma_\varepsilon^2
+\begin{bmatrix}
+1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
+\rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
+\rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
+\rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
+\rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
+\end{bmatrix}\]</span></p>
+<p><strong>AR(1)</strong></p>
+<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
+\sigma^2
+\begin{bmatrix}
+1 &amp; \rho &amp; \rho^2 &amp; \rho^3 &amp; \rho^4 \\
+\rho &amp; 1 &amp; \rho &amp; \rho^2 &amp; \rho^3 \\
+\rho^2 &amp; \rho &amp; 1 &amp; \rho &amp; \rho^2 \\
+\rho^3 &amp; \rho^2 &amp; \rho &amp; 1 &amp; \rho \\
+\rho^4 &amp; \rho^3 &amp; \rho^2 &amp; \rho &amp; 1\\
+\end{bmatrix}\]</span></p>
+<p><strong>Unstructured</strong></p>
+<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
+\begin{bmatrix}
+\sigma^2_{1} &amp; \sigma^2_{12} &amp; \sigma^2_{13} &amp; \sigma^2_{14} &amp; \sigma^2_{15} \\
+&amp; \sigma^2_{2} &amp; \sigma^2_{23} &amp; \sigma^2_{24} &amp; \sigma^2_{25} \\
+&amp;   &amp; \sigma^2_{3} &amp; \sigma^2_{34} &amp; \sigma^2_{35} \\
+  &amp;  &amp;  &amp; \sigma^2_{4} &amp; \sigma^2_{45} \\
+&amp;  &amp;  &amp;  &amp; \sigma^2_{5} \\
+\end{bmatrix}\]</span></p>
+</div>
+</div>
+<div id="correlation---g-side-conditional-and-r-side-marginal" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Correlation - G side (conditional) and R side (marginal)<a href="repeated-measures-i.html#correlation---g-side-conditional-and-r-side-marginal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><span class="math inline">\(\mu_{ijk}\)</span> is the expected value of <span class="math inline">\(y_{ij}\)</span>, the observation of the <span class="math inline">\(i\)</span>th treatment <span class="math inline">\(T\)</span>, <span class="math inline">\(j\)</span>th treatment <span class="math inline">\(G\)</span>, and <span class="math inline">\(k\)</span> repetition,</li>
-<li><span class="math inline">\(g(\cdot)\)</span> is the link function, that ensures that the mean is within the support of the chosen distribution,</li>
-<li><span class="math inline">\(\eta_{ijk}\)</span> is the linear predictor of <span class="math inline">\(g(\mu_{ijk})\)</span>,</li>
-<li><span class="math inline">\(\eta_{0}\)</span> is the overall mean,<br />
+<li>Typically, <code>REPEATED</code> (in SAS’s <code>MIXED</code> procedure) is equivalent to R-side (marginal) covariance in <code>GLIMMIX</code>.</li>
+<li>Look at marginal variance-covariance matrix on the board.</li>
+<li>What happens if we model G-side covariance?</li>
+</ul>
+<p><strong>Implications on inference</strong></p>
+<ul>
+<li>Similar CI for marginal means (lsmeans)<br />
 </li>
-<li><span class="math inline">\(T_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th level of the treatment <span class="math inline">\(T\)</span>,</li>
-<li><span class="math inline">\(G_j\)</span> is the effect of the <span class="math inline">\(j\)</span>th level of the treatment <span class="math inline">\(G\)</span>, and</li>
-<li><span class="math inline">\((TG)_{ij}\)</span> is the interaction between the <span class="math inline">\(i\)</span>th level of treatment <span class="math inline">\(T\)</span>, and <span class="math inline">\(j\)</span>th level of treatment <span class="math inline">\(G\)</span>.</li>
+<li>Confidence intervals estimated with different DF approximations</li>
+<li>May see some discrepancy in test statistics.</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
-<img src="../figures/trtdesigns_threeway.PNG" alt="Schematic representation of a tree-way factorial treatment structure." width="80%" />
+</div>
+<div id="repeated-measures-in-glmms" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Repeated measures in GLMMs<a href="repeated-measures-i.html#repeated-measures-in-glmms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall distributions of non-Gaussian GLMMs:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-35"></span>
+<img src="../figures/stroup_distributions.jpg" alt="Common variable distributions. Page 60 in Stroup et al. (2024)" width="80%" />
 <p class="caption">
-Figure 2.4: Schematic representation of a tree-way factorial treatment structure.
+Figure 9.3: Common variable distributions. Page 60 in Stroup et al. (2024)
 </p>
 </div>
-<p>Other treatment structures:</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
-<img src="../figures/trtdesigns_twowayfract.PNG" alt="Schematic representation of a two-way fractional factorial treatment structure." width="80%" />
-<p class="caption">
-Figure 2.5: Schematic representation of a two-way fractional factorial treatment structure.
-</p>
+<div id="common-response-variable-y-b-distributions" class="section level3 hasAnchor" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> Common Response Variable (<span class="math inline">\(y | b\)</span>) Distributions<a href="repeated-measures-i.html#common-response-variable-y-b-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Below is a table of commonly used distributions, their properties, and related probability density functions (PDFs).</p>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+GLMMs
+</title>
+<style>
+        .table-wrapper {
+            width: 100%; 
+            overflow-x: auto; 
+            border: 1px solid #ccc; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>
+<b>Distribution</b>
+</th>
+<th>
+<b>Range of Variable</b>
+</th>
+<th>
+<b>Mean</b>
+</th>
+<th>
+<b>Commonly Used Link(s)</b>
+</th>
+<th>
+<b>Variance</b>
+</th>
+<th>
+<b>PDF</b>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Gaussian/normal
+</td>
+<td>
+<span class="math inline">\(-\infty &lt; y &lt; \infty\)</span>
+</td>
+<td>
+<span class="math inline">\(\mu\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \mu\)</span>
+</td>
+<td>
+<span class="math inline">\(\sigma^2\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(y-\mu)^2}{2\sigma^2}}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Log normal
+</td>
+<td>
+<span class="math inline">\(-\infty &lt; y &lt; \infty\)</span>
+</td>
+<td>
+<span class="math inline">\(\mu\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log(\mu)\)</span>
+</td>
+<td>
+<span class="math inline">\(\sigma^2\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \frac{1}{y\sigma\sqrt{2\pi}} e^{-\frac{(\log y - \mu)^2}{2\sigma^2}}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Gamma
+</td>
+<td>
+<span class="math inline">\(y &gt; 0\)</span>
+</td>
+<td>
+<span class="math inline">\(\mu\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log(\mu), \frac{1}{\mu}\)</span>
+</td>
+<td>
+<span class="math inline">\(\phi \mu^2\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \frac{y^{\frac{\mu}{\phi} - 1} e^{-\frac{y}{\phi}}}{\phi^{\mu} \Gamma(\mu)}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Exponential
+</td>
+<td>
+<span class="math inline">\(y &gt; 0\)</span>
+</td>
+<td>
+<span class="math inline">\(\mu\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log(\mu), \frac{1}{\mu}\)</span>
+</td>
+<td>
+<span class="math inline">\(\mu^2\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \frac{1}{\mu} e^{-\frac{y}{\mu}}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Binomial
+</td>
+<td>
+0, <span class="math inline">\(\frac{1}{N}, \dots, \frac{N}{N}\)</span>
+</td>
+<td>
+<span class="math inline">\(\pi = \frac{\mu}{N}\)</span>
+</td>
+<td>
+Logit: <span class="math inline">\(\eta = \log\left(\frac{\pi}{1-\pi}\right)\)</span>
+</td>
+<td>
+<span class="math inline">\(N\pi(1-\pi)\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \binom{N}{y} \pi^y (1-\pi)^{N-y}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Beta
+</td>
+<td>
+0 &lt; <span class="math inline">\(y &lt; 1\)</span>
+</td>
+<td>
+<span class="math inline">\(\mu\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log\left(\frac{\mu}{1-\mu}\right)\)</span>
+</td>
+<td>
+<span class="math inline">\(\frac{\mu(1-\mu)}{1+\phi}\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \frac{y^{\alpha-1}(1-y)^{\beta-1}}{B(\alpha, \beta)}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Poisson
+</td>
+<td>
+<span class="math inline">\(y = 0, 1, 2, \dots\)</span>
+</td>
+<td>
+<span class="math inline">\(\lambda\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log(\lambda)\)</span>
+</td>
+<td>
+<span class="math inline">\(\lambda\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \frac{\lambda^y e^{-\lambda}}{y!}\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Geometric
+</td>
+<td>
+<span class="math inline">\(y = 0, 1, 2, \dots\)</span>
+</td>
+<td>
+<span class="math inline">\(\lambda\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log(\lambda)\)</span>
+</td>
+<td>
+<span class="math inline">\(\lambda(1+\lambda)\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = (1-\lambda)^y \lambda\]</span>
+</td>
+</tr>
+<tr>
+<td>
+Negative binomial
+</td>
+<td>
+<span class="math inline">\(y = 0, 1, 2, \dots\)</span>
+</td>
+<td>
+<span class="math inline">\(\lambda\)</span>
+</td>
+<td>
+<span class="math inline">\(\eta = \log(\lambda)\)</span>
+</td>
+<td>
+<span class="math inline">\(\lambda(1+\phi\lambda)\)</span>
+</td>
+<td>
+<span class="math display">\[f(y) = \binom{y + r - 1}{y} \lambda^r (1-\lambda)^y\]</span>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
-<img src="../figures/trtdesigns_twoway_control.PNG" alt="Schematic representation of a two-way factorial plus a control treatment structure." width="80%" />
-<p class="caption">
-Figure 2.6: Schematic representation of a two-way factorial plus a control treatment structure.
-</p>
-</div>
-</div>
-<div id="design-structure" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Design structure<a href="designed-experiments-review-1.html#design-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The experiment design describes the data generating process (“blueprint” of the data).</p>
+<p>If we describe a non-Gaussian GLMM with</p>
+<p><span class="math display">\[{y}|\boldsymbol{u} \sim P({\mu}, \phi),\]</span>
+where <span class="math inline">\(y\)</span> is the response, <span class="math inline">\(\boldsymbol{u}\)</span> are the random effects, <span class="math inline">\(\mu\)</span> is the mean, and <span class="math inline">\(\phi\)</span> is the dispersion,
+we know that <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\phi\)</span> may not be independent.</p>
 <ul>
-<li>You’ll notice that the models above only consider the treatment sources of variability to explain variations in the observed values.</li>
-<li>How were the treatments above (logistically) applied?</li>
-</ul>
-<p><strong>Useful questions:</strong></p>
+<li>G-side ~ ‘true GLMM’</li>
+<li>R-side: quasi-likelihood models</li>
+<li>Marginal models often lead to less powerful tests.</li>
+<li>Several discussions:
 <ul>
-<li>What is the experimental unit?<br />
-</li>
-<li>What is the blueprint of the design? (which observations are similar to what)</li>
-</ul>
-<p>While the treatment structure defines what effects we will try and estimate as precisely as possible, the design structure tells us the story of <strong>how</strong> those treatments were applied.
-Some of the most common designed experiments include</p>
-<ul>
-<li>completely randomized design (CRD),</li>
-<li>randomized complete block design (RCBD),</li>
-<li>split-plot design,</li>
-<li>relevant variations to the designs above:
-<ul>
-<li>generalized randomized complete block design,</li>
-<li>strip-plot design,</li>
-<li>repeated measures designs.</li>
+<li>Philosophical, Power, and more <a href="https://projecteuclid.org/journals/statistical-science/volume-19/issue-2/Conditional-and-Marginal-Models-Another-View/10.1214/088342304000000305.full">Lee and Nelder (2004)</a></li>
+<li>Many unknowns for the software implementation of non-Gaussian GLMMs <a href="jstor.org/stable/48736894">Stroup and Claassen (2020)</a></li>
 </ul></li>
 </ul>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
-<img src="../figures/designs_crd.PNG" alt="Schematic description of an experiment with a completely randomized design" width="100%" />
-<p class="caption">
-Figure 2.7: Schematic description of an experiment with a completely randomized design
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
-<img src="../figures/designs_rcbd.PNG" alt="Schematic description of an experiment with a randomized complete block design" width="100%" />
-<p class="caption">
-Figure 2.8: Schematic description of an experiment with a randomized complete block design
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
-<img src="../figures/designs_splitplot.PNG" alt="Schematic description of a field experiment with a split-plot design" width="100%" />
-<p class="caption">
-Figure 2.9: Schematic description of a field experiment with a split-plot design
-</p>
-</div>
-</div>
-</div>
-<div id="statistical-models" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Statistical models<a href="designed-experiments-review-1.html#statistical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>What are the sources of variability?</li>
-<li>What is the distribution of the data?</li>
-<li>What is the structure in the data?</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
-<img src="../figures/mindmap2.jpg" alt="Schematic representation of the relationship between the experiment design and the statistical model." width="80%" />
-<p class="caption">
-Figure 2.10: Schematic representation of the relationship between the experiment design and the statistical model.
-</p>
-</div>
-</div>
-<div id="homework-announcements-1" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Homework &amp; Announcements<a href="designed-experiments-review-1.html#homework-announcements-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Submit <a href="https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf">Assignment 1</a> by next Wednesday.</li>
-</ul>
 
+</div>
 </div>
 </div>
             </section>
@@ -464,8 +707,8 @@ Figure 2.10: Schematic representation of the relationship between the experiment
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="designed-experiments-connection-to-linear-mixed-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="practice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -496,7 +739,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/stat870/fall2026/edit/main/02-design1.Rmd",
+    "link": "https://github.com/stat870/fall2026/edit/main/09-Rep-Measures.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -504,7 +747,7 @@ gitbook.start({
     "text": null
   },
   "view": {
-    "link": "https://github.com/stat870/fall2026/blob/main/02-design1.Rmd",
+    "link": "https://github.com/stat870/fall2026/blob/main/09-Rep-Measures.Rmd",
     "text": null
   },
   "download": null,
