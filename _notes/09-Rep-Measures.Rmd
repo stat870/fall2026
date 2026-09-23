@@ -119,10 +119,10 @@ $$\boldsymbol{\Sigma}_{ik} =
 
 $$\boldsymbol{\Sigma}_{ik} =
 \begin{bmatrix}
-\sigma^2_{1} & \sigma^2_{12} & \sigma^2_{13} & \sigma^2_{14} & \sigma^2_{15} \\
- & \sigma^2_{2} & \sigma^2_{23} & \sigma^2_{24} & \sigma^2_{25} \\
- &   & \sigma^2_{3} & \sigma^2_{34} & \sigma^2_{35} \\
-  &  &  & \sigma^2_{4} & \sigma^2_{45} \\
+\sigma^2_{1} & \sigma_{12} & \sigma_{13} & \sigma_{14} & \sigma_{15} \\
+ & \sigma^2_{2} & \sigma_{23} & \sigma_{24} & \sigma_{25} \\
+ &   & \sigma^2_{3} & \sigma_{34} & \sigma_{35} \\
+  &  &  & \sigma^2_{4} & \sigma_{45} \\
  &  &  &  & \sigma^2_{5} \\
 \end{bmatrix}$$
 
