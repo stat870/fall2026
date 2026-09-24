@@ -16,7 +16,7 @@ Keep in mid that all the code to generate this website and the class notes can b
 - Introduction (09/02) [get code](scripts/09022026_inclass.qmd)
 - (09/09) [get code](scripts/09092026.qmd)
 - (09/14) [get code](scripts/09142026.qmd)
-- (09/16) [get code](scripts/09162026.qmd)
+- (09/16) [get code](scripts/09162026.Rmd)
 
 **In-class exercises** 
 
