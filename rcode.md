@@ -21,4 +21,5 @@ Keep in mid that all the code to generate this website and the class notes can b
 **In-class exercises** 
 
 - (09/21) [get code](scripts/09212026_inclass_ex_key.Rmd)
+- (09/28) [get code](scripts/09282026_inclass_ex_key.Rmd)
 

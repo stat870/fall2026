@@ -56,7 +56,7 @@ dd_fecal |>
 library(lme4)
 library(multcomp)
 
-m1 <- lmer(Dry.matter... ~ Trt*Day + Room + (1|Room:Pen/Pig), data = dd_fecal)
+m1 <- lmer(Dry.matter... ~ Trt*Day + Room + (1|Room:Pen) + (1|Room:Pen:Pig), data = dd_fecal)
 
 (means <- emmeans(m1, ~Trt , at = list(Day = factor(17))))
 
@@ -67,6 +67,17 @@ cld(means)
 ```{r}
 library(glmmTMB)
 
+m_ar1 <- glmmTMB(Dry.matter...*10 ~
+                   Trt*Day + Room + (1|Room:Pen) + ar1(Day + 0 |Room:Pen:Pig),
+                REML = TRUE,
+                control = glmmTMBControl(),
+        data = dd_fecal)
 
+
+m_toep <- glmmTMB(Dry.matter.../10 ~ 
+                  Trt*Day + Room + (1|Room:Pen) + toep(Day + 0 |Room:Pen:Pig),
+                REML = TRUE,
+                control = glmmTMBControl(),
+        data = dd_fecal)
 ```
 
