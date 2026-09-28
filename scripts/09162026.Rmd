@@ -57,3 +57,12 @@ as.data.frame(emmeans(model1, ~rep))$emmean - mean(as.data.frame(emmeans(model1,
 getME(model2, "b")
 ```
 
+```{r}
+data.frame(fixed = as.data.frame(emmeans(model1, ~rep))$emmean - mean(as.data.frame(emmeans(model1, ~rep))$emmean),
+           mixed = getME(model2, "b")[,1]) |> 
+  ggplot(aes(fixed, mixed))+
+  geom_abline(linetype =2, slope =1)+
+  geom_point()+
+  coord_cartesian(xlim = c(-100, 100), ylim = c(-100,100))
+```
+

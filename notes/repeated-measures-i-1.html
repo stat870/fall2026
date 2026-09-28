@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data</title>
-  <meta name="description" content="Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data" />
+  <title>Day 10 Repeated measures I | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 10 Repeated measures I | STAT 870 - Analysis of Messy Data" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:title" content="Day 10 Repeated measures I | STAT 870 - Analysis of Messy Data" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 6 Generalized linear mixed models | STAT 870 - Analysis of Messy Data" />
+  <meta name="twitter:title" content="Day 10 Repeated measures I | STAT 870 - Analysis of Messy Data" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linear-mixed-models-1.html"/>
-<link rel="next" href="shrinkage-and-degrees-of-freedom.html"/>
+<link rel="prev" href="repeated-measures-i.html"/>
+<link rel="next" href="semester-project-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -271,15 +271,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.1" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#common-response-variable-y-b-distributions"><i class="fa fa-check"></i><b>9.5.1</b> Common Response Variable (<span class="math inline">\(y | b\)</span>) Distributions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html"><i class="fa fa-check"></i><b>10</b> Repeated measures II</a>
+<li class="chapter" data-level="10" data-path="repeated-measures-i-1.html"><a href="repeated-measures-i-1.html"><i class="fa fa-check"></i><b>10</b> Repeated measures I</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#announcements-8"><i class="fa fa-check"></i><b>10.1</b> Announcements</a></li>
-<li class="chapter" data-level="10.2" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#repeated-measures-designs"><i class="fa fa-check"></i><b>10.2</b> Repeated measures designs</a>
+<li class="chapter" data-level="10.1" data-path="repeated-measures-i-1.html"><a href="repeated-measures-i-1.html#announcements-8"><i class="fa fa-check"></i><b>10.1</b> Announcements</a></li>
+<li class="chapter" data-level="10.2" data-path="repeated-measures-i-1.html"><a href="repeated-measures-i-1.html#repeated-measures-designs"><i class="fa fa-check"></i><b>10.2</b> Repeated measures designs</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#model-selection-for-different-covariance-structures"><i class="fa fa-check"></i><b>10.2.1</b> Model selection for different covariance structures</a></li>
+<li class="chapter" data-level="10.2.1" data-path="repeated-measures-i-1.html"><a href="repeated-measures-i-1.html#model-selection-for-different-covariance-structures"><i class="fa fa-check"></i><b>10.2.1</b> Model selection for different covariance structures</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#selecting-the-covariance-structure"><i class="fa fa-check"></i><b>10.3</b> Selecting the covariance structure</a></li>
-<li class="chapter" data-level="10.4" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#applied-example"><i class="fa fa-check"></i><b>10.4</b> Applied example</a></li>
+<li class="chapter" data-level="10.3" data-path="repeated-measures-i-1.html"><a href="repeated-measures-i-1.html#selecting-the-covariance-structure"><i class="fa fa-check"></i><b>10.3</b> Selecting the covariance structure</a></li>
+<li class="chapter" data-level="10.4" data-path="repeated-measures-i-1.html"><a href="repeated-measures-i-1.html#applied-example"><i class="fa fa-check"></i><b>10.4</b> Applied example</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="semester-project-1.html"><a href="semester-project-1.html"><i class="fa fa-check"></i><b>11</b> Semester Project</a>
 <ul>
@@ -312,174 +312,266 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="generalized-linear-mixed-models" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Day 6</span> Generalized linear mixed models<a href="generalized-linear-mixed-models.html#generalized-linear-mixed-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>September 14th</p>
-<div id="announcements-4" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Announcements<a href="generalized-linear-mixed-models.html#announcements-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="repeated-measures-i-1" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Day 10</span> Repeated measures I<a href="repeated-measures-i-1.html#repeated-measures-i-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>September 28th, 2026</p>
+<div id="announcements-8" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Announcements<a href="repeated-measures-i-1.html#announcements-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><a href="https://stat870.github.io/fall2026/assignments/Assignment2_YourLastName.pdf"><strong>HW 2</strong></a> is up and due next Wednesday</li>
-<li>Semester project</li>
-<li><a href="https://www.k-state.edu/digital-ag-advanced-analytics/events/linear-mixed-models-2026.html">Mixed models workshop</a>
+<li>Online classes on Oct 5, 7, 12, 14.</li>
+<li>Mixture of recordings and Zoom classes.</li>
+</ul>
+</div>
+<div id="repeated-measures-designs" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Repeated measures designs<a href="repeated-measures-i-1.html#repeated-measures-designs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Repeated measures designs are similar to split-plot designs, where time is at the subplot level.
+However, an important difference is that time cannot be randomly allocated,
+because it is unidirectional!
+The independence assumption does not hold and should be included in the model.</p>
+<p><img src="../figures/designs_repeated.PNG" alt="" width="640" style="display: block; margin: auto;" /></p>
+<p><span class="math display">\[y_{ijk} = \mu + \tau_i + \alpha_j + (\tau \alpha)_{ij} + u_{k} + v_{ijk} + \varepsilon_{ijk},\\
+u_{k} \sim N(0, \sigma^2_u),\]</span></p>
+<p>where <span class="math inline">\(y_{ijk}\)</span> is the observation for the <span class="math inline">\(i\)</span>th treatment, <span class="math inline">\(j\)</span>th time, in the <span class="math inline">\(k\)</span>th block,
+<span class="math inline">\(\mu\)</span> is the overall mean,
+<span class="math inline">\(\tau_i\)</span> is the main effect of the <span class="math inline">\(i\)</span>th level of treatment factor 1 (treatment),
+<span class="math inline">\(\alpha_j\)</span> is the main effect of the <span class="math inline">\(j\)</span>th level of treatment factor 2 (time),
+<span class="math inline">\((\tau \alpha)_{ij}\)</span> is their interaction,
+<span class="math inline">\(u_k\)</span> is the random effect of the <span class="math inline">\(k\)</span>th block,
+<span class="math inline">\(v_{ijk}\)</span> is the random effect of the <span class="math inline">\(i\)</span>th “miniblock” (whole plot) at the <span class="math inline">\(j\)</span>th time, in the <span class="math inline">\(k\)</span>th block,
+and <span class="math inline">\(\varepsilon_{ijk}\)</span> is the residual.</p>
+<p>This time, unlike split-plots, <span class="math inline">\(v_{ijk} \nsim N(0, \sigma^2_v)\)</span> because
+the treatment levels are not randomly assigned! Time is unidirectional and cannot be randomized.
+We can describe how different observations of a treatment <span class="math inline">\(i\)</span> in block <span class="math inline">\(k\)</span> are correlated, by looking at
+the distribution of <span class="math inline">\(\mathbf{v}_{ik}\)</span>:</p>
+<p><span class="math display">\[\mathbf{v}_{ik} \sim N(\boldsymbol{0}, \Sigma_{v, ik}), \\
+\Sigma_{v, ik} = \sigma^2_v \begin{bmatrix} 1 &amp; \rho &amp; \rho^2 \\
+\rho &amp; 1 &amp; \rho \\
+\rho^2 &amp; \rho &amp; 1\end{bmatrix}.\]</span></p>
+<p>This example shows a first order autoregressive covariance structure.
+Other covariance functions include the compound symmetry covariance function,
+<span class="math display">\[\mathbf{v}_{ik} \sim N(\boldsymbol{0}, \Sigma_{v, ik}), \\
+\Sigma_{v, ik} = \sigma^2_v \begin{bmatrix} 1 &amp; \rho &amp; \rho \\
+\rho &amp; 1 &amp; \rho \\
+\rho &amp; \rho &amp; 1\end{bmatrix}.\]</span> and
+the unstructured covariance function, <span class="math display">\[\mathbf{v}_{ik} \sim N(\boldsymbol{0}, \Sigma_{v, ik}), \\
+\Sigma_{v, ik} = \sigma^2_v \begin{bmatrix} 1 &amp; \sigma_{12} &amp; \sigma_{13} \\
+\sigma_{21} &amp; 1 &amp; \sigma_{23} \\
+\sigma_{31} &amp; \sigma_{32} &amp; 1\end{bmatrix}.\]</span></p>
+<p>Note that we are still affecting the <span class="math inline">\(\mathbf{G}\)</span> matrix, not the <span class="math inline">\(\mathbf{R}\)</span> matrix – the residuals <span class="math inline">\(\varepsilon_{ijk}\)</span> are still iid normal.
+This difference may affect inference in non-normal responses (not the case yet),
+and is typically a modeling decision that should be carefully considered by the scientist.
+For other types of correlation functions and a discussion of the implications of
+G-side versus R-side correlations see <a href="https://doi.org/10.1201/EBK1584883340">Johnson and Milliken (2009)</a>,
+<a href="https://www.routledge.com/Generalized-Linear-Mixed-Models-Modern-Concepts-Methods-and-Applications/Stroup-Ptukhina-Garai/p/book/9781498755566?srsltid=AfmBOop80SBSwTFMCIzkiTtYe-5uir_Xnw2KVZxa1oXb4LJWrLRx0Wwq">Stroup et al. (2024)</a>,
+and <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12623">Muff et al. (2016)</a>.</p>
+<div id="model-selection-for-different-covariance-structures" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Model selection for different covariance structures<a href="repeated-measures-i-1.html#model-selection-for-different-covariance-structures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>How do we know what the best covariance structure is?</p>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+Covariance structures for repeated measures
+</title>
+<style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<table>
+<tr>
+<th>
+Covariance function
+</th>
+<th>
+Abbreviations
+</th>
+<th>
+Number of parameters estimated
+</th>
+<th>
+Formula
+</th>
+</tr>
+<tr>
+<th>
+No covariance
+</th>
+<td>
+</td>
+<td>
+1: <span class="math inline">\(\sigma\)</span>
+</td>
+<td>
+<span class="math inline">\(\boldsymbol{\Sigma}_{ik} =
+            \sigma^2
+            \begin{bmatrix}
+            1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+            0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+            0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+            0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+            0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\\
+            \end{bmatrix}\)</span>
+</td>
+</tr>
+<tr>
+<th>
+Compound symmetry
+</th>
+<td>
+CS
+</td>
+<td>
+2: <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\rho\)</span>
+</td>
+<td>
+<span class="math inline">\(\boldsymbol{\Sigma}_{ik} =
+            \sigma^2
+            \begin{bmatrix}
+            1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
+            \rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
+            \rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
+            \rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
+            \rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
+            \end{bmatrix}\)</span>
+</td>
+</tr>
+<tr>
+<th>
+First-order autoregressive
+</th>
+<td>
+AR(1)
+</td>
+<td>
+<span class="math inline">\(\rho\)</span>
+</td>
+<td>
+<span class="math inline">\(\boldsymbol{\Sigma}_{ik} =
+            \sigma^2
+            \begin{bmatrix}
+            1 &amp; \rho &amp; \rho^2 &amp; \rho^3 &amp; \rho^4 \\
+            \rho &amp; 1 &amp; \rho &amp; \rho^2 &amp; \rho^3 \\
+            \rho^2 &amp; \rho &amp; 1 &amp; \rho &amp; \rho^2 \\
+            \rho^3 &amp; \rho^2 &amp; \rho &amp; 1 &amp; \rho \\
+            \rho^4 &amp; \rho^3 &amp; \rho^2 &amp; \rho &amp; 1\\
+            \end{bmatrix}\)</span>
+</td>
+</tr>
+<tr>
+<th>
+First-order ante-dependence
+</th>
+<td>
+ANTE(1)
+</td>
+<td>
+2: <span class="math inline">\(\sigma^2_M\)</span> and <span class="math inline">\(\rho\)</span>
+</td>
+<td>
+<span class="math inline">\(\boldsymbol{\Sigma}_{ik} =
+            \sigma_M^2
+            \begin{bmatrix}
+            1 &amp; \rho &amp; \rho^2 &amp; \rho^3 &amp; \rho^4 \\
+            \rho &amp; 1 &amp; \rho &amp; \rho^2 &amp; \rho^3 \\
+            \rho^2 &amp; \rho &amp; 1 &amp; \rho &amp; \rho^2 \\
+            \rho^3 &amp; \rho^2 &amp; \rho &amp; 1 &amp; \rho \\
+            \rho^4 &amp; \rho^3 &amp; \rho^2 &amp; \rho &amp; 1\\
+            \end{bmatrix}\)</span>
+</td>
+</tr>
+<tr>
+<th>
+Toeplitz
+</th>
+<td>
+Toeplitz
+</td>
+<td>
+<span class="math inline">\(t\)</span>
+</td>
+<td>
+<span class="math inline">\(\boldsymbol{\Sigma}_{ik} =
+            \begin{bmatrix}
+            \sigma^2 &amp; \sigma_1 &amp; \sigma_2 &amp; \sigma_3 &amp; \sigma_4 \\
+            \sigma_1 &amp; \sigma^2 &amp; \sigma_1 &amp; \sigma_2 &amp; \sigma_3 \\
+            \sigma_2 &amp; \sigma_1 &amp; \sigma^2 &amp; \sigma_1 &amp; \sigma_2 \\
+            \sigma_3 &amp; \sigma_2 &amp; \sigma_1 &amp; \sigma^2 &amp; \rho \\
+            \sigma_4 &amp; \sigma_3 &amp; \sigma_2 &amp; \sigma_1 &amp; \sigma^2\\
+            \end{bmatrix}\)</span>
+</td>
+</tr>
+<tr>
+<th>
+Unstructured
+</th>
+<td>
+UN
+</td>
+<td>
+<span class="math inline">\(t(t+1)/2\)</span>
+</td>
+<td>
+<span class="math inline">\(\boldsymbol{\Sigma}_{ik} =
+            \begin{bmatrix}
+            \sigma^2_{1} &amp; \sigma_{12} &amp; \sigma_{13} &amp; \sigma_{14} &amp; \sigma_{15} \\
+             &amp; \sigma^2_{2} &amp; \sigma_{23} &amp; \sigma_{24} &amp; \sigma_{25} \\
+             &amp;   &amp; \sigma^2_{3} &amp; \sigma_{34} &amp; \sigma_{35} \\
+              &amp;  &amp;  &amp; \sigma^2_{4} &amp; \sigma_{45} \\
+             &amp;  &amp;  &amp;  &amp; \sigma^2_{5} \\
+            \end{bmatrix}\)</span>
+</td>
+</tr>
+</table>
+</body>
+</div>
+</div>
+<div id="selecting-the-covariance-structure" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Selecting the covariance structure<a href="repeated-measures-i-1.html#selecting-the-covariance-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How do we decide what’s the best covariance structure for our data?</p>
 <ul>
-<li>“The mixed models workshops clearly improved my understanding of the material in STAT 870. Both the class and the workshops complemented each other very well. The positive aspect of this combination was that the workshops provided a very practical space to connect the theory from lectures with real data analysis in R. Working through examples step by step made the concepts much clearer.”</li>
-<li>“it helped to understand core concepts regarding non-normal data and mixed models. One positive aspect is that through the workshop, I got an idea about my semester project.”</li>
-<li>“It was really helpful not only for the discussion but also for the content. I hope to attend more of these workshops because I can’t emphasize enough how beneficial that workshop was, especially for the STAT870 class.”</li>
+<li>Over-modeling correlation compromises power and under-modeling compromises type I error control.</li>
+<li>Information criteria:
+<ul>
+<li>Used as a metric for predictive ability and model fit.</li>
+<li>Lower value = better</li>
+<li>No general rule about AIC magnitude</li>
+<li>Akaike Information Criterion (AIC): <span class="math inline">\(\text{AIC} = 2p - 2 \ln(\hat{L})\)</span></li>
+<li>AICC: correction for small sample sizes <span class="math inline">\(\text{AICc} = \text{AIC} + \frac{2p^2+2p}{n-p-1}\)</span></li>
+<li>Bayesian Information Criterion (BIC) <span class="math inline">\(\text{BIC} = p \log(n) -2\log(\hat{L})\)</span></li>
+<li>[<span class="math inline">\(p\)</span>: number of parameters estimated in the model, <span class="math inline">\(\hat{L}\)</span>: likelihood for the model, <span class="math inline">\(\hat{L}=p(\mathbf{y}\vert \hat{\boldsymbol{\beta}}, M)\)</span>]</li>
+<li>Plot covariance as a function of distance (could be time or space).<br />
+</li>
+<li>Likelihood ratio tests are not always reliable for mixed models [<a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#is-the-likelihood-ratio-test-reliable-for-mixed-models">see Bolker’s GLMM FAQ</a>]</li>
+</ul></li>
+<li>Is there a clear reasonable assumption about the data-generating process?</li>
+<li>Use UN as the reference:
+<ul>
+<li>UN covariance structure is the most complex because it is estimating unique <span class="math inline">\(\sigma\)</span>s for each pair of time points</li>
+<li>Select the covariance structure that is most similar to UN.</li>
 </ul></li>
 </ul>
 </div>
-<div id="statistical-modeling-1" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Statistical modeling<a href="generalized-linear-mixed-models.html#statistical-modeling-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Statistical models combine deterministic (see step 1 below) and stochastic (see step 2 below) components</li>
-</ul>
-<div id="three-steps-to-modeling-data-1" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Three steps to modeling data<a href="generalized-linear-mixed-models.html#three-steps-to-modeling-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li>Define the linear predictor <span class="math inline">\(\boldsymbol\eta = \mathbf{X}\boldsymbol{\beta} + \mathbf{Z}\mathbf{u}\)</span>,</li>
-<li>Define the probability distribution for the data, <span class="math inline">\(\mathbf{y}|\mathbf{u}\)</span>,</li>
-<li>Define the link function <span class="math inline">\(g(\cdot)\)</span>, <span class="math inline">\(\boldsymbol\eta = g(\mathbf{y}|\mathbf{u})\)</span>.</li>
-</ol>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
-<img src="../figures/stroup_distributions.jpg" alt="Common variable distributions. Page 60 in Stroup et al. (2024)" width="80%" />
-<p class="caption">
-Figure 6.1: Common variable distributions. Page 60 in Stroup et al. (2024)
-</p>
-</div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-32"></span>
-<img src="../figures/dsitributions.png" alt="Common variable distributions." width="80%" />
-<p class="caption">
-Figure 6.2: Common variable distributions.
-</p>
-</div>
-</div>
-</div>
-<div id="estimation-of-variance-components-1" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Estimation of variance components<a href="generalized-linear-mixed-models.html#estimation-of-variance-components-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For any unknown parameter, there are multiple ways to estimate it. We call those the methods of estimation.</p>
-<div id="maximum-likelihood-estimation-mle-1" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Maximum Likelihood Estimation (MLE)<a href="generalized-linear-mixed-models.html#maximum-likelihood-estimation-mle-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Maximum Likelihood Estimation</strong> of variance components provides downward biased estimates for small data (most experimental data).
-<span class="math inline">\(\ell_{ML}(\boldsymbol{\sigma; \boldsymbol{\beta}, \mathbf{y}}) = - (\frac{n}{2}) \log(2\pi)-(\frac{1}{2}) \log ( \vert \mathbf{V}(\boldsymbol\sigma) \vert ) - (\frac{1}{2}) (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^T[\mathbf{V}(\boldsymbol\sigma)]^{-1}(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})\)</span></p>
-</div>
-<div id="restricted-maximum-likelihood-reml-1" class="section level3 hasAnchor" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> Restricted Maximum Likelihood (REML)<a href="generalized-linear-mixed-models.html#restricted-maximum-likelihood-reml-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Restricted Maximum Likelihood</strong> (REML) avoids MLE’s downward bias under small data and is thus is the default in most mixed effects models.</p>
-<ul>
-<li>In REML, the likelihood is maximized <strong>after</strong> accounting for the model’s fixed effects.<br />
-</li>
-<li>In REML, <span class="math inline">\(\ell_{REML}(\boldsymbol{\sigma};\mathbf{y}) = - (\frac{n-p}{2}) \log (2\pi) - (\frac{1}{2}) \log ( \vert \mathbf{V}(\boldsymbol\sigma) \vert ) - (\frac{1}{2})log \left(  \vert \mathbf{X}^T[\mathbf{V}(\boldsymbol\sigma)]^{-1}\mathbf{X} \vert \right) - (\frac{1}{2})\mathbf{r}[\mathbf{V}(\boldsymbol\sigma)]^{-1}\mathbf{r}\)</span>,
-where <span class="math inline">\(p = rank(\mathbf{X})\)</span>, <span class="math inline">\(\mathbf{r} = \mathbf{y}-\mathbf{X}\hat{\boldsymbol{\beta}}_{ML}\)</span>.
-<ul>
-<li>Start with initial values for <span class="math inline">\(\boldsymbol{\sigma}\)</span>, <span class="math inline">\(\tilde{\boldsymbol{\sigma}}\)</span>.<br />
-</li>
-<li>Compute <span class="math inline">\(\mathbf{G}(\tilde{\boldsymbol{\sigma}})\)</span> and <span class="math inline">\(\mathbf{R}(\tilde{\boldsymbol{\sigma}})\)</span>.<br />
-</li>
-<li>Obtain <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\mathbf{b}\)</span>.<br />
-</li>
-<li>Update <span class="math inline">\(\tilde{\boldsymbol{\sigma}}\)</span>.<br />
-</li>
-<li>Repeat until convergence.<br />
-</li>
-</ul></li>
-<li>Variance components may be <span class="math inline">\(&lt;0\)</span>; in that case they are set to zero.</li>
-</ul>
-</div>
-<div id="method-of-moments-mom-1" class="section level3 hasAnchor" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> Method of moments (MoM)<a href="generalized-linear-mixed-models.html#method-of-moments-mom-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Method of moments</strong> (MoM) is derived from ANOVA tables that include the expected mean squares.</p>
-<ul>
-<li><p>Use actual sums of squares and expected mean squares (EMS) from ANOVA to clear for the different variance components.</p></li>
-<li><p>e.g., <span class="math inline">\(\tilde{\sigma}^2_{w} = \frac{SSw - SS_e}{c}\)</span> (See table above). However, if <span class="math inline">\(\tilde{\sigma}^2_{w} &lt; 0\)</span>, <span class="math inline">\(\hat{\sigma}^2_{w} = 0\)</span>.</p></li>
-<li><p>Issues with variance estimates equal to zero</p>
-<ul>
-<li>Type I error inflation</li>
-<li><a href="https://acsess.onlinelibrary.wiley.com/doi/10.1002/agj2.21570">Frey et al. (2024)</a></li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="information-pooling-and-shrinkage" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Information pooling and shrinkage<a href="generalized-linear-mixed-models.html#information-pooling-and-shrinkage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In mixed models, pooling refers to how much information is shared across different groups (or clusters) in the data when estimating parameters.</p>
-<p>The three pooling approaches represent different assumptions about the variance between these groups (<span class="math inline">\(\sigma^2_{b}\)</span>).</p>
-<p>To illustrate this concept, consider a scenario where we have yield observations <span class="math inline">\(y_{ij}\)</span> for the <span class="math inline">\(i\)</span>th observation of location <span class="math inline">\(j\)</span>. Then, <span class="math inline">\(i = 1, \dots, n_j\)</span> and <span class="math inline">\(j = 1, \dots, J\)</span>.
-We want to estimate a mean for each location <span class="math inline">\(L_j\)</span>.</p>
-<div id="complete-pooling" class="section level3 hasAnchor" number="6.4.1">
-<h3><span class="header-section-number">6.4.1</span> Complete pooling<a href="generalized-linear-mixed-models.html#complete-pooling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>All groups (i.e., locations) are similar and there is no meaningful variation between them.</li>
-<li>The group (i.e., location) identifier <span class="math inline">\(j\)</span> contains no useful information.</li>
-<li><span class="math inline">\(y_{ij} \sim N(\mu, \sigma^2)\)</span></li>
-<li>The between-group (i.e., location) variance is assumed to be exactly zero (<span class="math inline">\(\sigma^2_{L} = 0\)</span>) and thus, if <span class="math inline">\(L_j \sim N(0, 0)\)</span>, all <span class="math inline">\(L_j =0\)</span>. Thus, all locations have the same mean <span class="math inline">\(\mu\)</span>.</li>
-</ul>
-</div>
-<div id="no-pooling-all-fixed-model" class="section level3 hasAnchor" number="6.4.2">
-<h3><span class="header-section-number">6.4.2</span> No pooling (all-fixed model)<a href="generalized-linear-mixed-models.html#no-pooling-all-fixed-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Each group is completely independent and unique (i.e., knowing something about Location 1 tells you absolutely nothing about Location 2).</li>
-<li>Equivalent to fitting a classical linear model with only fixed effects.</li>
-<li><span class="math inline">\(y_{ij} \sim N(\mu + L_j, \sigma^2)\)</span></li>
-<li>The between-group (i.e., location) variance is assumed to be infinite (<span class="math inline">\(\sigma^2_{L} \to \infty\)</span>) and thus, <span class="math inline">\(L_j\)</span> is the BLUE for that group.</li>
-<li>Think about this for an IBD!</li>
-</ul>
-</div>
-<div id="partial-pooling-mixed-effects-model" class="section level3 hasAnchor" number="6.4.3">
-<h3><span class="header-section-number">6.4.3</span> Partial pooling (mixed-effects model)<a href="generalized-linear-mixed-models.html#partial-pooling-mixed-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>Groups are different, but they are all drawn from a common overarching population distribution.</p></li>
-<li><p>Information is shared across groups to improve the estimates for each individual group.</p></li>
-<li><p><span class="math inline">\(y_{ij} \vert L_j \sim N(\mu + L_j, \sigma^2)\)</span>, where <span class="math inline">\(L_j \sim N(0, \sigma^2_L)\)</span>, or…</p></li>
-<li><p><span class="math inline">\(y_{ij} \sim N(\mu + L_j, \sigma^2_L+\sigma^2)\)</span>.</p></li>
-<li><p>The between-group (i.e., location) variance is estimated from the data (see methods of estimation).</p></li>
-<li><p><strong>Shrinkage: The estimate for group <span class="math inline">\(j\)</span> is a weighted average of the unpooled group mean (<span class="math inline">\(\bar{y}_j\)</span>) and the completely pooled grand mean (<span class="math inline">\(\mu\)</span>).</strong>
-<span class="math display">\[L_j \approx \frac{\frac{n_j}{\sigma^2}\bar{y}_j + \frac{1}{\sigma_{L}^2}\mu}{\frac{n_j}{\sigma^2} + \frac{1}{\sigma_{L}^2}}\]</span></p></li>
-<li><p>Think about this for an IBD!</p></li>
-<li><p>More on shrinkage:</p>
-<ul>
-<li>If Loc has a lot of data (<span class="math inline">\(n_j \to \infty\)</span>): first term dominates, and the partial pooling estimate approaches the no pooling estimate (<span class="math inline">\(\bar{y}_j\)</span>). The model trusts the abundant local data.</li>
-<li>If a group has very little data (<span class="math inline">\(n_j \to 0\)</span>), the second term dominates, and the estimate shrinks toward the complete pooling estimate (<span class="math inline">\(\mu\)</span>). The model borrows strength from the rest of the population to stabilize a noisy, low-information group.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="degrees-of-freedom" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Degrees of freedom<a href="generalized-linear-mixed-models.html#degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Mixed models do not trace to the classical concept of degrees of freedom. In hierarchical models, rigidly counting parameters for degrees of freedom is conceptually problematic.</p>
-<p>The independent pieces of information shift depending on group sizes and variance: a group-level coefficient modeled as a random effect does not consume exactly <span class="math inline">\(1\)</span> degree of freedom (as an unpooled fixed effect would), nor does it consume <span class="math inline">\(0\)</span> (as a completely pooled grand mean would). Instead, the effective degrees of freedom consumed by a set of random effects lies somewhere between <span class="math inline">\(1\)</span> and <span class="math inline">\(J\)</span> (where <span class="math inline">\(J\)</span> is the total number of groups).</p>
-<p>The effective degrees of freedom depend on the magnitude of between-group versus within-group variance: if group variation is high, degrees of freedom approach the number of groups; if low, they approach the total sample size.</p>
-<ul>
-<li>Contrasts for balanced &amp; complete designs have straightforward calculation of degrees of freedom.</li>
-<li>For unbalanced designs, incomplete blocks, missing data, and cases with more complex variance-covariance structure, the ANOVA shell does not give us exact degrees of freedom.</li>
-<li>Downward bias of the variance of an estimable function, leading to:
-<ul>
-<li>too narrow confidence intervals</li>
-<li>inflated type I error rates</li>
-</ul></li>
-<li>Bias adjustment methods estimate the approximate degrees of freedom, which might be a non-integer number.</li>
-</ul>
-<p><strong>Satterthwaite approximation</strong></p>
-<ul>
-<li><a href="https://www.jstor.org/stable/3002019?seq=1">Paper</a></li>
-</ul>
-<p>Let <span class="math inline">\(\frac{X^2_{num}/\nu_1}{X_2^\star/\nu^\star_2}\)</span> be the ratio of interest, where <span class="math inline">\(X_{num}^2 \sim \chi^2_{\nu_1}\)</span> and <span class="math inline">\(X_2^\star\)</span> is a linear combination of chi-square random variables all independent of <span class="math inline">\(X_{num}^2\)</span>, then <span class="math inline">\(X_2^\star \sim\)</span> approximately <span class="math inline">\(\chi^2_{\nu^\star_2}\)</span>, where</p>
-<p><span class="math display">\[\nu_2^\star \equiv \frac{(\sum_m c_m X_m^2)^2}{\sum_m\frac{(c_m X_m^2)}{df_m}}.\]</span></p>
-<p><strong>Kenward-Roger approximation</strong></p>
-<ul>
-<li><a href="https://www.jstor.org/stable/2533558?seq=1">Paper</a></li>
-<li>Based on REML</li>
-<li>Focused on <span class="math inline">\((\mathbf{X}^T\mathbf{V}^{-1} \mathbf{X})^{-1}\)</span> (the variance of <span class="math inline">\(\hat{\boldsymbol\beta}\)</span>)</li>
-<li>Again, expept for variance-component-only LMMs with balanced data and their compound symmetry marginal model equivalents, the estimated covariance of <span class="math inline">\(\beta \mathbf{K}\)</span> will tend to be underestimated.</li>
-<li>KR somewhat more conservative and reliable than Satterthwaite (<a href="https://link.springer.com/article/10.1198/108571102726">source</a>).</li>
-<li>Integrated in most statistical software.</li>
-</ul>
-</div>
-<div id="reading-1" class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Reading<a href="generalized-linear-mixed-models.html#reading-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Gelman and Hill (2006) Chapter 12 (multilevel modeling basics)</li>
-<li>Stroup et al. (2024) Chapter 6 (statistical inference)</li>
-</ul>
+<div id="applied-example" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Applied example<a href="repeated-measures-i-1.html#applied-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Go back to the applied example from last week (<a href="scripts/09212026_inclass_ex.Rmd">get code</a>).
+Re-analyze the data and provide the answer to the client.</p>
 
 </div>
 </div>
@@ -488,8 +580,8 @@ We want to estimate a mean for each location <span class="math inline">\(L_j\)</
           </div>
         </div>
       </div>
-<a href="linear-mixed-models-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="shrinkage-and-degrees-of-freedom.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="repeated-measures-i.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -520,7 +612,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/stat870/fall2026/edit/main/06-GLMM.Rmd",
+    "link": "https://github.com/stat870/fall2026/edit/main/10-Rep-Measures-Practice.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -528,7 +620,7 @@ gitbook.start({
     "text": null
   },
   "view": {
-    "link": "https://github.com/stat870/fall2026/blob/main/06-GLMM.Rmd",
+    "link": "https://github.com/stat870/fall2026/blob/main/10-Rep-Measures-Practice.Rmd",
     "text": null
   },
   "download": null,

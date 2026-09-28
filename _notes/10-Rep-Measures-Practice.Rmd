@@ -1,0 +1,218 @@
+# Repeated measures II
+
+September 28th, 2026
+
+## Announcements 
+
+- Online classes on Oct 5, 7, 12, 14. 
+- Mixture of recordings and Zoom classes. 
+
+## Repeated measures designs 
+
+Repeated measures designs are similar to split-plot designs, where time is at the subplot level. 
+However, an important difference is that time cannot be randomly allocated, 
+because it is unidirectional! 
+The independence assumption does not hold and should be included in the model. 
+
+
+```{r fig.height=5, fig.align='center', echo=FALSE, caption = 'Schematic diagram of a split-plot design'}
+knitr::include_graphics("../figures/designs_repeated.PNG")
+```
+
+
+
+
+$$y_{ijk} = \mu + \tau_i + \alpha_j + (\tau \alpha)_{ij} + u_{k} + v_{ijk} + \varepsilon_{ijk},\\
+u_{k} \sim N(0, \sigma^2_u),$$
+
+where $y_{ijk}$ is the observation for the $i$th treatment, $j$th time, in the $k$th block, 
+$\mu$ is the overall mean, 
+$\tau_i$ is the main effect of the $i$th level of treatment factor 1 (treatment), 
+$\alpha_j$ is the main effect of the $j$th level of treatment factor 2 (time), 
+$(\tau \alpha)_{ij}$ is their interaction, 
+$u_k$ is the random effect of the $k$th block, 
+$v_{ijk}$ is the random effect of the $i$th "miniblock" (whole plot) at the $j$th time, in the $k$th block,
+and $\varepsilon_{ijk}$ is the residual. 
+
+This time, unlike split-plots, $v_{ijk} \nsim N(0, \sigma^2_v)$ because 
+the treatment levels are not randomly assigned! Time is unidirectional and cannot be randomized. 
+We can describe how different observations of a treatment $i$ in block $k$ are correlated, by looking at
+the distribution of $\mathbf{v}_{ik}$:
+
+$$\mathbf{v}_{ik} \sim N(\boldsymbol{0}, \Sigma_{v, ik}), \\
+\Sigma_{v, ik} = \sigma^2_v \begin{bmatrix} 1 & \rho & \rho^2 \\
+\rho & 1 & \rho \\
+\rho^2 & \rho & 1\end{bmatrix}.$$
+
+This example shows a first order autoregressive covariance structure. 
+Other covariance functions include the compound symmetry covariance function, 
+$$\mathbf{v}_{ik} \sim N(\boldsymbol{0}, \Sigma_{v, ik}), \\
+\Sigma_{v, ik} = \sigma^2_v \begin{bmatrix} 1 & \rho & \rho \\
+\rho & 1 & \rho \\
+\rho & \rho & 1\end{bmatrix}.$$ and
+the unstructured covariance function, $$\mathbf{v}_{ik} \sim N(\boldsymbol{0}, \Sigma_{v, ik}), \\
+\Sigma_{v, ik} = \sigma^2_v \begin{bmatrix} 1 & \sigma_{12} & \sigma_{13} \\
+\sigma_{21} & 1 & \sigma_{23} \\
+\sigma_{31} & \sigma_{32} & 1\end{bmatrix}.$$
+
+Note that we are still affecting the $\mathbf{G}$ matrix, not the $\mathbf{R}$ matrix -- the residuals $\varepsilon_{ijk}$ are still iid normal. 
+This difference may affect inference in non-normal responses (not the case yet), 
+and is typically a modeling decision that should be carefully considered by the scientist. 
+For other types of correlation functions and a discussion of the implications of 
+G-side versus R-side correlations see [Johnson and Milliken (2009)](https://doi.org/10.1201/EBK1584883340), 
+[Stroup et al. (2024)](https://www.routledge.com/Generalized-Linear-Mixed-Models-Modern-Concepts-Methods-and-Applications/Stroup-Ptukhina-Garai/p/book/9781498755566?srsltid=AfmBOop80SBSwTFMCIzkiTtYe-5uir_Xnw2KVZxa1oXb4LJWrLRx0Wwq), 
+and [Muff et al. (2016)](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12623).  
+
+
+
+### Model selection for different covariance structures 
+
+How do we know what the best covariance structure is? 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covariance structures for repeated measures</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<table>
+    <tr>
+        <th>Covariance function</th>
+        <th>Abbreviations</th>
+        <th>Number of parameters estimated</th>
+        <th>Formula</th>
+    </tr>
+    <tr>
+        <th>No covariance</th>
+        <td></td>
+        <td>1: $\sigma$</td>
+        <td>$\boldsymbol{\Sigma}_{ik} =
+            \sigma^2 
+            \begin{bmatrix}
+            1 & 0 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 1\\
+            \end{bmatrix}$</td>
+    </tr>
+    <tr>
+        <th>Compound symmetry</th>
+        <td>CS</td>
+        <td>2: $\sigma$ and $\rho$</td>
+        <td>$\boldsymbol{\Sigma}_{ik} =
+            \sigma^2 
+            \begin{bmatrix}
+            1 & \rho & \rho & \rho & \rho \\
+            \rho & 1 & \rho & \rho & \rho \\
+            \rho & \rho & 1 & \rho & \rho \\
+            \rho & \rho & \rho & 1 & \rho \\
+            \rho & \rho & \rho & \rho & 1\\
+            \end{bmatrix}$</td>
+    </tr>
+    <tr>
+        <th>First-order autoregressive</th>
+        <td>AR(1)</td>
+        <td>$\rho$</td>
+        <td>$\boldsymbol{\Sigma}_{ik} =
+            \sigma^2 
+            \begin{bmatrix}
+            1 & \rho & \rho^2 & \rho^3 & \rho^4 \\
+            \rho & 1 & \rho & \rho^2 & \rho^3 \\
+            \rho^2 & \rho & 1 & \rho & \rho^2 \\
+            \rho^3 & \rho^2 & \rho & 1 & \rho \\
+            \rho^4 & \rho^3 & \rho^2 & \rho & 1\\
+            \end{bmatrix}$</td>
+    </tr>
+    <tr>
+        <th>First-order ante-dependence</th>
+        <td>ANTE(1)</td>
+        <td>2: $\sigma^2_M$ and $\rho$</td>
+        <td>$\boldsymbol{\Sigma}_{ik} =
+            \sigma_M^2 
+            \begin{bmatrix}
+            1 & \rho & \rho^2 & \rho^3 & \rho^4 \\
+            \rho & 1 & \rho & \rho^2 & \rho^3 \\
+            \rho^2 & \rho & 1 & \rho & \rho^2 \\
+            \rho^3 & \rho^2 & \rho & 1 & \rho \\
+            \rho^4 & \rho^3 & \rho^2 & \rho & 1\\
+            \end{bmatrix}$</td>
+    </tr>
+    <tr>
+        <th>Toeplitz</th>
+        <td>Toeplitz</td>
+        <td>$t$</td>
+        <td>$\boldsymbol{\Sigma}_{ik} =
+            \begin{bmatrix}
+            \sigma^2 & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_4 \\
+            \sigma_1 & \sigma^2 & \sigma_1 & \sigma_2 & \sigma_3 \\
+            \sigma_2 & \sigma_1 & \sigma^2 & \sigma_1 & \sigma_2 \\
+            \sigma_3 & \sigma_2 & \sigma_1 & \sigma^2 & \rho \\
+            \sigma_4 & \sigma_3 & \sigma_2 & \sigma_1 & \sigma^2\\
+            \end{bmatrix}$</td>
+    </tr>
+    <tr>
+        <th>Unstructured</th>
+        <td>UN</td>
+        <td>$t(t+1)/2$</td>
+        <td>$\boldsymbol{\Sigma}_{ik} =
+            \begin{bmatrix}
+            \sigma^2_{1} & \sigma_{12} & \sigma_{13} & \sigma_{14} & \sigma_{15} \\
+             & \sigma^2_{2} & \sigma_{23} & \sigma_{24} & \sigma_{25} \\
+             &   & \sigma^2_{3} & \sigma_{34} & \sigma_{35} \\
+              &  &  & \sigma^2_{4} & \sigma_{45} \\
+             &  &  &  & \sigma^2_{5} \\
+            \end{bmatrix}$</td>
+    </tr>
+</table>
+</body>
+
+## Selecting the covariance structure 
+
+How do we decide what's the best covariance structure for our data?  
+
+- Over-modeling correlation compromises power and under-modeling compromises type I error control. 
+- Information criteria: 
+  - Used as a metric for predictive ability and model fit. 
+  - Lower value = better 
+  - No general rule about AIC magnitude 
+  - Akaike Information Criterion (AIC): $\text{AIC} = 2p - 2 \ln(\hat{L})$ 
+  - AICC: correction for small sample sizes $\text{AICc} = \text{AIC} + \frac{2p^2+2p}{n-p-1}$ 
+  - Bayesian Information Criterion (BIC) $\text{BIC} = p \log(n) -2\log(\hat{L})$ 
+  - [$p$: number of parameters estimated in the model, $\hat{L}$: likelihood for the model, $\hat{L}=p(\mathbf{y}\vert \hat{\boldsymbol{\beta}}, M)$]
+  - Plot covariance as a function of distance (could be time or space).  
+  - Likelihood ratio tests are not always reliable for mixed models [[see Bolker's GLMM FAQ](https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#is-the-likelihood-ratio-test-reliable-for-mixed-models)] 
+
+
+- Is there a clear reasonable assumption about the data-generating process? 
+- Use UN as the reference: 
+  - UN covariance structure is the most complex because it is estimating unique $\sigma$s for each pair of time points
+  - Select the covariance structure that is most similar to UN. 
+
+## Applied example
+
+Go back to the applied example from last week ([get code](scripts/09212026_inclass_ex.Rmd)). 
+Re-analyze the data and provide the answer to the client. 
+
+
