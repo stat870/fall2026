@@ -212,7 +212,9 @@ How do we decide what's the best covariance structure for our data?
 
 ## Applied example
 
-Go back to the applied example from last week ([get code](scripts/09212026_inclass_ex.Rmd)). 
+Go back to the applied example from last week ([get code](../scripts/09212026_inclass_ex.Rmd)). 
 Re-analyze the data and provide the answer to the client. 
+
+[Here's a helpful resource](https://cran.r-project.org/web/packages/glmmTMB/vignettes/covstruct.html).
 
 
