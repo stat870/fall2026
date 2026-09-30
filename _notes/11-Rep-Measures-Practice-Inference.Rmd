@@ -1,0 +1,147 @@
+# Applied analysis of a repeated measures design, Inference
+
+September 30th, 2026
+
+## Announcements 
+
+- Online classes on Oct 5, 7, 12, 14. 
+- Mixture of recordings and Zoom classes. 
+- Projects and homeworks are graded. 
+
+## Repeated measures designs -- practice 
+
+Applied example from last week ([get code](../scripts/09212026_inclass_ex.Rmd)). 
+
+
+```{r message=FALSE, warning=FALSE}
+library(glmmTMB)
+```
+
+
+The model discussed in class can be described as 
+
+$$y_{ijk}=\mu_0 + D_i + T_j + (DT)_{ij} + r_k + u_{l(k)} + v_{m(lk)} + \varepsilon_{ijklm}, \\ u_{l(k)}\sim N(0, \sigma^2_u), \\ v_{m(lk)}\sim N(0, \sigma^2_v), \\ \varepsilon_{ijklm} \sim N(0, \sigma^2_\varepsilon),$$
+
+where ....
+
+
+```{r}
+# prepare data
+url <- "https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/fecal_dm.csv"
+dd_fecal <- read.csv(url)
+dd_fecal$Pig <- as.factor(dd_fecal$Pig)
+dd_fecal$Trt <- as.factor(dd_fecal$Trt)
+dd_fecal$Room <- as.factor(dd_fecal$Room)
+dd_fecal$Pen <- as.factor(dd_fecal$Pen)
+dd_fecal$Day <- as.factor(dd_fecal$Day)
+
+# AR(1) covariance structure 
+m_ar1 <- glmmTMB(Dry.matter...*10 ~
+                   Trt*Day + Room + (1|Room:Pen) + ar1(Day + 0 |Room:Pen:Pig),
+                REML = TRUE,
+                control = glmmTMBControl(),
+        data = dd_fecal)
+
+# Toep covariance structure 
+m_toep <- glmmTMB(Dry.matter.../10 ~ 
+                  Trt*Day + Room + (1|Room:Pen) + toep(Day + 0 |Room:Pen:Pig),
+                REML = TRUE,
+                control = glmmTMBControl(),
+        data = dd_fecal)
+```
+
+
+How do we know what covariance function was the best?
+
+```{r}
+DHARMa::simulateResiduals(m_ar1, plot = T)
+DHARMa::simulateResiduals(m_toep, plot = T)
+```
+
+```{r}
+AIC(m_ar1, m_toep)
+```
+
+
+
+- [A helpful resource](https://cran.r-project.org/web/packages/glmmTMB/vignettes/covstruct.html).
+
+
+## Statistical inference review
+
+### Hypothesis tests 
+
+- Classic statistics have been deeply associated to falsifiability in the advancement of Science.  
+- Hugely influenced by [Karl Popper](https://en.wikipedia.org/wiki/Karl_Popper), the advancement of Science can be understood as a string of hypotheses that are constantly evaluated. 
+- In statistics, hypothesis tests evaluate whether a given statistic (i.e., a function of the data) is too extreme for the null hypothesis to be true. 
+- Normally, the null hypothesis is business as usual, and we want to evaluate if we just made a scientific discovery, or if there's not enough evidence to say that there's something different going on. 
+
+```{r echo=FALSE, fig.cap="Types of errors in hypothesis tests.", out.width = '80%', fig.align='center'}
+knitr::include_graphics("../figures/error_types.jpg")
+```
+
+### On p-values 
+
+- The p value is the probability of observing the [t/F] statistic under the null hypothesis. 
+- Often, we assume $\alpha = 0.05$, and reject $H_0$ if $p<\alpha$. 
+- [ASA's statement on p-values](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf) 
+- [Scientists rise up against statistical significance](https://www.nature.com/articles/d41586-019-00857-9) 
+  - [Discussion](https://statmodeling.stat.columbia.edu/2019/03/20/retire-statistical-significance-the-discussion/) 
+  - Counterargument: [In defense of p-values](https://esajournals.onlinelibrary.wiley.com/doi/10.1890/13-0590.1) 
+- Gelman "Let us have the serenity to embrace the variation that we cannot reduce, the courage to reduce the variation we cannot embrace, and the wisdom to distinguish one from the other." [[see talk](https://www.youtube.com/watch?v=KS3yPw91iC0&t=3252s)] 
+
+
+### t-tests 
+
+```{r echo=FALSE, out.width="70%"}
+data.frame(x = seq(-3, 3, by = .05)) %>% 
+  mutate(d = dt(x, df = 30)) %>% 
+  ggplot(aes(x, d))+
+  geom_line()+
+  labs(y = "[t]", x = "t", title = "PDF for t with df = 30.")+
+  theme_classic()+
+  theme(aspect.ratio = .6,
+        panel.grid = element_blank(), 
+        axis.text = element_text(size = 8))
+```
+
+- Usually used to test whether **one** value/parameter/linear combination of parameters is different to a certain number. 
+- Steps: 
+  1. Define the target quantity $\theta$. For example, $\theta = \beta_1-\beta_2$. 
+  2. After observing the data, estimate $\hat{\boldsymbol\beta}$ and $se(\hat{\boldsymbol\beta})$. 
+  3. Calculate the test $t$ statistic as $t^\star = \frac{\hat\theta}{se(\hat\theta)}$. 
+  4. Compare $t^{\star}$ to $t_{1-\frac{\alpha}{2}, dfe}$. 
+
+- Why $t$ distribution? $N$ for known se, $t$ for $\hat{se}$. 
+- Note that $t^\star$ depends on: 
+  - sample size ($dfe$) 
+  - experiment design (other df) 
+  - the variability $\sigma^2$ associated to that system. 
+- Note that $t_{crit}$ depends on $dfe$. 
+
+### F-tests are multivariate t-tests 
+
+```{r echo=FALSE, out.width="70%"}
+data.frame(x = seq(0, 25, by = .01)) %>% 
+  mutate(d = df(x, df1 = 3, df2 =30)) %>% 
+  ggplot(aes(x, d))+
+  geom_line()+
+  labs(y = "[F]", x = "F", title = "PDF for F with df1 = 3 and df2 = 30.")+
+  theme_classic()+
+  theme(aspect.ratio = .6,
+        panel.grid = element_blank(), 
+        axis.text = element_text(size = 8))
+```
+
+- Test the relevance of multiple factors at once. 
+- Consistent with the "bins" concept of ANOVA. 
+- Usually used to test whether **a group** of factor is relevant to explain variability in the data. 
+- Why $F$ distribution? Ratio between two independent $\chi^2$ distributions divided by their df.  
+- Steps: 
+  1. Calculate Mean Squared Errors for the different sources of variability $= \frac{SSH}{df}$. 
+  2. Calculate the F statistic as the ratio between mean squares, $=\frac{MSH}{MSE}$. 
+  3. Compute $P(F>F^\star)$, using the degrees of freedom of both mean squares, df of the numerator and df of the denominator.  
+
+- Note, again, the relationship between the p value and sample size and $\sigma^2$. 
+- Note, again, that the $P(F>F^\star)$ depends on the df of the denominator. 
+

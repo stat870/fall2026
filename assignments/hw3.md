@@ -8,15 +8,14 @@ nav_order: 3
   
 # Assignment 3 
   
-The goals of this assignment are to: 
-  
-- Review treatment structure and design structure of designed experiments.  
-- Review fundamental topics from (generalized) linear mixed models. 
 
-Please open the Google Docs document I shared with you via e-mail and make a contribution. 
-Valid contributions for this assignment include writing a question about a topic covered in class, 
-or answering one of your classmates’ questions. 
-Make sure you have your track changes on (see the Examples in the document), 
-or leave your last name by commenting on your contribution to get your assignment graded.
+Please complete exercises (1) and (2), rename the `Rmd` file to "Assignment3_YourLastName.Rmd" (e.g., "Assignment3_Smith.Rmd"), your name in the header, and knit the Rmd to an html file or pdf file. Please submit that html or pdf file on CANVAS by Wednesday, September 10th by midnight. You may work in pairs, but each one of you will have to submit your own file. 
+Please submit that html or pdf file on CANVAS by Friday, October 9th midnight. 
+You may work in pairs, but each one of you will have to submit your own file. 
+
+Download the `Rmd` file [here](https://stat870.github.io/fall2026/assignments/Assignment3_YourLastName.Rmd). 
+
+[Look at the pdf version.](https://stat870.github.io/fall2026/assignments/Assignment3_YourLastName.pdf)
+
 
 

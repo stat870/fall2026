@@ -16,5 +16,5 @@ Sept. 28
   : **HW 3**{: .label .label-green } 
 
 Sept. 30  
-: Practice II  
-  : [](https://stat870.github.io/fall2026/notes/practice-ii.html)
+: Applied analysis of a repeated measures design  
+  : [](https://stat870.github.io/fall2026/notes/)

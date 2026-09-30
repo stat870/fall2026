@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data</title>
-  <meta name="description" content="Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data" />
+  <title>Day 11 Applied analysis of a repeated measures design, Inference | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 11 Applied analysis of a repeated measures design, Inference | STAT 870 - Analysis of Messy Data" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:title" content="Day 11 Applied analysis of a repeated measures design, Inference | STAT 870 - Analysis of Messy Data" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 9 Repeated measures I | STAT 870 - Analysis of Messy Data" />
+  <meta name="twitter:title" content="Day 11 Applied analysis of a repeated measures design, Inference | STAT 870 - Analysis of Messy Data" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="practice.html"/>
-<link rel="next" href="repeated-measures-ii.html"/>
+<link rel="prev" href="repeated-measures-ii.html"/>
+<link rel="next" href="semester-project-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -324,401 +324,136 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="repeated-measures-i" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Day 9</span> Repeated measures I<a href="repeated-measures-i.html#repeated-measures-i" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>September 23rd, 2026</p>
-<div id="announcements-7" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Announcements<a href="repeated-measures-i.html#announcements-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="applied-analysis-of-a-repeated-measures-design-inference" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Day 11</span> Applied analysis of a repeated measures design, Inference<a href="applied-analysis-of-a-repeated-measures-design-inference.html#applied-analysis-of-a-repeated-measures-design-inference" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>September 30th, 2026</p>
+<div id="announcements-9" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Announcements<a href="applied-analysis-of-a-repeated-measures-design-inference.html#announcements-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Online classes on Oct 5, 7, 12, 14.</li>
 <li>Mixture of recordings and Zoom classes.</li>
+<li>Projects and homeworks are graded.</li>
 </ul>
 </div>
-<div id="linear-mixed-models-review" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Linear mixed models review<a href="repeated-measures-i.html#linear-mixed-models-review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Considering the linear mixed model</p>
-<p><span class="math display">\[\mathbf{y} \sim N(\mathbf{X}\boldsymbol{\beta}, \mathbf{V}),\]</span>
-where:</p>
+<div id="repeated-measures-designs-practice" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Repeated measures designs – practice<a href="applied-analysis-of-a-repeated-measures-design-inference.html#repeated-measures-designs-practice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Applied example from last week (<a href="../scripts/09212026_inclass_ex.Rmd">get code</a>).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span></code></pre></div>
+<p>The model discussed in class can be described as</p>
+<p><span class="math display">\[y_{ijk}=\mu_0 + D_i + T_j + (DT)_{ij} + r_k + u_{l(k)} + v_{m(lk)} + \varepsilon_{ijklm}, \\ u_{l(k)}\sim N(0, \sigma^2_u), \\ v_{m(lk)}\sim N(0, \sigma^2_v), \\ \varepsilon_{ijklm} \sim N(0, \sigma^2_\varepsilon),\]</span></p>
+<p>where ….</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-1" tabindex="-1"></a><span class="co"># prepare data</span></span>
+<span id="cb22-2"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/fecal_dm.csv&quot;</span></span>
+<span id="cb22-3"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-3" tabindex="-1"></a>dd_fecal <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url)</span>
+<span id="cb22-4"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-4" tabindex="-1"></a>dd_fecal<span class="sc">$</span>Pig <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dd_fecal<span class="sc">$</span>Pig)</span>
+<span id="cb22-5"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-5" tabindex="-1"></a>dd_fecal<span class="sc">$</span>Trt <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dd_fecal<span class="sc">$</span>Trt)</span>
+<span id="cb22-6"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-6" tabindex="-1"></a>dd_fecal<span class="sc">$</span>Room <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dd_fecal<span class="sc">$</span>Room)</span>
+<span id="cb22-7"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-7" tabindex="-1"></a>dd_fecal<span class="sc">$</span>Pen <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dd_fecal<span class="sc">$</span>Pen)</span>
+<span id="cb22-8"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-8" tabindex="-1"></a>dd_fecal<span class="sc">$</span>Day <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dd_fecal<span class="sc">$</span>Day)</span>
+<span id="cb22-9"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-9" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-10" tabindex="-1"></a><span class="co"># AR(1) covariance structure </span></span>
+<span id="cb22-11"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-11" tabindex="-1"></a>m_ar1 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Dry.matter...<span class="sc">*</span><span class="dv">10</span> <span class="sc">~</span></span>
+<span id="cb22-12"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-12" tabindex="-1"></a>                   Trt<span class="sc">*</span>Day <span class="sc">+</span> Room <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Room<span class="sc">:</span>Pen) <span class="sc">+</span> <span class="fu">ar1</span>(Day <span class="sc">+</span> <span class="dv">0</span> <span class="sc">|</span>Room<span class="sc">:</span>Pen<span class="sc">:</span>Pig),</span>
+<span id="cb22-13"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-13" tabindex="-1"></a>                <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-14"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-14" tabindex="-1"></a>                <span class="at">control =</span> <span class="fu">glmmTMBControl</span>(),</span>
+<span id="cb22-15"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-15" tabindex="-1"></a>        <span class="at">data =</span> dd_fecal)</span>
+<span id="cb22-16"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-16" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-17" tabindex="-1"></a><span class="co"># Toep covariance structure </span></span>
+<span id="cb22-18"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-18" tabindex="-1"></a>m_toep <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Dry.matter...<span class="sc">/</span><span class="dv">10</span> <span class="sc">~</span> </span>
+<span id="cb22-19"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-19" tabindex="-1"></a>                  Trt<span class="sc">*</span>Day <span class="sc">+</span> Room <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Room<span class="sc">:</span>Pen) <span class="sc">+</span> <span class="fu">toep</span>(Day <span class="sc">+</span> <span class="dv">0</span> <span class="sc">|</span>Room<span class="sc">:</span>Pen<span class="sc">:</span>Pig),</span>
+<span id="cb22-20"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-20" tabindex="-1"></a>                <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-21"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-21" tabindex="-1"></a>                <span class="at">control =</span> <span class="fu">glmmTMBControl</span>(),</span>
+<span id="cb22-22"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-22" tabindex="-1"></a>        <span class="at">data =</span> dd_fecal)</span></code></pre></div>
+<p>How do we know what covariance function was the best?</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb23-1" tabindex="-1"></a>DHARMa<span class="sc">::</span><span class="fu">simulateResiduals</span>(m_ar1, <span class="at">plot =</span> T)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-61-1.png" alt="" width="672" /></p>
+<pre><code>## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+##  
+## Scaled residual values: 0.676 0.736 0.112 0.684 0.824 0.82 0.272 0.76 0.8 0.652 0.356 0.292 0.672 0.416 0.356 0.328 0.888 0.292 0.024 0.648 ...</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb25-1" tabindex="-1"></a>DHARMa<span class="sc">::</span><span class="fu">simulateResiduals</span>(m_toep, <span class="at">plot =</span> T)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-61-2.png" alt="" width="672" /></p>
+<pre><code>## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+##  
+## Scaled residual values: 0.688 0.736 0.104 0.664 0.82 0.808 0.356 0.76 0.748 0.628 0.38 0.304 0.68 0.456 0.408 0.332 0.872 0.304 0.048 0.612 ...</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb27-1" tabindex="-1"></a><span class="fu">AIC</span>(m_ar1, m_toep)</span></code></pre></div>
+<pre><code>##        df      AIC
+## m_ar1  23 5954.007
+## m_toep 26 1146.945</code></pre>
 <ul>
-<li><span class="math inline">\(\mathbf{y}\)</span> is the vector of the response,</li>
-<li><span class="math inline">\(\mathbf{X}\)</span> is the model matrix (often containing treatment allocation),</li>
-<li><span class="math inline">\(\boldsymbol{\beta}\)</span> is a vector containing the estimates for the effects of all variables in <span class="math inline">\(\mathbf{X}\)</span>,</li>
-<li><span class="math inline">\(\mathbf{V}\)</span> is the variance covariance matrix for <span class="math inline">\(\mathbf{y}\)</span>.</li>
+<li><a href="https://cran.r-project.org/web/packages/glmmTMB/vignettes/covstruct.html">A helpful resource</a>.</li>
 </ul>
-<p>The marginal distribution of <span class="math inline">\(\mathbf{y}\)</span> for a normal distribution can also be written as
-<span class="math display">\[\mathbf{y} \sim MVN(\mathbf{X}\boldsymbol{\beta}, \mathbf{ZGZ}&#39;+\mathbf{R}).\]</span></p>
-<p>The variance-covariance matrices below represent the variance/covariance of all <span class="math inline">\(y\)</span>s.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-55"></span>
-<img src="../figures/Var_matrix.jpg" alt="Illustrative example of the variance-covariance matrix." width="100%" />
-<p class="caption">
-Figure 9.1: Illustrative example of the variance-covariance matrix.
-</p>
 </div>
-<p>We consider <strong>messy data</strong> the different dependence patterns in <span class="math inline">\(\mathbf{G}\)</span> and/or <span class="math inline">\(\mathbf{R}\)</span>.</p>
-<p>Note that, for all mixed models we have been handling so far,
-<span class="math display">\[\mathbf{G} = \sigma^2_u\mathbf{I} =
-\begin{bmatrix}
-\sigma^2_u &amp; 0 &amp; 0 &amp; &amp; 0\\
-0 &amp; \sigma^2_u &amp; 0 &amp;  &amp; 0\\
-0 &amp; 0 &amp; \sigma^2_u &amp;  &amp; 0\\
-&amp;  &amp;  &amp; \ddots &amp; \vdots \\
-0 &amp; 0 &amp; 0 &amp; \dots &amp; \sigma^2_u\\
-\end{bmatrix},\]</span>
-which, will result in some variation of the matrix above.</p>
-</div>
-<div id="repeated-measures" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> Repeated measures<a href="repeated-measures-i.html#repeated-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-56"></span>
-<img src="../figures/designs_repeated.PNG" alt="Schematic description of a field experiment with repeated measures" width="100%" />
-<p class="caption">
-Figure 9.2: Schematic description of a field experiment with repeated measures
-</p>
-</div>
-<div id="correlation-functions" class="section level3 hasAnchor" number="9.3.1">
-<h3><span class="header-section-number">9.3.1</span> Correlation functions<a href="repeated-measures-i.html#correlation-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let <span class="math inline">\(\mathbf{v}_{i k}\)</span> be the vector for the <span class="math inline">\(k\)</span>th individual under the <span class="math inline">\(i\)</span>th vaccine treatment, at the different timepoints of the experiment.</p>
-<p><span class="math display">\[\mathbf{v}_{i k} \sim MVN(\boldsymbol{0}, \boldsymbol{\Sigma}_{ik})\]</span></p>
-<p><strong>Independent observations</strong></p>
-<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
-\sigma^2
-\begin{bmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\\
-\end{bmatrix}\]</span></p>
-<p><strong>Compound symmetry</strong></p>
-<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
-\sigma^2
-\begin{bmatrix}
-1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
-\rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
-\rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
-\rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
-\rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
-\end{bmatrix}\]</span></p>
-<p>This could mean
-<span class="math display">\[\mathbf{G}_{ik} =
-\sigma_v^2
-\begin{bmatrix}
-1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
-\rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
-\rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
-\rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
-\rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
-\end{bmatrix}\]</span>
-or
-<span class="math display">\[\mathbf{R}_{ik} =
-\sigma_\varepsilon^2
-\begin{bmatrix}
-1 &amp; \rho &amp; \rho &amp; \rho &amp; \rho \\
-\rho &amp; 1 &amp; \rho &amp; \rho &amp; \rho \\
-\rho &amp; \rho &amp; 1 &amp; \rho &amp; \rho \\
-\rho &amp; \rho &amp; \rho &amp; 1 &amp; \rho \\
-\rho &amp; \rho &amp; \rho &amp; \rho &amp; 1\\
-\end{bmatrix}\]</span></p>
-<p><strong>AR(1)</strong></p>
-<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
-\sigma^2
-\begin{bmatrix}
-1 &amp; \rho &amp; \rho^2 &amp; \rho^3 &amp; \rho^4 \\
-\rho &amp; 1 &amp; \rho &amp; \rho^2 &amp; \rho^3 \\
-\rho^2 &amp; \rho &amp; 1 &amp; \rho &amp; \rho^2 \\
-\rho^3 &amp; \rho^2 &amp; \rho &amp; 1 &amp; \rho \\
-\rho^4 &amp; \rho^3 &amp; \rho^2 &amp; \rho &amp; 1\\
-\end{bmatrix}\]</span></p>
-<p><strong>Unstructured</strong></p>
-<p><span class="math display">\[\boldsymbol{\Sigma}_{ik} =
-\begin{bmatrix}
-\sigma^2_{1} &amp; \sigma_{12} &amp; \sigma_{13} &amp; \sigma_{14} &amp; \sigma_{15} \\
-&amp; \sigma^2_{2} &amp; \sigma_{23} &amp; \sigma_{24} &amp; \sigma_{25} \\
-&amp;   &amp; \sigma^2_{3} &amp; \sigma_{34} &amp; \sigma_{35} \\
-  &amp;  &amp;  &amp; \sigma^2_{4} &amp; \sigma_{45} \\
-&amp;  &amp;  &amp;  &amp; \sigma^2_{5} \\
-\end{bmatrix}\]</span></p>
-</div>
-</div>
-<div id="correlation---g-side-conditional-and-r-side-marginal" class="section level2 hasAnchor" number="9.4">
-<h2><span class="header-section-number">9.4</span> Correlation - G side (conditional) and R side (marginal)<a href="repeated-measures-i.html#correlation---g-side-conditional-and-r-side-marginal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="statistical-inference-review" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Statistical inference review<a href="applied-analysis-of-a-repeated-measures-design-inference.html#statistical-inference-review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hypothesis-tests" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Hypothesis tests<a href="applied-analysis-of-a-repeated-measures-design-inference.html#hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Typically, <code>REPEATED</code> (in SAS’s <code>MIXED</code> procedure) is equivalent to R-side (marginal) covariance in <code>GLIMMIX</code>.</li>
-<li>Look at marginal variance-covariance matrix on the board.</li>
-<li>What happens if we model G-side covariance?</li>
-</ul>
-<p><strong>Implications on inference</strong></p>
-<ul>
-<li>Similar CI for marginal means (lsmeans)<br />
+<li>Classic statistics have been deeply associated to falsifiability in the advancement of Science.<br />
 </li>
-<li>Confidence intervals estimated with different DF approximations</li>
-<li>May see some discrepancy in test statistics.</li>
+<li>Hugely influenced by <a href="https://en.wikipedia.org/wiki/Karl_Popper">Karl Popper</a>, the advancement of Science can be understood as a string of hypotheses that are constantly evaluated.</li>
+<li>In statistics, hypothesis tests evaluate whether a given statistic (i.e., a function of the data) is too extreme for the null hypothesis to be true.</li>
+<li>Normally, the null hypothesis is business as usual, and we want to evaluate if we just made a scientific discovery, or if there’s not enough evidence to say that there’s something different going on.</li>
 </ul>
-</div>
-<div id="repeated-measures-in-glmms" class="section level2 hasAnchor" number="9.5">
-<h2><span class="header-section-number">9.5</span> Repeated measures in GLMMs<a href="repeated-measures-i.html#repeated-measures-in-glmms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Recall distributions of non-Gaussian GLMMs:</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-57"></span>
-<img src="../figures/stroup_distributions.jpg" alt="Common variable distributions. Page 60 in Stroup et al. (2024)" width="80%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-63"></span>
+<img src="../figures/error_types.jpg" alt="Types of errors in hypothesis tests." width="80%" />
 <p class="caption">
-Figure 9.3: Common variable distributions. Page 60 in Stroup et al. (2024)
+Figure 11.1: Types of errors in hypothesis tests.
 </p>
 </div>
-<div id="common-response-variable-y-b-distributions" class="section level3 hasAnchor" number="9.5.1">
-<h3><span class="header-section-number">9.5.1</span> Common Response Variable (<span class="math inline">\(y | b\)</span>) Distributions<a href="repeated-measures-i.html#common-response-variable-y-b-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Below is a table of commonly used distributions, their properties, and related probability density functions (PDFs).</p>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>
-GLMMs
-</title>
-<style>
-        .table-wrapper {
-            width: 100%; 
-            overflow-x: auto; 
-            border: 1px solid #ccc; 
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
-<body>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr>
-<th>
-<b>Distribution</b>
-</th>
-<th>
-<b>Range of Variable</b>
-</th>
-<th>
-<b>Mean</b>
-</th>
-<th>
-<b>Commonly Used Link(s)</b>
-</th>
-<th>
-<b>Variance</b>
-</th>
-<th>
-<b>PDF</b>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Gaussian/normal
-</td>
-<td>
-<span class="math inline">\(-\infty &lt; y &lt; \infty\)</span>
-</td>
-<td>
-<span class="math inline">\(\mu\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \mu\)</span>
-</td>
-<td>
-<span class="math inline">\(\sigma^2\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(y-\mu)^2}{2\sigma^2}}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Log normal
-</td>
-<td>
-<span class="math inline">\(-\infty &lt; y &lt; \infty\)</span>
-</td>
-<td>
-<span class="math inline">\(\mu\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log(\mu)\)</span>
-</td>
-<td>
-<span class="math inline">\(\sigma^2\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \frac{1}{y\sigma\sqrt{2\pi}} e^{-\frac{(\log y - \mu)^2}{2\sigma^2}}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Gamma
-</td>
-<td>
-<span class="math inline">\(y &gt; 0\)</span>
-</td>
-<td>
-<span class="math inline">\(\mu\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log(\mu), \frac{1}{\mu}\)</span>
-</td>
-<td>
-<span class="math inline">\(\phi \mu^2\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \frac{y^{\frac{\mu}{\phi} - 1} e^{-\frac{y}{\phi}}}{\phi^{\mu} \Gamma(\mu)}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Exponential
-</td>
-<td>
-<span class="math inline">\(y &gt; 0\)</span>
-</td>
-<td>
-<span class="math inline">\(\mu\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log(\mu), \frac{1}{\mu}\)</span>
-</td>
-<td>
-<span class="math inline">\(\mu^2\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \frac{1}{\mu} e^{-\frac{y}{\mu}}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Binomial
-</td>
-<td>
-0, <span class="math inline">\(\frac{1}{N}, \dots, \frac{N}{N}\)</span>
-</td>
-<td>
-<span class="math inline">\(\pi = \frac{\mu}{N}\)</span>
-</td>
-<td>
-Logit: <span class="math inline">\(\eta = \log\left(\frac{\pi}{1-\pi}\right)\)</span>
-</td>
-<td>
-<span class="math inline">\(N\pi(1-\pi)\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \binom{N}{y} \pi^y (1-\pi)^{N-y}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Beta
-</td>
-<td>
-0 &lt; <span class="math inline">\(y &lt; 1\)</span>
-</td>
-<td>
-<span class="math inline">\(\mu\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log\left(\frac{\mu}{1-\mu}\right)\)</span>
-</td>
-<td>
-<span class="math inline">\(\frac{\mu(1-\mu)}{1+\phi}\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \frac{y^{\alpha-1}(1-y)^{\beta-1}}{B(\alpha, \beta)}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Poisson
-</td>
-<td>
-<span class="math inline">\(y = 0, 1, 2, \dots\)</span>
-</td>
-<td>
-<span class="math inline">\(\lambda\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log(\lambda)\)</span>
-</td>
-<td>
-<span class="math inline">\(\lambda\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \frac{\lambda^y e^{-\lambda}}{y!}\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Geometric
-</td>
-<td>
-<span class="math inline">\(y = 0, 1, 2, \dots\)</span>
-</td>
-<td>
-<span class="math inline">\(\lambda\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log(\lambda)\)</span>
-</td>
-<td>
-<span class="math inline">\(\lambda(1+\lambda)\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = (1-\lambda)^y \lambda\]</span>
-</td>
-</tr>
-<tr>
-<td>
-Negative binomial
-</td>
-<td>
-<span class="math inline">\(y = 0, 1, 2, \dots\)</span>
-</td>
-<td>
-<span class="math inline">\(\lambda\)</span>
-</td>
-<td>
-<span class="math inline">\(\eta = \log(\lambda)\)</span>
-</td>
-<td>
-<span class="math inline">\(\lambda(1+\phi\lambda)\)</span>
-</td>
-<td>
-<span class="math display">\[f(y) = \binom{y + r - 1}{y} \lambda^r (1-\lambda)^y\]</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<p>If we describe a non-Gaussian GLMM with</p>
-<p><span class="math display">\[{y}|\boldsymbol{u} \sim P({\mu}, \phi),\]</span>
-where <span class="math inline">\(y\)</span> is the response, <span class="math inline">\(\boldsymbol{u}\)</span> are the random effects, <span class="math inline">\(\mu\)</span> is the mean, and <span class="math inline">\(\phi\)</span> is the dispersion,
-we know that <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\phi\)</span> may not be independent.</p>
+<div id="on-p-values" class="section level3 hasAnchor" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> On p-values<a href="applied-analysis-of-a-repeated-measures-design-inference.html#on-p-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>G-side ~ ‘true GLMM’</li>
-<li>R-side: quasi-likelihood models</li>
-<li>Marginal models often lead to less powerful tests.</li>
-<li>Several discussions:
+<li>The p value is the probability of observing the [t/F] statistic under the null hypothesis.</li>
+<li>Often, we assume <span class="math inline">\(\alpha = 0.05\)</span>, and reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(p&lt;\alpha\)</span>.</li>
+<li><a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf">ASA’s statement on p-values</a></li>
+<li><a href="https://www.nature.com/articles/d41586-019-00857-9">Scientists rise up against statistical significance</a>
 <ul>
-<li>Philosophical, Power, and more <a href="https://projecteuclid.org/journals/statistical-science/volume-19/issue-2/Conditional-and-Marginal-Models-Another-View/10.1214/088342304000000305.full">Lee and Nelder (2004)</a></li>
-<li>Many unknowns for the software implementation of non-Gaussian GLMMs <a href="jstor.org/stable/48736894">Stroup and Claassen (2020)</a></li>
+<li><a href="https://statmodeling.stat.columbia.edu/2019/03/20/retire-statistical-significance-the-discussion/">Discussion</a></li>
+<li>Counterargument: <a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1890/13-0590.1">In defense of p-values</a></li>
 </ul></li>
+<li>Gelman “Let us have the serenity to embrace the variation that we cannot reduce, the courage to reduce the variation we cannot embrace, and the wisdom to distinguish one from the other.” [<a href="https://www.youtube.com/watch?v=KS3yPw91iC0&amp;t=3252s">see talk</a>]</li>
+</ul>
+</div>
+<div id="t-tests" class="section level3 hasAnchor" number="11.3.3">
+<h3><span class="header-section-number">11.3.3</span> t-tests<a href="applied-analysis-of-a-repeated-measures-design-inference.html#t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-64-1.png" alt="" width="70%" /></p>
+<ul>
+<li>Usually used to test whether <strong>one</strong> value/parameter/linear combination of parameters is different to a certain number.</li>
+<li>Steps:
+<ol style="list-style-type: decimal">
+<li>Define the target quantity <span class="math inline">\(\theta\)</span>. For example, <span class="math inline">\(\theta = \beta_1-\beta_2\)</span>.</li>
+<li>After observing the data, estimate <span class="math inline">\(\hat{\boldsymbol\beta}\)</span> and <span class="math inline">\(se(\hat{\boldsymbol\beta})\)</span>.</li>
+<li>Calculate the test <span class="math inline">\(t\)</span> statistic as <span class="math inline">\(t^\star = \frac{\hat\theta}{se(\hat\theta)}\)</span>.</li>
+<li>Compare <span class="math inline">\(t^{\star}\)</span> to <span class="math inline">\(t_{1-\frac{\alpha}{2}, dfe}\)</span>.</li>
+</ol></li>
+<li>Why <span class="math inline">\(t\)</span> distribution? <span class="math inline">\(N\)</span> for known se, <span class="math inline">\(t\)</span> for <span class="math inline">\(\hat{se}\)</span>.</li>
+<li>Note that <span class="math inline">\(t^\star\)</span> depends on:
+<ul>
+<li>sample size (<span class="math inline">\(dfe\)</span>)</li>
+<li>experiment design (other df)</li>
+<li>the variability <span class="math inline">\(\sigma^2\)</span> associated to that system.</li>
+</ul></li>
+<li>Note that <span class="math inline">\(t_{crit}\)</span> depends on <span class="math inline">\(dfe\)</span>.</li>
+</ul>
+</div>
+<div id="f-tests-are-multivariate-t-tests" class="section level3 hasAnchor" number="11.3.4">
+<h3><span class="header-section-number">11.3.4</span> F-tests are multivariate t-tests<a href="applied-analysis-of-a-repeated-measures-design-inference.html#f-tests-are-multivariate-t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" alt="" width="70%" /></p>
+<ul>
+<li>Test the relevance of multiple factors at once.</li>
+<li>Consistent with the “bins” concept of ANOVA.</li>
+<li>Usually used to test whether <strong>a group</strong> of factor is relevant to explain variability in the data.</li>
+<li>Why <span class="math inline">\(F\)</span> distribution? Ratio between two independent <span class="math inline">\(\chi^2\)</span> distributions divided by their df.<br />
+</li>
+<li>Steps:
+<ol style="list-style-type: decimal">
+<li>Calculate Mean Squared Errors for the different sources of variability <span class="math inline">\(= \frac{SSH}{df}\)</span>.</li>
+<li>Calculate the F statistic as the ratio between mean squares, <span class="math inline">\(=\frac{MSH}{MSE}\)</span>.</li>
+<li>Compute <span class="math inline">\(P(F&gt;F^\star)\)</span>, using the degrees of freedom of both mean squares, df of the numerator and df of the denominator.</li>
+</ol></li>
+<li>Note, again, the relationship between the p value and sample size and <span class="math inline">\(\sigma^2\)</span>.</li>
+<li>Note, again, that the <span class="math inline">\(P(F&gt;F^\star)\)</span> depends on the df of the denominator.</li>
 </ul>
 
 </div>
@@ -729,8 +464,8 @@ we know that <span class="math inline">\(\mu\)</span> and <span class="math inli
           </div>
         </div>
       </div>
-<a href="practice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="repeated-measures-ii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="repeated-measures-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -761,7 +496,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/stat870/fall2026/edit/main/09-Rep-Measures.Rmd",
+    "link": "https://github.com/stat870/fall2026/edit/main/11-Rep-Measures-Practice-Inference.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -769,7 +504,7 @@ gitbook.start({
     "text": null
   },
   "view": {
-    "link": "https://github.com/stat870/fall2026/blob/main/09-Rep-Measures.Rmd",
+    "link": "https://github.com/stat870/fall2026/blob/main/11-Rep-Measures-Practice-Inference.Rmd",
     "text": null
   },
   "download": null,
