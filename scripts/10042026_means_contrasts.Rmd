@@ -1,0 +1,31 @@
+---
+title: "Untitled"
+author: "J Lacasa"
+date: "2026-10-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The data below come from an experiment studying different sanitizer treatments on the survival of bacteria on different surfaces. There are 8 different sanitizer treatments applied for 4 different times (e.g., leave the sanitizer it for 1 minute or for 5 minutes), and on 5 different surfaces. 
+At the end of the study, the researchers count how many colony forming units (good sources of bacteria growth) they find. 
+They wish to study whether the treatments had a different effect on the number of CFUs. 
+
+```{r}
+library(tidyverse)
+
+url <- "https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/sanitizers.csv"
+d <- read.csv(url) |> 
+  mutate(across(c(Treatment, Time), ~as.factor(.)))
+
+d %>% 
+  ggplot(aes(Treatment, logCFU))+
+  geom_point()
+```
+
+```{r}
+
+```
+

@@ -8,7 +8,7 @@ Sept. 21
 
 Sept. 23 
 : Repeated measures I   
-  : [](https://stat870.github.io/fall2026/notes/repeated-measures-i.html)
+  : [html](https://stat870.github.io/fall2026/notes/repeated-measures-i.html)
 
 Sept. 28  
 : Repeated measures II  
@@ -17,4 +17,4 @@ Sept. 28
 
 Sept. 30  
 : Applied analysis of a repeated measures design  
-  : [](https://stat870.github.io/fall2026/notes/)
+  : [html](https://stat870.github.io/fall2026/notes/applied-analysis-of-a-repeated-measures-design-inference.html)
