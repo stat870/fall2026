@@ -1,71 +1,11 @@
-# Applied analysis of a repeated measures design, Inference
+# Marginal means, contrasts, and derived quantities
 
-September 30th, 2026
+October 5th, 2026
 
 ## Announcements 
 
 - Online classes on Oct 5, 7, 12, 14. 
 - Mixture of recordings and Zoom classes. 
-- Projects and homeworks are graded. 
-
-## Repeated measures designs -- practice 
-
-Applied example from last week ([get code](../scripts/09212026_inclass_ex.Rmd)). 
-
-
-```{r message=FALSE, warning=FALSE}
-library(glmmTMB)
-```
-
-
-The model discussed in class can be described as 
-
-$$y_{ijk}=\mu_0 + D_i + T_j + (DT)_{ij} + r_k + u_{l(k)} + v_{m(lk)} + \varepsilon_{ijklm}, \\ u_{l(k)}\sim N(0, \sigma^2_u), \\ v_{m(lk)}\sim N(0, \sigma^2_v), \\ \varepsilon_{ijklm} \sim N(0, \sigma^2_\varepsilon),$$
-
-where ....
-
-
-```{r}
-# prepare data
-url <- "https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/fecal_dm.csv"
-dd_fecal <- read.csv(url)
-dd_fecal$Pig <- as.factor(dd_fecal$Pig)
-dd_fecal$Trt <- as.factor(dd_fecal$Trt)
-dd_fecal$Room <- as.factor(dd_fecal$Room)
-dd_fecal$Pen <- as.factor(dd_fecal$Pen)
-dd_fecal$Day <- as.factor(dd_fecal$Day)
-
-# AR(1) covariance structure 
-m_ar1 <- glmmTMB(Dry.matter...*10 ~
-                   Trt*Day + Room + (1|Room:Pen) + ar1(Day + 0 |Room:Pen:Pig),
-                REML = TRUE,
-                control = glmmTMBControl(),
-        data = dd_fecal)
-
-# Toep covariance structure 
-m_toep <- glmmTMB(Dry.matter.../10 ~ 
-                  Trt*Day + Room + (1|Room:Pen) + toep(Day + 0 |Room:Pen:Pig),
-                REML = TRUE,
-                control = glmmTMBControl(),
-        data = dd_fecal)
-```
-
-
-How do we know what covariance function was the best?
-
-```{r}
-DHARMa::simulateResiduals(m_ar1, plot = T)
-DHARMa::simulateResiduals(m_toep, plot = T)
-```
-
-```{r}
-AIC(m_ar1, m_toep)
-```
-
-
-
-- [A helpful resource](https://cran.r-project.org/web/packages/glmmTMB/vignettes/covstruct.html).
-
 
 ## Statistical inference review
 
@@ -144,4 +84,29 @@ data.frame(x = seq(0, 25, by = .01)) %>%
 
 - Note, again, the relationship between the p value and sample size and $\sigma^2$. 
 - Note, again, that the $P(F>F^\star)$ depends on the df of the denominator. 
+
+
+## Estimability 
+
+- A quantity is estimable if it is possible to find a linear combination of the data that provides an unbiased and unique estimate of that quantity. 
+- For matrix models, linear estimable functions of $\boldsymbol\beta$ take on the form of linear combinations of the parameter vector such as $a'\boldsymbol\beta$ where a is a $p\times1$ vector of constants. A linear function $a'\boldsymbol\beta$ is estimable if and only if there exists a vector $r$ such that $a = \mathbf{X}'\mathbf{X}r$. Each function $x_i'\boldsymbol\beta$ is estimable where $x_i$ is the $i$th row of $\mathbf{X}$. 
+
+### Contrasts 
+
+- Linear combinations of parameters. 
+- Often connected to hypothesis tests where $H_0: \mathbf{K}\boldsymbol\beta = 0$. 
+- We specify the matrix $\mathbf{K}$ that combines elements in $\hat{\boldsymbol\beta}$. 
+
+
+## Derived quantities 
+
+Derived quantities are functions of the parameters in a model. 
+
+Uncertainty is typically obtained via the delta method. 
+
+
+- The **delta method** sets the asymptotic variance of a function $g(\cdot)$ of the parameters ($g(\hat\beta)$): 
+  $Var(g(\hat\beta)) \approx \nabla g(\hat\beta)^T Cov(\hat\beta) \nabla g(\hat\beta),$
+  where $\nabla g(\hat\beta)$ is the gradient (vector of first derivatives) of function $g(\cdot)$ with respect to the parameters. 
+- In this case $se(\hat{\beta}_1 + 2 \hat{\beta}_2 x_{ij}) = \sqrt(\widehat{Var}(\hat\beta_1)+ 4 x_{ij}^2\widehat{Var}(\hat\beta_2) + 4x_{ij}\widehat{Cov}(\hat\beta_2))$
 
