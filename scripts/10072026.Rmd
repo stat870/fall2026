@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lme4)
 library(emmeans)
+library(multcomp)
 ```
 
 ```{r}
@@ -23,6 +24,30 @@ df$Day <- as.factor(df$Day)
 ```
 
 ## Categorical predictor 
+
+A baker wanted to determine the effect that the amount of fat in a recipe of cookie dough would have on the texture of the cookie. 
+She also wanted to determine if the temperature (°F) at which the cookies were baked would have an influence on the texture of the surface. 
+The texture of the cookie is measured by determining the amount of force (g) required to penetrate the cookie surface. 
+
+**Experimentation:** 
+
+The process she used was to make a batch of cookie dough for each of the four recipes every day, and baked them one by one in the oven in different batches. 
+She carried this process out each of four days when she baked cookies at three different temperatures. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ```{r}
@@ -46,13 +71,23 @@ and can be fitted to the data with the following R code:
 
 ```{r}
 m <- lmer(force ~ 1 + Temperature_f*fat_perc + (1|Day), data = df)
+
+DHARMa::simulateResiduals(m, plot = T)
 ```
 
 The degrees of freedom for the denominator are straightforward. 
 
 ```{r}
-emmeans(m, ~Temperature_f:fat_perc, contr = list(c( 1, -1, rep(0, 10)), 
-                                               c(0, 0, 0, 0, -1, 1, rep(0, 6))))
+means <- emmeans(m, ~Temperature_f:fat_perc)
+
+cld(means, Letters = letters)
+```
+
+```{r}
+emmeans(m, ~Temperature_f:fat_perc,
+        contr = list(c(1, -1, rep(0, 10)), 
+                     c(1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0, 0),
+                     c(1/5,1/5,1/5,1/5,1/5, -1/7,-1/7,-1/7,-1/7,-1/7,-1/7,-1/7 )))
 ```
 
 
@@ -116,7 +151,9 @@ d_k \sim N(0, \sigma^2_d), \\
 and can be fitted to the data with the following R code:
 
 ```{r}
-m <- lmer(force ~ Temperature*fat_perc + (1|Day), data = df)
+m <- lmer(force ~ Temperature+fat_perc+Temperature:fat_perc + (1|Day), data = df)
+
+DHARMa::simulateResiduals(m, plot = T)
 ```
 
 
@@ -127,3 +164,16 @@ emmeans(m, ~Temperature_f:fat_perc, contr = list(c(0, 0, 0,
 ```
 
 ### Delta method 
+
+
+- The **delta method** sets the asymptotic variance of a function $g(\cdot)$ of the parameters ($g(\hat\beta)$): 
+  $Var(g(\hat\beta)) \approx \nabla g(\hat\beta)^T Cov(\hat\beta) \nabla g(\hat\beta),$
+  where $\nabla g(\hat\beta)$ is the gradient (vector of first derivatives) of function $g(\cdot)$ with respect to the parameters. 
+- In this case $se(\hat{\beta}_1 + 2 \hat{\beta}_2 x_{ij}) = \sqrt(\widehat{Var}(\hat\beta_1)+ 4 x_{ij}^2\widehat{Var}(\hat\beta_2) + 4x_{ij}\widehat{Cov}(\hat\beta_2))$
+
+```{r}
+(covariance <- vcov(m1))
+msm::deltamethod(g = ~ x2 + (2*x3*0), mean = coef(m1), cov = covariance)
+emtrends(m1, ~ Total_N, "Total_N", at = list(Total_N = c(0, 100, 200)))
+```
+
