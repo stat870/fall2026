@@ -1,0 +1,129 @@
+---
+title: "Untitled"
+author: "J Lacasa"
+date: "2026-10-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lme4)
+library(emmeans)
+```
+
+```{r}
+df <- read.csv("../data/cookies.csv")
+df$Temperature_f <- as.factor(df$Temperature)
+df$fat_perc <- as.factor(df$fat_perc)
+df$Day <- as.factor(df$Day)
+```
+
+## Categorical predictor 
+
+
+```{r}
+df %>% 
+  ggplot(aes(Temperature_f, force))+
+  theme_classic()+
+  scale_fill_manual(values = c("#DCD6F7", "#B4869F", "#985F6F", "#4E4C67"))+
+  labs(x = "Temperature (°F)", fill = "Fat (%)", y = "Force (g)")+
+  theme(aspect.ratio = .5)+
+  geom_boxplot(aes(group = paste(Temperature, fat_perc),
+                   fill = factor(fat_perc)))
+```
+
+
+The corresponding model is 
+$$y_{ijk} = \mu + T_i + F_j + TF_{ij} + d_k + \varepsilon_{ijk} , \\
+d_k \sim N(0, \sigma^2_d), \\
+\varepsilon_{ijk} \sim N(0, \sigma^2_\varepsilon), $$
+
+and can be fitted to the data with the following R code:
+
+```{r}
+m <- lmer(force ~ 1 + Temperature_f*fat_perc + (1|Day), data = df)
+```
+
+The degrees of freedom for the denominator are straightforward. 
+
+```{r}
+emmeans(m, ~Temperature_f:fat_perc, contr = list(c( 1, -1, rep(0, 10)), 
+                                               c(0, 0, 0, 0, -1, 1, rep(0, 6))))
+```
+
+
+### t-test 
+
+- **Objective**: compare treatment means between 375 degrees temperature and 4% fat and 400 degrees temperature and 4% fat. 
+- Remember $t^\star = \frac{\hat\theta}{se(\hat\theta)}$ 
+- $\hat\theta = \mu_{22} - \mu_{32}$ 
+- $se(\hat\theta) = \sqrt{\frac{2 \sigma^2_\varepsilon}{r}}$
+
+```{r}
+d <- data.frame(Temperature = as.factor(c(375, 400)), 
+                fat_perc = factor(4))
+hat.mu <- predict(m, newdata = d, re.form = NA)
+hat.theta <- hat.mu[2]-hat.mu[1]
+```
+
+```{r}
+hat.sigma2 <- sigma(m)^2
+hat.sigma2_b <- as.data.frame(VarCorr(m))[1,4]
+reps <- n_distinct(df$Day)
+se.hat.theta <- sqrt((2* hat.sigma2)/reps)
+```
+
+```{r}
+emmeans(m, ~Temperature_f:fat_perc, contr = list(c(0, 0, 0, 
+                                                 0, -1, 1, 
+                                                 rep(0, 6))))$contrasts
+```
+
+```{r}
+hat.theta
+se.hat.theta
+
+t.star <- hat.theta/se.hat.theta
+t.star
+
+dt(t.star, df = 33)
+```
+
+## Continuous predictor 
+
+```{r}
+df %>% 
+  ggplot(aes(Temperature, force))+
+  theme_classic()+
+  scale_fill_manual(values = c("#DCD6F7", "#B4869F", "#985F6F", "#4E4C67"))+
+  labs(x = "Temperature (°F)", fill = "Fat (%)", y = "Force (g)")+
+  theme(aspect.ratio = .5)+
+  geom_point(aes(group = paste(Temperature, fat_perc),
+                 fill = factor(fat_perc)), shape =21, size =7 )
+```
+
+
+
+The corresponding model is 
+$$y_{ijk} = \beta_{0j} + \beta_{1j} x_{ij} + d_k + \varepsilon_{ij} , \\
+d_k \sim N(0, \sigma^2_d), \\
+\varepsilon_{ij} \sim N(0, \sigma^2_\varepsilon), $$
+
+and can be fitted to the data with the following R code:
+
+```{r}
+m <- lmer(force ~ Temperature*fat_perc + (1|Day), data = df)
+```
+
+
+```{r}
+emmeans(m, ~Temperature_f:fat_perc, contr = list(c(0, 0, 0, 
+                                                 0, -1, 1, 
+                                                 rep(0, 6))))$contrasts
+```
+
+### Delta method 

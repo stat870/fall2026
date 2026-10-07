@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data</title>
-  <meta name="description" content="Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <title>Day 13 Marginal means, contrasts, and derived quantities | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 13 Marginal means, contrasts, and derived quantities | STAT 870 - Analysis of Messy Data" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:title" content="Day 13 Marginal means, contrasts, and derived quantities | STAT 870 - Analysis of Messy Data" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Day 2 Designed Experiments Review | STAT 870 - Analysis of Messy Data" />
+  <meta name="twitter:title" content="Day 13 Marginal means, contrasts, and derived quantities | STAT 870 - Analysis of Messy Data" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="designed-experiments-connection-to-linear-mixed-models.html"/>
+<link rel="prev" href="marginal-means-contrasts-and-derived-quantities.html"/>
+<link rel="next" href="semester-project-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -345,160 +345,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="designed-experiments-review-1" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Day 2</span> Designed Experiments Review<a href="designed-experiments-review-1.html#designed-experiments-review-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>August 26th</p>
-<div id="announcements" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Announcements<a href="designed-experiments-review-1.html#announcements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="marginal-means-contrasts-and-derived-quantities-1" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Day 13</span> Marginal means, contrasts, and derived quantities<a href="marginal-means-contrasts-and-derived-quantities-1.html#marginal-means-contrasts-and-derived-quantities-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>October 7th, 2026</p>
+<div id="announcements-11" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Announcements<a href="marginal-means-contrasts-and-derived-quantities-1.html#announcements-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><a href="https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf">Assignment 1</a> is due next Wednesday.</li>
-<li>Applied Linear Mixed Models Workshop 09/19-09/20.</li>
+<li>Online classes on Oct 5, 7, 12, 14.</li>
+<li>Mixture of recordings and Zoom classes.</li>
 </ul>
 </div>
-<div id="designed-experiments" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Designed experiments<a href="designed-experiments-review-1.html#designed-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The golden rules of designed experiments:</p>
-<ul>
-<li>Replication</li>
-<li>Randomization</li>
-<li>Local control</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-28"></span>
-<img src="../figures/principles.jpg" alt="Principles for conducting valid and efficient experiments. From Box, Hunter and Hunter (2005)." width="80%" />
-<p class="caption">
-Figure 2.1: Principles for conducting valid and efficient experiments. From Box, Hunter and Hunter (2005).
-</p>
-</div>
-<ul>
-<li>About George Box I - A Conversation with George Box [<a href="https://projecteuclid.org/journals/statistical-science/volume-2/issue-3/A-Conversation-with-George-Box/10.1214/ss/1177013223.full">link</a>]</li>
-<li>About George Box II - An Accidental Statistician: The Life and Memories of George E. P. Box [<a href="https://www.amazon.com/Accidental-Statistician-Life-Memories-George/dp/1118400887">link</a>]</li>
-</ul>
-<div id="treatment-structure" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Treatment structure<a href="designed-experiments-review-1.html#treatment-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Solely about the treatment.</li>
-<li>Most likely connected to the research question and thus defined by the subject matter expert.</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-29"></span>
-<img src="../figures/trtdesigns_oneway.PNG" alt="Schematic representation of a one-way treatment structure." width="80%" />
-<p class="caption">
-Figure 2.2: Schematic representation of a one-way treatment structure.
-</p>
-</div>
-<p>A one-way treatment structure means that the expected value of the observations, <span class="math inline">\(y\)</span>, is affected by one treatment factor with <span class="math inline">\(k\)</span> levels:</p>
-<p><span class="math display">\[g(\mu_{ij}) = \eta_{ij} = \eta_{0} + T_i,\]</span>
-where:</p>
-<ul>
-<li><span class="math inline">\(\mu_{ij}\)</span> is the expected value of <span class="math inline">\(y_{ij}\)</span>, the observation of the <span class="math inline">\(i\)</span>th treatment and <span class="math inline">\(j\)</span>th repetition,</li>
-<li><span class="math inline">\(g(\cdot)\)</span> is the link function, that ensures that the mean is within the support of the chosen distribution,</li>
-<li><span class="math inline">\(\eta_{ij}\)</span> is the linear predictor of <span class="math inline">\(g(\mu_{ij})\)</span>,</li>
-<li><span class="math inline">\(\eta_{0}\)</span> is the overall mean, and</li>
-<li><span class="math inline">\(T_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th level of the treatment <span class="math inline">\(T\)</span>.</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
-<img src="../figures/trtdesigns_twoway.PNG" alt="Schematic representation of a two-way factorial treatment structure." width="80%" />
-<p class="caption">
-Figure 2.3: Schematic representation of a two-way factorial treatment structure.
-</p>
-</div>
-<p>A two-way treatment structure is similar to a one-way treatment structure, only now the expected value is affected by two treatment factors:</p>
-<p><span class="math display">\[g(\mu_{ijk}) = \eta_{ijk} = \eta_{0} + T_i + G_j + (TG)_{ij} ,\]</span>
-where:</p>
-<ul>
-<li><span class="math inline">\(\mu_{ijk}\)</span> is the expected value of <span class="math inline">\(y_{ij}\)</span>, the observation of the <span class="math inline">\(i\)</span>th treatment <span class="math inline">\(T\)</span>, <span class="math inline">\(j\)</span>th treatment <span class="math inline">\(G\)</span>, and <span class="math inline">\(k\)</span> repetition,</li>
-<li><span class="math inline">\(g(\cdot)\)</span> is the link function, that ensures that the mean is within the support of the chosen distribution,</li>
-<li><span class="math inline">\(\eta_{ijk}\)</span> is the linear predictor of <span class="math inline">\(g(\mu_{ijk})\)</span>,</li>
-<li><span class="math inline">\(\eta_{0}\)</span> is the overall mean,<br />
-</li>
-<li><span class="math inline">\(T_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th level of the treatment <span class="math inline">\(T\)</span>,</li>
-<li><span class="math inline">\(G_j\)</span> is the effect of the <span class="math inline">\(j\)</span>th level of the treatment <span class="math inline">\(G\)</span>, and</li>
-<li><span class="math inline">\((TG)_{ij}\)</span> is the interaction between the <span class="math inline">\(i\)</span>th level of treatment <span class="math inline">\(T\)</span>, and <span class="math inline">\(j\)</span>th level of treatment <span class="math inline">\(G\)</span>.</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
-<img src="../figures/trtdesigns_threeway.PNG" alt="Schematic representation of a tree-way factorial treatment structure." width="80%" />
-<p class="caption">
-Figure 2.4: Schematic representation of a tree-way factorial treatment structure.
-</p>
-</div>
-<p>Other treatment structures:</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-32"></span>
-<img src="../figures/trtdesigns_twowayfract.PNG" alt="Schematic representation of a two-way fractional factorial treatment structure." width="80%" />
-<p class="caption">
-Figure 2.5: Schematic representation of a two-way fractional factorial treatment structure.
-</p>
-</div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-33"></span>
-<img src="../figures/trtdesigns_twoway_control.PNG" alt="Schematic representation of a two-way factorial plus a control treatment structure." width="80%" />
-<p class="caption">
-Figure 2.6: Schematic representation of a two-way factorial plus a control treatment structure.
-</p>
-</div>
-</div>
-<div id="design-structure" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Design structure<a href="designed-experiments-review-1.html#design-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The experiment design describes the data generating process (“blueprint” of the data).</p>
-<ul>
-<li>You’ll notice that the models above only consider the treatment sources of variability to explain variations in the observed values.</li>
-<li>How were the treatments above (logistically) applied?</li>
-</ul>
-<p><strong>Useful questions:</strong></p>
-<ul>
-<li>What is the experimental unit?<br />
-</li>
-<li>What is the blueprint of the design? (which observations are similar to what)</li>
-</ul>
-<p>While the treatment structure defines what effects we will try and estimate as precisely as possible, the design structure tells us the story of <strong>how</strong> those treatments were applied.
-Some of the most common designed experiments include</p>
-<ul>
-<li>completely randomized design (CRD),</li>
-<li>randomized complete block design (RCBD),</li>
-<li>split-plot design,</li>
-<li>relevant variations to the designs above:
-<ul>
-<li>generalized randomized complete block design,</li>
-<li>strip-plot design,</li>
-<li>repeated measures designs.</li>
-</ul></li>
-</ul>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
-<img src="../figures/designs_crd.PNG" alt="Schematic description of an experiment with a completely randomized design" width="100%" />
-<p class="caption">
-Figure 2.7: Schematic description of an experiment with a completely randomized design
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-35"></span>
-<img src="../figures/designs_rcbd.PNG" alt="Schematic description of an experiment with a randomized complete block design" width="100%" />
-<p class="caption">
-Figure 2.8: Schematic description of an experiment with a randomized complete block design
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-36"></span>
-<img src="../figures/designs_splitplot.PNG" alt="Schematic description of a field experiment with a split-plot design" width="100%" />
-<p class="caption">
-Figure 2.9: Schematic description of a field experiment with a split-plot design
-</p>
-</div>
-</div>
-</div>
-<div id="statistical-models" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Statistical models<a href="designed-experiments-review-1.html#statistical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>What are the sources of variability?</li>
-<li>What is the distribution of the data?</li>
-<li>What is the structure in the data?</li>
-</ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
-<img src="../figures/mindmap2.jpg" alt="Schematic representation of the relationship between the experiment design and the statistical model." width="80%" />
-<p class="caption">
-Figure 2.10: Schematic representation of the relationship between the experiment design and the statistical model.
-</p>
-</div>
-</div>
-<div id="homework-announcements-1" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Homework &amp; Announcements<a href="designed-experiments-review-1.html#homework-announcements-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Submit <a href="https://stat870.github.io/fall2026/assignments/Assignment1_YourLastName.pdf">Assignment 1</a> by next Wednesday.</li>
-</ul>
+<div id="see-todays-recording" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> See today’s recording<a href="marginal-means-contrasts-and-derived-quantities-1.html#see-todays-recording" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="../scripts/10072026.Rmd">Get R code</a></p>
 
 </div>
 </div>
@@ -507,8 +366,8 @@ Figure 2.10: Schematic representation of the relationship between the experiment
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="designed-experiments-connection-to-linear-mixed-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="marginal-means-contrasts-and-derived-quantities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -539,7 +398,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/stat870/fall2026/edit/main/02-design1.Rmd",
+    "link": "https://github.com/stat870/fall2026/edit/main/13-Recording.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -547,7 +406,7 @@ gitbook.start({
     "text": null
   },
   "view": {
-    "link": "https://github.com/stat870/fall2026/blob/main/02-design1.Rmd",
+    "link": "https://github.com/stat870/fall2026/blob/main/13-Recording.Rmd",
     "text": null
   },
   "download": null,

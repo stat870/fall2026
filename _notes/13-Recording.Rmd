@@ -1,0 +1,14 @@
+# Marginal means, contrasts, and derived quantities
+
+October 7th, 2026
+
+## Announcements 
+
+- Online classes on Oct 5, 7, 12, 14. 
+- Mixture of recordings and Zoom classes. 
+
+
+## See today's recording
+
+[Get R code](../scripts/10072026.Rmd) 
+
