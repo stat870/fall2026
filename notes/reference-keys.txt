@@ -142,6 +142,11 @@ improving-computational-stability
 nonlinear-optimizing-algorithms
 issues
 references
+software-implementation-of-lmms-1
+announcements-13
+live-r-examples
+issues-1
+references-1
 semester-project-1
 learning-objectives
 partial-deadlines

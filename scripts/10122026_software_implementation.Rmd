@@ -11,6 +11,17 @@ output:
 
 This document presents the R implementation of some of the most important models covered in STAT 870 (so far). 
 
+### Libraries 
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lme4)
+library(nlme)
+
+library(emmeans)
+```
+
+
 ## General linear model 
 
 The general linear model generally assumes: 
@@ -18,26 +29,114 @@ The general linear model generally assumes:
 - Linearity
 - Normality and iid residuals 
 
-$$\mathbf{y} \sim N(\mathbf{X}\boldsymbol{\beta}, \sigma^2\mathbf{I}), $$
+$$\mathbf{y} \sim N(\mathbf{X}\boldsymbol{\beta}, \sigma^2\mathbf{I}),$$
 where:
 
 - $\mathbf{y}$ is the response data 
 - $\mathbf{X}\boldsymbol{\beta}$ are the fixed effects [$\mathbf{X}$ shows treatment allocation and $\boldsymbol{\beta}$ are the fixed effects] 
 - $\sigma^2\mathbf{I}$ is the variance-covariance matrix (also $\mathbf{R}$), which is the residual variance times $\text{diag}(1)_{n\times n}$ 
 
+Assumes: 
+
+- normality 
+- linearity
+- independence
+
+
+$$\mathbf{y} \vert \boldsymbol{u} \sim N(\mathbf{X}\boldsymbol{\beta} + \mathbf{Z}\boldsymbol{u}, \sigma^2\mathbf{I}),$$
+
+
+$$\mathbf{y}  \sim N(\mathbf{X}\boldsymbol{\beta} , \mathbf{Z}\mathbf{G}\mathbf{Z}' \sigma^2\mathbf{I}),$$
+
+
+
+
+
 ### Applied example I (general linear model) 
 
 The data below come from an experiment studying different feeding treatments on Pig health. The researchers randomly allocated 6 Treatments to 96 pens of 5 pigs each (16 repetitions) and measured the response, Serum haptoglobin (mg/dL), before and after applying the treatment. 
 They wish to study whether the treatments had an effect on Serum haptoglobin before versus after applying the treatment. 
 
+Treatment str:
+
+- 6 Treatments 
+- 2 timepoints
+
+Design str:
+
+- CRD, OU = EU
+- 16 repetitions
+
+y = Serum haptoglobin
+
 ```{r}
 url <- "https://raw.githubusercontent.com/stat870/fall2025/refs/heads/main/data/blood_study_pigs.csv"
 d <- read.csv(url)
 d$Day <- as.factor(d$Day)
-m <- lm(Serum_haptoglobin_mg.dL ~ Trt * Day , data = d)
+
+# no subsampling 
+# d |> 
+#   group_by(Pen, Day) |> 
+#   summarise(n())
 ```
 
-Note: it is hard to find an applied example where this model holds, due to the strong assumption of iid residuals. 
+Trt: 
+
+$\mu_0 + Diet_i + Time_j + (Diet \times Time)_{ij}$
+
+Str: 
+
+$w_{ik}$
+
+$$y_{ijk} \sim N(\mu_{ijk}, \sigma^2),$$
+
+$$\mu_{ijk} = \mu_0 + Diet_i + Time_j + (Diet \times Time)_{ij} +w_{ik}, \\ w_{ik}\sim N(0, \sigma^2_w)$$
+
+
+```{r}
+
+hist(d$Serum_haptoglobin_mg.dL)
+hist(log(d$Serum_haptoglobin_mg.dL))
+log(Serum_haptoglobin_mg.dL) 
+```
+
+```{r}
+m <- lmer(sqrt(Serum_haptoglobin_mg.dL) ~
+            Trt * Day + (1|Trt:Pen),
+          control = lmerControl(optimizer = "nloptwrap",
+                                optCtrl=list(algorithm="NLOPT_LN_NELDERMEAD")),
+          data = d)
+# the model model at the obs scale assumes lognormal distr
+
+DHARMa::simulateResiduals(m, plot = T)
+
+
+m2 <- lme(Serum_haptoglobin_mg.dL/100 ~ Trt * Day ,
+          random = ~ 1 | Pen,
+          data = d)
+
+plot(predict(m2), resid(m2))
+
+
+m3 <- glmmTMB(Serum_haptoglobin_mg.dL/100 ~ Trt * Day +
+          (1|Pen),
+          family = Gamma(link = "log"),
+          data = d)
+
+DHARMa::simulateResiduals(m3, plot = T)
+```
+
+
+```{r}
+emmeans(m2, ~ Day|Trt, 
+        contr = list(c(1,-1)))
+
+emmeans(m2, ~ Day:Trt, 
+        contr = list(c(-0.5,0.5, 0.5, -0.5, 
+                       rep(0, 8))))
+```
+
+
 
 ## General linear mixed models  
 
@@ -56,9 +155,30 @@ where:
 
 ### Applied example II - LMM
 
-The data below come from a split-plot experiment in an RCBD, where a baker wanted to determine the effect that the amount of fat in a recipe of cookie dough would have on the texture of the cookie. She also wanted to determine if the temperature (°F) at which the cookies were baked would have an influence on the texture of the surface. The texture of the cookie is measured by determining the amount of force (g) required to penetrate the cookie surface.  
+The data below come from a strip-plot experiment in an RCBD, where a baker wanted to determine the effect that the amount of fat in a recipe of cookie dough would have on the texture of the cookie. She also wanted to determine if the temperature (°F) at which the cookies were baked would have an influence on the texture of the surface. The texture of the cookie is measured by determining the amount of force (g) required to penetrate the cookie surface.  
 
 The process she used was to make a batch of cookie dough for each of the four recipes every day, and baked one cookie from each recipe in the oven together. She carried this process out each of four days when she baked cookies at three different temperatures.
+
+
+
+
+y = cookie texture (force)
+
+trt str: 
+
+temperature 
+recipes (fat %) 
+
+
+
+strip plot design 
+
+recipe is the whole plot
+temp is the strip plot
+
+
+$$\mu_{ijk}  = \mu_0 + R_i + T_j + RT_{ij} + d_k + w_{i(k)} + s_{j(k)}$$
+
 
 ```{r}
 library(lme4)
@@ -67,10 +187,35 @@ d2 <- read.csv(url)
 d2$Day <- as.factor(d2$Day)
 d2$Temperature <- as.factor(d2$Temperature)
 d2$fat_perc <- as.factor(d2$fat_perc)
-
-m1 <- lmer(force ~ Temperature * fat_perc + (1|Day/Temperature),
-           data = d2)
 ```
+
+```{r}
+d2 |> 
+  ggplot(aes(fat_perc, force))+
+  geom_boxplot()
+```
+
+
+
+
+$$\mu_{ijk}  = \mu_0 + R_i + T_j + RT_{ij} + d_k + w_{i(k)} + s_{j(k)}$$
+
+
+```{r}
+m1 <- lmer(force ~ 1 + factor(fat_perc) * factor(Temperature) +
+             (1|Day) + (1|Day:Temperature) + (1|Day:fat_perc),
+           data = d2)
+
+DHARMa::simulateResiduals(m1, plot = T)
+
+```
+
+
+```{r}
+emmeans(m1, ~Temperature, contr = list(c(1, -1, 0)))
+emmeans(m1, ~fat_perc, contr = list(c(1, -1, 0, 0)))
+```
+
 
 
 
@@ -146,7 +291,7 @@ d4$Time <- as.factor(d4$Time)
 d4$Biological.Rep <- as.factor(d4$Biological.Rep)
 d4$Technical.Rep <- as.factor(d4$Technical.Rep)
 
-m4 <- lmer(`Log.CFU.coupon` ~ Treatment * Time * Material +
+m4 <- lmer(`logCFU` ~ Treatment * Time * Material +
              (1|Biological.Rep), 
            data = d4)
 ```
@@ -171,7 +316,8 @@ m5 <- glmmTMB(died ~ rad*chemo + (1|clinic) ,
 
 summary(m5)
 
-emmeans(m5, ~ rad:chemo, type = "response")
+emmeans(m5, ~ rad:chemo, type = "response", 
+        contr = list(c(1, -1, 0, 0)))
 ```
 
 
