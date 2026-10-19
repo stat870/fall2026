@@ -17,6 +17,7 @@ This document presents the R implementation of some of the most important models
 library(tidyverse)
 library(lme4)
 library(nlme)
+library(glmmTMB)
 
 library(emmeans)
 ```
@@ -234,12 +235,105 @@ emmeans(m1, ~fat_perc, contr = list(c(1, -1, 0, 0)))
 The data below come from a CRD with repeated measures. 
 
 ```{r}
-library(glmmTMB)
 url <- "https://raw.githubusercontent.com/stat870/fall2025/refs/heads/main/data/fecalm_swine2.csv"
 d3 <- read.csv(url)
 d3$Day <- as.factor(d3$Day)
 d3$Pen <- as.factor(d3$Pen)
+d3$Dry_matter_dec <- d3$Dry_matter_perc/100
+```
 
+```{r}
+unique(d3$Trt)
+unique(d3$Day)
+unique(d3$Pen)
+hist(d3$Dry_matter_dec)
+```
+
+
+```{r}
+hist(rbeta(n = 10^6, 1 , 1))
+```
+
+
+Modeling decisions: 
+
+- distribution is beta
+
+$$y_{ijk} \sim beta(\mu_{ijk}, \phi),$$
+
+- predictor
+
+$$logit(\mu_{ijk}) = \eta_{ijk} = \eta_0 + Trt_i + Time_j + (Trt \times Time)_{ij} + w_{i(k)}, \\ w_{i(k)} \sim N(0, \sigma^2_w)$$
+
+
+DO NOT DO THIS:
+$$y_{ijk} = \eta_0 + Trt_i + Time_j + (Trt \times Time)_{ij} + w_{i(k)} + \varepsilon_{ijk}, \\ w_{i(k)} \sim N(0, \sigma^2_w) \\ \varepsilon_{ijk}\sim beta(...)$$
+
+
+
+
+
+
+```{r}
+m_CS <- 
+  glmmTMB(Dry_matter_dec ~ Trt * Day + (1|Pen),
+          family = beta_family(link = "logit"),
+          REML = T,
+          data = d3)
+
+DHARMa::simulateResiduals(m_CS, plot = T)
+```
+
+```{r}
+plot(emmeans(m_CS, ~Trt, type = "response"))
+```
+
+
+
+
+```{r}
+m_CS_normal <- 
+  glmmTMB(Dry_matter_dec ~ Trt * Day + (1|Pen),
+          family = gaussian(link = "identity"),
+          REML = T,
+          data = d3)
+
+m_CS_normal <- 
+  lmer(Dry_matter_dec ~ Trt * Day + (1|Pen),
+       REML = T,
+       data = d3)
+
+DHARMa::simulateResiduals(m_CS_normal, plot = T)
+```
+
+
+```{r}
+emmeans(m_CS, ~ Trt|Day, type = "link", 
+        contr = list(c(1, -1, rep(0, 4))))
+
+emmeans(m_CS, ~ Trt|Day, type = "response", 
+        contr = list(c(1, -1, rep(0, 4))))
+```
+
+```{r}
+AIC(m_CS, m_CS_normal)
+
+performance::performance_aicc(m_CS)
+performance::performance_aicc(m_CS_normal)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
 m3 <- glmmTMB(Dry_matter_perc ~ Trt*Day + ar1(Pen|Day), 
               REML = TRUE,
               data = d3)
@@ -279,7 +373,9 @@ AICcmodavg::AICc(m3_ar1)
 
 ### Applied example IV - LMM
 
-The data below come from an experiment studying different sanitizer treatments on the survival of bacteria on different surfaces. There are 5 different sanitizer treatments applied for 2 different times (e.g., leave the sanitizer it for 1 minute or for 5 minutes), and on 5 different surfaces. 
+The data below come from an experiment studying different sanitizer treatments on the survival of bacteria on different surfaces. 
+
+There are 5 different sanitizer treatments applied for 2 different times (e.g., leave the sanitizer it for 1 minute or for 5 minutes), and on 5 different surfaces. 
 At the end of the study, the researchers count how many colony forming units (good sources of bacteria growth) they find. 
 They wish to study whether the treatments had a different effect on the number of CFUs. 
 
@@ -290,6 +386,12 @@ d4$Treatment <- as.factor(d4$Treatment)
 d4$Time <- as.factor(d4$Time)
 d4$Biological.Rep <- as.factor(d4$Biological.Rep)
 d4$Technical.Rep <- as.factor(d4$Technical.Rep)
+
+d4 |> 
+  ggplot(aes(Treatment, Material))+
+  geom_point()+
+  facet_wrap(~Time)
+
 
 m4 <- lmer(`logCFU` ~ Treatment * Time * Material +
              (1|Biological.Rep), 
@@ -309,6 +411,39 @@ d5 <- read.csv(url)
 
 d5 <- d5 %>%
   mutate(across(c(rad, chemo), ~as.factor(.)))
+
+
+d5 |> 
+  ggplot(aes(paste(rad, chemo), died))+
+  geom_jitter(aes(color = factor(clinic)))
+  geom_point()
+```
+
+1. Probability
+
+$$y_{ij} \sim Binom(1, p_{ij})$$
+
+2. 
+
+$$g(p_{ij}) = LINEAR \ \ PREDICTOR$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
 m5 <- glmmTMB(died ~ rad*chemo + (1|clinic) , 
               family = binomial(link = "logit"), 
               REML = TRUE,

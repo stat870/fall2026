@@ -16,5 +16,5 @@ October 12
 
 October 14  
 : Practice 
-  : []()
+  : [html](https://stat870.github.io/fall2026/notes/software-implementation-of-lmms-1.html)
   
