@@ -7,8 +7,8 @@ October 19
   : [html](https://stat870.github.io/fall2026/notes/accounting-for-spatial-effects.html)
 
 October 21  
-: Splines II & Kahoot!  
-  : [](https://stat870.github.io/fall2026/notes/smoothing-splines.html)
+: Splines
+  : [html](https://stat870.github.io/fall2026/notes/splines.html)
 
 October 26  
 : Splines III  
