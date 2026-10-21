@@ -44,7 +44,7 @@ where
 - supports multiple predictor variables (unlike other basis)  
 - avoid the problem of knot placement 
 - not so computationally costly, but may become more relevant for large data (scaling $O(k^3)$) 
-- basis functions and basis funciton dimension 
+- basis functions and basis function dimension 
 - See Chapter 5 in Wood (2017) 
 
 In thin-plate regression, we can represent the data with the equation 
