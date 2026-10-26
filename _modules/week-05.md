@@ -11,10 +11,10 @@ October 21
   : [html](https://stat870.github.io/fall2026/notes/splines.html)
 
 October 26  
-: Splines III  
-  : [](https://stat870.github.io/fall2026/notes/applications-of-smoothing-splines.html)
+: Splines II  
+  : [html](https://stat870.github.io/fall2026/notes/applied-modeling.html)
 
 October 28 
-: Splines IV  
+: Splines III  
   : [](https://stat870.github.io/fall2026/notes/miscellaneous.html)
 

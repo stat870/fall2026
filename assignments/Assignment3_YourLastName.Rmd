@@ -68,7 +68,7 @@ fish <- read.csv(url)
 
 # plot the data
 fish %>% 
-  ggplot(aes(day, wt))+
+  ggplot(aes(day, log(wt)))+
   geom_point(aes(fill = factor(vaccine), 
                  group = factor(vaccine)),
              position = position_dodge(width = 60),
@@ -85,32 +85,101 @@ fish %>%
 ```{r}
 library(glmmTMB)
 
-fish$day<- factor(fish$day, levels = c(0, 82, 246, 505, 901))
+fish$day_f<- factor(fish$day, levels = c(0, 82, 246, 505, 901))
 fish$vaccine <- factor(fish$vaccine)
 fish$fish <- factor(fish$fish)
 
 #Lmer with us and ar1 and toep all failed to converge# 
-m_ar1 <- glmmTMB(
-  wt ~ vaccine * day +
-    (1 | fish) +
-    ar1(day + 0 | fish),
+
+
+m_ar1 <- glmmTMB( 
+  wt ~ vaccine * day_f +
+    ar1(day_f + 0 | fish),
   data = fish,
   REML = TRUE
   )
 
+
 m_ar1 <- glmmTMB( 
-  wt ~ vaccine * day +
-    ar1(day + 0 | fish),
+  wt ~ vaccine * day_f +
+    (1|fish:vaccine)+
+    ar1(day_f + 0 | fish),
   data = fish,
   REML = TRUE
   )
 
+
+means <- as.data.frame(emmeans(m_ar1, ~ vaccine, at = list(day_f = factor(901))))
+
 m_ar1 <- glmmTMB( 
-  wt/1000 ~ vaccine * day +
-    ar1(day + 0 | fish),
+  wt/1000 ~ vaccine * day_f +
+    ar1(day_f + 0 | fish),
   data = fish,
   REML = TRUE
   )
 ```
 
+```{r}
+predictions <- predict(m_ar1, se.fit = T, re.form = ~0, )
+emmeans(m_ar1, ~ vaccine:day_f) |> plot()
+fish$fitted <- predictions$fit
+fish$se <- predictions$se.fit
+```
+
+```{r}
+fish %>% 
+  ggplot(aes(day, wt))+
+  geom_point(aes(fill = factor(vaccine), 
+                 group = factor(vaccine)),
+             position = position_dodge(width = 60),
+             shape=21, size =3.5, alpha =.17)+
+  
+    geom_point(aes(y = fitted*1000,
+                 group = factor(vaccine)),
+             position = position_dodge(width = 60),
+             size =3.5, alpha =1)+
+  
+    # geom_errorbar(aes(ymin = (fitted*1000) + (se*1000)*1.96,
+    #                   ymax = (fitted*1000) -  (se*1000)*1.96,
+    #                   
+    #                   group = factor(vaccine)),
+    #          position = position_dodge(width = 60),
+    #          size =3.5, alpha =1)+
+  
+  labs(y = expression(Weight~(g~fish^{-1})), x = "Time (days)")+
+  theme_classic()+
+  labs(fill="Vaccine treatment")+
+  theme(legend.position = "bottom")+
+  scico::scale_fill_scico_d()
+
+```
+
+```{r}
+plot(predict(m_ar1), resid(m_ar1))
+
+DHARMa::simulateResiduals(m_ar1, plot = T)
+```
+
+```{r}
+m_ar1_log <- glmmTMB( 
+  log(wt) ~ vaccine * day_f +
+    ar1(day_f + 0 | fish),
+  data = fish,
+  REML = TRUE
+  )
+
+
+DHARMa::simulateResiduals(m_ar1_log , plot = T)
+```
+
+```{r}
+m_ar1_gamma <- glmmTMB( 
+  wt ~ vaccine * day_f +
+    toep(day_f + 0 | fish),
+  family = Gamma(link = "log"),
+  data = fish,
+  REML = TRUE
+  )
+DHARMa::simulateResiduals(m_ar1_gamma, plot = T)
+```
 
