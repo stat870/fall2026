@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Day 18 Applied modeling | STAT 870 - Analysis of Messy Data</title>
+  <meta name="description" content="Day 18 Applied modeling | STAT 870 - Analysis of Messy Data" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Day 18 Applied modeling | STAT 870 - Analysis of Messy Data" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 18 Applied modeling | STAT 870 - Analysis of Messy Data" />
+  
+  
+  
+
+<meta name="author" content="Josefina Lacasa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="splines-1.html"/>
+<link rel="next" href="semester-project-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STAT 870</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome to STAT 870!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-this-course"><i class="fa fa-check"></i><b>1.1</b> About this course:</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#logistics"><i class="fa fa-check"></i><b>1.1.1</b> Logistics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#learning-goals"><i class="fa fa-check"></i><b>1.2</b> Learning goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#overview-of-the-course"><i class="fa fa-check"></i><b>1.3</b> Overview of the course</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-advice-would-you-give-to-future-students-of-this-course"><i class="fa fa-check"></i><b>1.4</b> What advice would you give to future students of this course?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-is-messy-data-anyways"><i class="fa fa-check"></i><b>1.5</b> What is messy data anyways?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#linear-models-review"><i class="fa fa-check"></i><b>1.6</b> Linear Models review</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#on-notation"><i class="fa fa-check"></i><b>1.7</b> On notation</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#designed-experiments-review"><i class="fa fa-check"></i><b>1.8</b> Designed experiments review</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#homework-announcements"><i class="fa fa-check"></i><b>1.9</b> Homework &amp; Announcements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html"><i class="fa fa-check"></i><b>2</b> Designed Experiments Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#announcements"><i class="fa fa-check"></i><b>2.1</b> Announcements</a></li>
+<li class="chapter" data-level="2.2" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#designed-experiments"><i class="fa fa-check"></i><b>2.2</b> Designed experiments</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#treatment-structure"><i class="fa fa-check"></i><b>2.2.1</b> Treatment structure</a></li>
+<li class="chapter" data-level="2.2.2" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#design-structure"><i class="fa fa-check"></i><b>2.2.2</b> Design structure</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#statistical-models"><i class="fa fa-check"></i><b>2.3</b> Statistical models</a></li>
+<li class="chapter" data-level="2.4" data-path="designed-experiments-review-1.html"><a href="designed-experiments-review-1.html#homework-announcements-1"><i class="fa fa-check"></i><b>2.4</b> Homework &amp; Announcements</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Designed Experiments connection to Linear Mixed Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#announcements-1"><i class="fa fa-check"></i><b>3.1</b> Announcements</a></li>
+<li class="chapter" data-level="3.2" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#semester-project"><i class="fa fa-check"></i><b>3.2</b> Semester project</a></li>
+<li class="chapter" data-level="3.3" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#designed-experiments-1"><i class="fa fa-check"></i><b>3.3</b> Designed experiments</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#design-structures"><i class="fa fa-check"></i><b>3.3.1</b> Design structures</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#fixed-versus-random-effects"><i class="fa fa-check"></i><b>3.4</b> Fixed versus random effects</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#going-from-fixed-effects-to-fixedrandom-effects"><i class="fa fa-check"></i><b>3.4.1</b> Going from fixed effects to fixed+random effects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#generalities-on-mixed-models"><i class="fa fa-check"></i><b>3.5</b> Generalities on mixed models</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#random-effects"><i class="fa fa-check"></i><b>3.5.1</b> Random effects</a></li>
+<li class="chapter" data-level="3.5.2" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#estimation-of-parameters"><i class="fa fa-check"></i><b>3.5.2</b> Estimation of parameters</a></li>
+<li class="chapter" data-level="3.5.3" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#fixed-effects-versus-random-effects"><i class="fa fa-check"></i><b>3.5.3</b> Fixed effects versus random effects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="designed-experiments-connection-to-linear-mixed-models.html"><a href="designed-experiments-connection-to-linear-mixed-models.html#homework-announcements-2"><i class="fa fa-check"></i><b>3.6</b> Homework &amp; Announcements</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>4</b> Linear mixed models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#announcements-2"><i class="fa fa-check"></i><b>4.1</b> Announcements</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#review"><i class="fa fa-check"></i><b>4.2</b> Review</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#going-from-fixed-effects-to-fixedrandom-effects-1"><i class="fa fa-check"></i><b>4.2.1</b> Going from fixed effects to fixed+random effects</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#generalities-on-mixed-models-1"><i class="fa fa-check"></i><b>4.3</b> Generalities on mixed models</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#random-effects-1"><i class="fa fa-check"></i><b>4.3.1</b> Random effects</a></li>
+<li class="chapter" data-level="4.3.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#estimation-of-parameters-1"><i class="fa fa-check"></i><b>4.3.2</b> Estimation of parameters</a></li>
+<li class="chapter" data-level="4.3.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#fixed-effects-versus-random-effects-1"><i class="fa fa-check"></i><b>4.3.3</b> Fixed effects versus random effects</a></li>
+<li class="chapter" data-level="4.3.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#standard-errors"><i class="fa fa-check"></i><b>4.3.4</b> Standard errors</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#applied-example-fungicide-effects-on-barley-genotypes"><i class="fa fa-check"></i><b>4.4</b> Applied example: fungicide effects on barley genotypes</a></li>
+<li class="chapter" data-level="4.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#for-next-week"><i class="fa fa-check"></i><b>4.5</b> For next week</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html"><i class="fa fa-check"></i><b>5</b> Linear mixed models</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#announcements-3"><i class="fa fa-check"></i><b>5.1</b> Announcements</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#statistical-modeling"><i class="fa fa-check"></i><b>5.2</b> Statistical modeling</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#three-steps-to-modeling-data"><i class="fa fa-check"></i><b>5.2.1</b> Three steps to modeling data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#estimation-of-variance-components"><i class="fa fa-check"></i><b>5.3</b> Estimation of variance components</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#maximum-likelihood-estimation-mle"><i class="fa fa-check"></i><b>5.3.1</b> Maximum Likelihood Estimation (MLE)</a></li>
+<li class="chapter" data-level="5.3.2" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#restricted-maximum-likelihood-reml"><i class="fa fa-check"></i><b>5.3.2</b> Restricted Maximum Likelihood (REML)</a></li>
+<li class="chapter" data-level="5.3.3" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#method-of-moments-mom"><i class="fa fa-check"></i><b>5.3.3</b> Method of moments (MoM)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="linear-mixed-models-1.html"><a href="linear-mixed-models-1.html#reading"><i class="fa fa-check"></i><b>5.4</b> Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html"><i class="fa fa-check"></i><b>6</b> Generalized linear mixed models</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#announcements-4"><i class="fa fa-check"></i><b>6.1</b> Announcements</a></li>
+<li class="chapter" data-level="6.2" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#statistical-modeling-1"><i class="fa fa-check"></i><b>6.2</b> Statistical modeling</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#three-steps-to-modeling-data-1"><i class="fa fa-check"></i><b>6.2.1</b> Three steps to modeling data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#estimation-of-variance-components-1"><i class="fa fa-check"></i><b>6.3</b> Estimation of variance components</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#maximum-likelihood-estimation-mle-1"><i class="fa fa-check"></i><b>6.3.1</b> Maximum Likelihood Estimation (MLE)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#restricted-maximum-likelihood-reml-1"><i class="fa fa-check"></i><b>6.3.2</b> Restricted Maximum Likelihood (REML)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#method-of-moments-mom-1"><i class="fa fa-check"></i><b>6.3.3</b> Method of moments (MoM)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#information-pooling-and-shrinkage"><i class="fa fa-check"></i><b>6.4</b> Information pooling and shrinkage</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#complete-pooling"><i class="fa fa-check"></i><b>6.4.1</b> Complete pooling</a></li>
+<li class="chapter" data-level="6.4.2" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#no-pooling-all-fixed-model"><i class="fa fa-check"></i><b>6.4.2</b> No pooling (all-fixed model)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#partial-pooling-mixed-effects-model"><i class="fa fa-check"></i><b>6.4.3</b> Partial pooling (mixed-effects model)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#degrees-of-freedom"><i class="fa fa-check"></i><b>6.5</b> Degrees of freedom</a></li>
+<li class="chapter" data-level="6.6" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#reading-1"><i class="fa fa-check"></i><b>6.6</b> Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html"><i class="fa fa-check"></i><b>7</b> Shrinkage and degrees of freedom</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#announcements-5"><i class="fa fa-check"></i><b>7.1</b> Announcements</a></li>
+<li class="chapter" data-level="7.2" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#information-pooling-and-shrinkage-1"><i class="fa fa-check"></i><b>7.2</b> Information pooling and shrinkage</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#complete-pooling-1"><i class="fa fa-check"></i><b>7.2.1</b> Complete pooling</a></li>
+<li class="chapter" data-level="7.2.2" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#no-pooling-all-fixed-model-1"><i class="fa fa-check"></i><b>7.2.2</b> No pooling (all-fixed model)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#partial-pooling-mixed-effects-model-1"><i class="fa fa-check"></i><b>7.2.3</b> Partial pooling (mixed-effects model)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#degrees-of-freedom-1"><i class="fa fa-check"></i><b>7.3</b> Degrees of freedom</a></li>
+<li class="chapter" data-level="7.4" data-path="shrinkage-and-degrees-of-freedom.html"><a href="shrinkage-and-degrees-of-freedom.html#reading-2"><i class="fa fa-check"></i><b>7.4</b> Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="practice.html"><a href="practice.html"><i class="fa fa-check"></i><b>8</b> Practice</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="practice.html"><a href="practice.html#announcements-6"><i class="fa fa-check"></i><b>8.1</b> Announcements</a></li>
+<li class="chapter" data-level="8.2" data-path="practice.html"><a href="practice.html#in-class-activity"><i class="fa fa-check"></i><b>8.2</b> In-class activity</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html"><i class="fa fa-check"></i><b>9</b> Repeated measures I</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#announcements-7"><i class="fa fa-check"></i><b>9.1</b> Announcements</a></li>
+<li class="chapter" data-level="9.2" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#linear-mixed-models-review"><i class="fa fa-check"></i><b>9.2</b> Linear mixed models review</a></li>
+<li class="chapter" data-level="9.3" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#repeated-measures"><i class="fa fa-check"></i><b>9.3</b> Repeated measures</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#correlation-functions"><i class="fa fa-check"></i><b>9.3.1</b> Correlation functions</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#correlation---g-side-conditional-and-r-side-marginal"><i class="fa fa-check"></i><b>9.4</b> Correlation - G side (conditional) and R side (marginal)</a></li>
+<li class="chapter" data-level="9.5" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#repeated-measures-in-glmms"><i class="fa fa-check"></i><b>9.5</b> Repeated measures in GLMMs</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="repeated-measures-i.html"><a href="repeated-measures-i.html#common-response-variable-y-b-distributions"><i class="fa fa-check"></i><b>9.5.1</b> Common Response Variable (<span class="math inline">\(y | b\)</span>) Distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html"><i class="fa fa-check"></i><b>10</b> Repeated measures II</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#announcements-8"><i class="fa fa-check"></i><b>10.1</b> Announcements</a></li>
+<li class="chapter" data-level="10.2" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#repeated-measures-designs"><i class="fa fa-check"></i><b>10.2</b> Repeated measures designs</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#model-selection-for-different-covariance-structures"><i class="fa fa-check"></i><b>10.2.1</b> Model selection for different covariance structures</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#selecting-the-covariance-structure"><i class="fa fa-check"></i><b>10.3</b> Selecting the covariance structure</a></li>
+<li class="chapter" data-level="10.4" data-path="repeated-measures-ii.html"><a href="repeated-measures-ii.html#applied-example"><i class="fa fa-check"></i><b>10.4</b> Applied example</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html"><i class="fa fa-check"></i><b>11</b> Applied analysis of a repeated measures design, Inference</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#announcements-9"><i class="fa fa-check"></i><b>11.1</b> Announcements</a></li>
+<li class="chapter" data-level="11.2" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#repeated-measures-designs-practice"><i class="fa fa-check"></i><b>11.2</b> Repeated measures designs – practice</a></li>
+<li class="chapter" data-level="11.3" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#statistical-inference-review"><i class="fa fa-check"></i><b>11.3</b> Statistical inference review</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#hypothesis-tests"><i class="fa fa-check"></i><b>11.3.1</b> Hypothesis tests</a></li>
+<li class="chapter" data-level="11.3.2" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#on-p-values"><i class="fa fa-check"></i><b>11.3.2</b> On p-values</a></li>
+<li class="chapter" data-level="11.3.3" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#t-tests"><i class="fa fa-check"></i><b>11.3.3</b> t-tests</a></li>
+<li class="chapter" data-level="11.3.4" data-path="applied-analysis-of-a-repeated-measures-design-inference.html"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#f-tests-are-multivariate-t-tests"><i class="fa fa-check"></i><b>11.3.4</b> F-tests are multivariate t-tests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html"><i class="fa fa-check"></i><b>12</b> Marginal means, contrasts, and derived quantities</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#announcements-10"><i class="fa fa-check"></i><b>12.1</b> Announcements</a></li>
+<li class="chapter" data-level="12.2" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#statistical-inference-review-1"><i class="fa fa-check"></i><b>12.2</b> Statistical inference review</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#hypothesis-tests-1"><i class="fa fa-check"></i><b>12.2.1</b> Hypothesis tests</a></li>
+<li class="chapter" data-level="12.2.2" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#on-p-values-1"><i class="fa fa-check"></i><b>12.2.2</b> On p-values</a></li>
+<li class="chapter" data-level="12.2.3" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#t-tests-1"><i class="fa fa-check"></i><b>12.2.3</b> t-tests</a></li>
+<li class="chapter" data-level="12.2.4" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#f-tests-are-multivariate-t-tests-1"><i class="fa fa-check"></i><b>12.2.4</b> F-tests are multivariate t-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#estimability"><i class="fa fa-check"></i><b>12.3</b> Estimability</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#contrasts"><i class="fa fa-check"></i><b>12.3.1</b> Contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="marginal-means-contrasts-and-derived-quantities.html"><a href="marginal-means-contrasts-and-derived-quantities.html#derived-quantities"><i class="fa fa-check"></i><b>12.4</b> Derived quantities</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="marginal-means-contrasts-and-derived-quantities-1.html"><a href="marginal-means-contrasts-and-derived-quantities-1.html"><i class="fa fa-check"></i><b>13</b> Marginal means, contrasts, and derived quantities</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="marginal-means-contrasts-and-derived-quantities-1.html"><a href="marginal-means-contrasts-and-derived-quantities-1.html#announcements-11"><i class="fa fa-check"></i><b>13.1</b> Announcements</a></li>
+<li class="chapter" data-level="13.2" data-path="marginal-means-contrasts-and-derived-quantities-1.html"><a href="marginal-means-contrasts-and-derived-quantities-1.html#see-todays-recording"><i class="fa fa-check"></i><b>13.2</b> See today’s recording</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html"><i class="fa fa-check"></i><b>14</b> Software Implementation of LMMs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#announcements-12"><i class="fa fa-check"></i><b>14.1</b> Announcements</a></li>
+<li class="chapter" data-level="14.2" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#model-review"><i class="fa fa-check"></i><b>14.2</b> Model review</a></li>
+<li class="chapter" data-level="14.3" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#computational-tricks"><i class="fa fa-check"></i><b>14.3</b> Computational tricks</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#improving-computational-stability"><i class="fa fa-check"></i><b>14.3.1</b> Improving computational stability</a></li>
+<li class="chapter" data-level="14.3.2" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#nonlinear-optimizing-algorithms"><i class="fa fa-check"></i><b>14.3.2</b> Nonlinear optimizing algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#issues"><i class="fa fa-check"></i><b>14.4</b> Issues</a></li>
+<li class="chapter" data-level="14.5" data-path="software-implementation-of-lmms.html"><a href="software-implementation-of-lmms.html#references"><i class="fa fa-check"></i><b>14.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="software-implementation-of-lmms-1.html"><a href="software-implementation-of-lmms-1.html"><i class="fa fa-check"></i><b>15</b> Software Implementation of LMMs</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="software-implementation-of-lmms-1.html"><a href="software-implementation-of-lmms-1.html#announcements-13"><i class="fa fa-check"></i><b>15.1</b> Announcements</a></li>
+<li class="chapter" data-level="15.2" data-path="software-implementation-of-lmms-1.html"><a href="software-implementation-of-lmms-1.html#live-r-examples"><i class="fa fa-check"></i><b>15.2</b> Live R examples</a></li>
+<li class="chapter" data-level="15.3" data-path="software-implementation-of-lmms-1.html"><a href="software-implementation-of-lmms-1.html#issues-1"><i class="fa fa-check"></i><b>15.3</b> Issues</a></li>
+<li class="chapter" data-level="15.4" data-path="software-implementation-of-lmms-1.html"><a href="software-implementation-of-lmms-1.html#references-1"><i class="fa fa-check"></i><b>15.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html"><i class="fa fa-check"></i><b>16</b> Accounting for spatial effects</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#announcements-14"><i class="fa fa-check"></i><b>16.1</b> Announcements</a></li>
+<li class="chapter" data-level="16.2" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#spatial-patterns"><i class="fa fa-check"></i><b>16.2</b> Spatial patterns</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#parametric-tools"><i class="fa fa-check"></i><b>16.2.1</b> Parametric tools</a></li>
+<li class="chapter" data-level="16.2.2" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#visual-representation-of-covariance-functions"><i class="fa fa-check"></i><b>16.2.2</b> Visual representation of covariance functions</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#non-parametric-tools"><i class="fa fa-check"></i><b>16.3</b> Non-parametric tools</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#splines"><i class="fa fa-check"></i><b>16.3.1</b> Splines</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#b-splines"><i class="fa fa-check"></i><b>16.4</b> B-splines</a>
+<ul>
+<li class="chapter" data-level="16.4.1" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#illustrating-splines"><i class="fa fa-check"></i><b>16.4.1</b> Illustrating splines</a></li>
+<li class="chapter" data-level="16.4.2" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#penalized-splines"><i class="fa fa-check"></i><b>16.4.2</b> Penalized splines</a></li>
+<li class="chapter" data-level="16.4.3" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#other-types-of-splines"><i class="fa fa-check"></i><b>16.4.3</b> Other types of splines</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#final-comments"><i class="fa fa-check"></i><b>16.5</b> Final comments</a></li>
+<li class="chapter" data-level="16.6" data-path="accounting-for-spatial-effects.html"><a href="accounting-for-spatial-effects.html#resources"><i class="fa fa-check"></i><b>16.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="splines-1.html"><a href="splines-1.html"><i class="fa fa-check"></i><b>17</b> Splines</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="splines-1.html"><a href="splines-1.html#announcements-15"><i class="fa fa-check"></i><b>17.1</b> Announcements</a></li>
+<li class="chapter" data-level="17.2" data-path="splines-1.html"><a href="splines-1.html#splines-2"><i class="fa fa-check"></i><b>17.2</b> Splines</a></li>
+<li class="chapter" data-level="17.3" data-path="splines-1.html"><a href="splines-1.html#non-parametric-tools-1"><i class="fa fa-check"></i><b>17.3</b> Non-parametric tools</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="splines-1.html"><a href="splines-1.html#splines-3"><i class="fa fa-check"></i><b>17.3.1</b> Splines</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="splines-1.html"><a href="splines-1.html#thin-plate-regression-splines"><i class="fa fa-check"></i><b>17.4</b> Thin-plate regression splines</a></li>
+<li class="chapter" data-level="17.5" data-path="splines-1.html"><a href="splines-1.html#final-comments-1"><i class="fa fa-check"></i><b>17.5</b> Final comments</a></li>
+<li class="chapter" data-level="17.6" data-path="splines-1.html"><a href="splines-1.html#resources-1"><i class="fa fa-check"></i><b>17.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="applied-modeling.html"><a href="applied-modeling.html"><i class="fa fa-check"></i><b>18</b> Applied modeling</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="applied-modeling.html"><a href="applied-modeling.html#announcements-16"><i class="fa fa-check"></i><b>18.1</b> Announcements</a></li>
+<li class="chapter" data-level="18.2" data-path="applied-modeling.html"><a href="applied-modeling.html#splines-review"><i class="fa fa-check"></i><b>18.2</b> Splines review</a></li>
+<li class="chapter" data-level="18.3" data-path="applied-modeling.html"><a href="applied-modeling.html#applications-of-splines"><i class="fa fa-check"></i><b>18.3</b> Applications of splines</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="semester-project-1.html"><a href="semester-project-1.html"><i class="fa fa-check"></i><b>19</b> Semester Project</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="semester-project-1.html"><a href="semester-project-1.html#learning-objectives"><i class="fa fa-check"></i><b>19.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="19.2" data-path="semester-project-1.html"><a href="semester-project-1.html#partial-deadlines"><i class="fa fa-check"></i><b>19.2</b> Partial deadlines</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="semester-project-1.html"><a href="semester-project-1.html#project-proposal---due-september-17-at-1159pm-ct"><i class="fa fa-check"></i><b>19.2.1</b> Project proposal - Due September 17 at 11:59pm CT</a></li>
+<li class="chapter" data-level="19.2.2" data-path="semester-project-1.html"><a href="semester-project-1.html#written-report-for-peer-review---due-november-27-at-1159pm-ct-for-peer-review"><i class="fa fa-check"></i><b>19.2.2</b> Written report for peer review - Due November 27 at 11:59pm CT for peer review</a></li>
+<li class="chapter" data-level="19.2.3" data-path="semester-project-1.html"><a href="semester-project-1.html#peer-review---due-friday-december-4-at-1159pm"><i class="fa fa-check"></i><b>19.2.3</b> Peer review - Due Friday December 4 at 11:59pm</a></li>
+<li class="chapter" data-level="19.2.4" data-path="semester-project-1.html"><a href="semester-project-1.html#oral-presentation---somewhere-between-december-3---december-11"><i class="fa fa-check"></i><b>19.2.4</b> Oral presentation - Somewhere between December 3 - December 11</a></li>
+<li class="chapter" data-level="19.2.5" data-path="semester-project-1.html"><a href="semester-project-1.html#final-written-report---due-friday-december-13-at-1159pm-ct"><i class="fa fa-check"></i><b>19.2.5</b> FINAL written report - Due Friday December 13 at 11:59pm CT</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 870 - Analysis of Messy Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="applied-modeling" class="section level1 hasAnchor" number="18">
+<h1><span class="header-section-number">Day 18</span> Applied modeling<a href="applied-modeling.html#applied-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>October 26th, 2026</p>
+<div id="announcements-16" class="section level2 hasAnchor" number="18.1">
+<h2><span class="header-section-number">18.1</span> Announcements<a href="applied-modeling.html#announcements-16" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Semester project due in a month</li>
+</ul>
+</div>
+<div id="splines-review" class="section level2 hasAnchor" number="18.2">
+<h2><span class="header-section-number">18.2</span> Splines review<a href="applied-modeling.html#splines-review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Piecewise polynomial functions
+<ul>
+<li>pros of local approximation of polynomials without cons of global approximation of polynomials</li>
+</ul></li>
+<li>maximal smoothness</li>
+<li>PROS:
+<ul>
+<li>Flexibility</li>
+<li>No need to specify functional</li>
+</ul></li>
+<li>CONS:
+<ul>
+<li>Less interpretable</li>
+<li>Computational cost</li>
+<li>Flexibility must be selected by adjusting the smoothing parameter <span class="math inline">\(\lambda\)</span></li>
+</ul></li>
+</ul>
+<p>We can represent the data with the equation
+<span class="math display">\[y_i = \beta_0 + f(x_i) + \varepsilon_i, \\ \varepsilon_i \sim N(0, \sigma^2),\]</span>
+where <span class="math inline">\(f(\cdot)\)</span> is estimated with the function <span class="math inline">\(g(\cdot)\)</span> that minimizes <span class="math inline">\(||\mathbf{y}-\mathbf{g}||^2 + \lambda J_{md}(g)\)</span>.
+Reember that <span class="math inline">\(\mathbf{g} = [g(\mathbf{x}_1), g(\mathbf{x}_2), \dots, g(\mathbf{x}_n)]&#39;\)</span>
+<span class="math inline">\(J_{md}(g)\)</span> is a penalty funcitonal that regulates the wiggliness of <span class="math inline">\(g(\cdot)\)</span> and <span class="math inline">\(\lambda\)</span> controls the smoothness of <span class="math inline">\(g(\cdot)\)</span>.</p>
+<ul>
+<li><a href="https://academic.oup.com/jrsssb/article-abstract/65/1/95/7110632">Thin Plate Regression Splines (Wood, 2003)</a></li>
+<li><a href="https://projecteuclid.org/journals/statistical-science/volume-35/issue-2/A-Conversation-with-Grace-Wahba/10.1214/19-STS734.full">A Conversation with Grace Wahba</a></li>
+</ul>
+<p><strong>Importance of basis dimension</strong></p>
+<ul>
+<li>Impact on flexibility of the model</li>
+<li>Checking if basis dimension is too small (residuals vs. neighbours)</li>
+<li>Comparing effective degrees of freedom with basis dimension<br />
+</li>
+<li>Implemented in <code>gam.check</code>
+<ul>
+<li><code>k'</code> gives the maximum possible EDF for that smooth</li>
+<li>compare <code>k'</code> with <code>EDF</code> in a model</li>
+</ul></li>
+</ul>
+</div>
+<div id="applications-of-splines" class="section level2 hasAnchor" number="18.3">
+<h2><span class="header-section-number">18.3</span> Applications of splines<a href="applied-modeling.html#applications-of-splines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="applied-modeling.html#cb34-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># data wrangling </span></span>
+<span id="cb34-2"><a href="applied-modeling.html#cb34-2" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># data viz</span></span>
+<span id="cb34-3"><a href="applied-modeling.html#cb34-3" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># fit LMMs (only supports simple random effects - sompound symmetry)</span></span>
+<span id="cb34-4"><a href="applied-modeling.html#cb34-4" tabindex="-1"></a><span class="fu">library</span>(mgcv) <span class="co"># fit GAMs (supports both random effects and splines)</span></span></code></pre></div>
+<div id="spatial-effects" class="section level4 hasAnchor" number="18.3.0.1">
+<h4><span class="header-section-number">18.3.0.1</span> Spatial effects<a href="applied-modeling.html#spatial-effects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Traditional approach</strong></p>
+<p>The data below come from a multi-environment experiment that studies yield of lupin for different genotypes.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="applied-modeling.html#cb35-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(agridat<span class="sc">::</span>verbyla.lupin)</span>
+<span id="cb35-2"><a href="applied-modeling.html#cb35-2" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="applied-modeling.html#cb35-3" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="applied-modeling.html#cb35-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(col, row))<span class="sc">+</span></span>
+<span id="cb35-5"><a href="applied-modeling.html#cb35-5" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> yield))<span class="sc">+</span></span>
+<span id="cb35-6"><a href="applied-modeling.html#cb35-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year<span class="sc">~</span>loc)<span class="sc">+</span></span>
+<span id="cb35-7"><a href="applied-modeling.html#cb35-7" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb35-8"><a href="applied-modeling.html#cb35-8" tabindex="-1"></a>  scico<span class="sc">::</span><span class="fu">scale_fill_scico</span>()<span class="sc">+</span></span>
+<span id="cb35-9"><a href="applied-modeling.html#cb35-9" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" alt="" width="672"  /></p>
+<p>A (typically) reasonable model could be
+<span class="math display">\[y_{ijk} \sim N(\mu_{ijk}, \sigma^2),\\ \mu_{ijk} = \mu_0 + T_i + l_j + b_{k(j)}, \\ l_j \sim N(0, \sigma^2_l), \\ b_{k(j)} \sim N(0, \sigma^2_b),\]</span>
+where:</p>
+<ul>
+<li><span class="math inline">\(y_{ijk}\)</span> is the observed yield and arises from a normal distribution with mean <span class="math inline">\(\mu_{ijk}\)</span> and variance <span class="math inline">\(\sigma^2\)</span>,</li>
+<li><span class="math inline">\(\mu_0\)</span> is the overall mean yield for all fields,</li>
+<li><span class="math inline">\(l_j\)</span> is the (random) effect of the <span class="math inline">\(j\)</span>th field that arises from a normal distribution with variance <span class="math inline">\(\sigma^2_l\)</span> (note that <span class="math inline">\(\mu_0 + l_j\)</span> is the overall yield for the <span class="math inline">\(j\)</span>th field),</li>
+<li><span class="math inline">\(b_{k(j)}\)</span> is the (random) effect of the <span class="math inline">\(k\)</span>th block in the <span class="math inline">\(j\)</span>th field that arises from a normal distribution with variance <span class="math inline">\(\sigma^2_b\)</span>,</li>
+<li><span class="math inline">\(T_i\)</span> is the treatment effect of the <span class="math inline">\(i\)</span>th genotype.</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="applied-modeling.html#cb36-1" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">tic</span>()</span>
+<span id="cb36-2"><a href="applied-modeling.html#cb36-2" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>site<span class="sc">/</span>rep), <span class="at">data =</span> dat)</span>
+<span id="cb36-3"><a href="applied-modeling.html#cb36-3" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">toc</span>()</span></code></pre></div>
+<pre><code>## 0.04 sec elapsed</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="applied-modeling.html#cb38-1" tabindex="-1"></a><span class="fu">VarCorr</span>(m1)</span></code></pre></div>
+<pre><code>##  Groups   Name        Std.Dev.
+##  rep:site (Intercept) 0.10140 
+##  site     (Intercept) 0.27897 
+##  Residual             0.30284</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="applied-modeling.html#cb40-1" tabindex="-1"></a>dat<span class="sc">$</span>resid_1 <span class="ot">&lt;-</span> <span class="fu">resid</span>(m1)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="applied-modeling.html#cb41-1" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="applied-modeling.html#cb41-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(col, row))<span class="sc">+</span></span>
+<span id="cb41-3"><a href="applied-modeling.html#cb41-3" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> resid_1))<span class="sc">+</span></span>
+<span id="cb41-4"><a href="applied-modeling.html#cb41-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>site)<span class="sc">+</span></span>
+<span id="cb41-5"><a href="applied-modeling.html#cb41-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb41-6"><a href="applied-modeling.html#cb41-6" tabindex="-1"></a>  scico<span class="sc">::</span><span class="fu">scale_fill_scico</span>()<span class="sc">+</span></span>
+<span id="cb41-7"><a href="applied-modeling.html#cb41-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">main =</span> <span class="st">&quot;Residuals assuming within-block homogeneity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb41-8"><a href="applied-modeling.html#cb41-8" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-61-1.png" alt="" width="672"  /></p>
+<p><strong>Relaxing an assumption from the traditional approach</strong></p>
+<p>Alternatively, we could add an element to the linear predictor. Previously, we said <span class="math inline">\(\mu_{ijk} = \mu_0 + T_i + l_j + b_{k(j)}\)</span>.</p>
+<p>Potential risks of assuming within-block homogeneity:</p>
+<ul>
+<li>loss of power</li>
+<li></li>
+</ul>
+<p>Alternative: expand the linear predictor into <span class="math inline">\(\mu_{ijk} = \mu_0 + T_i + l_j + b_{k(j)} + f(\mathbf{s}_{ijk})\)</span>, where <span class="math inline">\(\mathbf{s}_{ijk}\)</span> is a vector of the coordinates of the observation <span class="math inline">\(ijk\)</span>, and <span class="math inline">\(f(\cdot)\)</span> is a smooth function of space. We consider <span class="math inline">\(f(\cdot)\)</span> can be approximated using smoothing splines.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="applied-modeling.html#cb42-1" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">tic</span>()</span>
+<span id="cb42-2"><a href="applied-modeling.html#cb42-2" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> <span class="fu">s</span>(rep, site, <span class="at">bs =</span> <span class="st">&quot;re&quot;</span>) <span class="sc">+</span> <span class="fu">s</span>(row, col, <span class="at">bs =</span> <span class="st">&quot;tp&quot;</span>, <span class="at">by =</span> site), <span class="at">data =</span> dat)</span>
+<span id="cb42-3"><a href="applied-modeling.html#cb42-3" tabindex="-1"></a>tictoc<span class="sc">::</span><span class="fu">toc</span>()</span></code></pre></div>
+<pre><code>## 9.04 sec elapsed</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="applied-modeling.html#cb44-1" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code></pre></div>
+<pre><code>## 
+## Family: gaussian 
+## Link function: identity 
+## 
+## Formula:
+## yield ~ gen + s(rep, site, bs = &quot;re&quot;) + s(row, col, bs = &quot;tp&quot;, 
+##     by = site)
+## 
+## Parametric coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.89485    0.04871  18.372  &lt; 2e-16 ***
+## genGungurru  -0.02161    0.03232  -0.669 0.503922    
+## genIllyarrie -0.12520    0.03255  -3.846 0.000126 ***
+## genMerrit    -0.01378    0.03300  -0.417 0.676425    
+## genMyallie   -0.07358    0.03716  -1.980 0.047935 *  
+## genUnicrop   -0.18396    0.03238  -5.681 1.65e-08 ***
+## genWarrah    -0.17843    0.03243  -5.501 4.54e-08 ***
+## genYandee    -0.15374    0.03242  -4.742 2.35e-06 ***
+## genYorrel    -0.09957    0.03254  -3.060 0.002256 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Approximate significance of smooth terms:
+##                       edf Ref.df      F  p-value    
+## s(rep,site)        21.824 27.000 26.549  &lt; 2e-16 ***
+## s(row,col):siteS01  2.000  2.000  0.911 0.402579    
+## s(row,col):siteS02 17.825 19.763  5.263  &lt; 2e-16 ***
+## s(row,col):siteS03 12.999 15.385  2.526 0.000966 ***
+## s(row,col):siteS04  2.000  2.000  0.757 0.469094    
+## s(row,col):siteS05  3.745  4.893  1.816 0.126446    
+## s(row,col):siteS06  2.000  2.000  1.288 0.276202    
+## s(row,col):siteS07  9.206 12.532  1.016 0.432038    
+## s(row,col):siteS08 13.272 17.680  2.008 0.007607 ** 
+## s(row,col):siteS09  2.000  2.000  3.518 0.029936 *  
+## s(row,col):siteS10  2.000  2.000  2.655 0.070672 .  
+## s(row,col):siteS11  6.062  8.237  0.901 0.519681    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## R-sq.(adj) =  0.536   Deviance explained =   57%
+## GCV = 0.087403  Scale est. = 0.080877  n = 1392</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="applied-modeling.html#cb46-1" tabindex="-1"></a>dat<span class="sc">$</span>resid_2 <span class="ot">&lt;-</span> <span class="fu">resid</span>(m2)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="applied-modeling.html#cb47-1" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="applied-modeling.html#cb47-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(col, row))<span class="sc">+</span></span>
+<span id="cb47-3"><a href="applied-modeling.html#cb47-3" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> resid_2))<span class="sc">+</span></span>
+<span id="cb47-4"><a href="applied-modeling.html#cb47-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>site)<span class="sc">+</span></span>
+<span id="cb47-5"><a href="applied-modeling.html#cb47-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb47-6"><a href="applied-modeling.html#cb47-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">main =</span> <span class="st">&quot;Residuals relaxing the assumption of within-block homogeneity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb47-7"><a href="applied-modeling.html#cb47-7" tabindex="-1"></a>  scico<span class="sc">::</span><span class="fu">scale_fill_scico</span>()<span class="sc">+</span></span>
+<span id="cb47-8"><a href="applied-modeling.html#cb47-8" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-63-1.png" alt="" width="672"  /></p>
+<p><strong>An intuitive visualization of splines</strong></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="applied-modeling.html#cb48-1" tabindex="-1"></a>d_predict <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="applied-modeling.html#cb48-2" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">gen =</span> <span class="st">&quot;Merrit&quot;</span>, </span>
+<span id="cb48-3"><a href="applied-modeling.html#cb48-3" tabindex="-1"></a>            row, col, site, rep)</span>
+<span id="cb48-4"><a href="applied-modeling.html#cb48-4" tabindex="-1"></a>d_predict<span class="sc">$</span>yhat_1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(m1, <span class="at">newdata =</span> d_predict)</span>
+<span id="cb48-5"><a href="applied-modeling.html#cb48-5" tabindex="-1"></a>d_predict<span class="sc">$</span>yhat_2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(m2, <span class="at">newdata =</span> d_predict)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="applied-modeling.html#cb49-1" tabindex="-1"></a>sp_effects_trad <span class="ot">&lt;-</span> </span>
+<span id="cb49-2"><a href="applied-modeling.html#cb49-2" tabindex="-1"></a>  d_predict <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="applied-modeling.html#cb49-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(col, row))<span class="sc">+</span></span>
+<span id="cb49-4"><a href="applied-modeling.html#cb49-4" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> yhat_1))<span class="sc">+</span></span>
+<span id="cb49-5"><a href="applied-modeling.html#cb49-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>site)<span class="sc">+</span></span>
+<span id="cb49-6"><a href="applied-modeling.html#cb49-6" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb49-7"><a href="applied-modeling.html#cb49-7" tabindex="-1"></a>  scico<span class="sc">::</span><span class="fu">scale_fill_scico</span>(<span class="at">palette =</span> <span class="st">&quot;bamako&quot;</span>)<span class="sc">+</span></span>
+<span id="cb49-8"><a href="applied-modeling.html#cb49-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="fu">expression</span>(Yield<span class="sc">~</span>(ton<span class="sc">~</span>ha<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>})))<span class="sc">+</span></span>
+<span id="cb49-9"><a href="applied-modeling.html#cb49-9" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()</span>
+<span id="cb49-10"><a href="applied-modeling.html#cb49-10" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="applied-modeling.html#cb49-11" tabindex="-1"></a>sp_effects_splines <span class="ot">&lt;-</span> </span>
+<span id="cb49-12"><a href="applied-modeling.html#cb49-12" tabindex="-1"></a>  d_predict <span class="sc">%&gt;%</span> </span>
+<span id="cb49-13"><a href="applied-modeling.html#cb49-13" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(col, row))<span class="sc">+</span></span>
+<span id="cb49-14"><a href="applied-modeling.html#cb49-14" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> yhat_2))<span class="sc">+</span></span>
+<span id="cb49-15"><a href="applied-modeling.html#cb49-15" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>site)<span class="sc">+</span></span>
+<span id="cb49-16"><a href="applied-modeling.html#cb49-16" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb49-17"><a href="applied-modeling.html#cb49-17" tabindex="-1"></a>  scico<span class="sc">::</span><span class="fu">scale_fill_scico</span>(<span class="at">palette =</span> <span class="st">&quot;bamako&quot;</span>)<span class="sc">+</span></span>
+<span id="cb49-18"><a href="applied-modeling.html#cb49-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="fu">expression</span>(Yield<span class="sc">~</span>(ton<span class="sc">~</span>ha<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>})))<span class="sc">+</span></span>
+<span id="cb49-19"><a href="applied-modeling.html#cb49-19" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()</span>
+<span id="cb49-20"><a href="applied-modeling.html#cb49-20" tabindex="-1"></a></span>
+<span id="cb49-21"><a href="applied-modeling.html#cb49-21" tabindex="-1"></a><span class="fu">ggarrange</span>(sp_effects_trad, sp_effects_splines, </span>
+<span id="cb49-22"><a href="applied-modeling.html#cb49-22" tabindex="-1"></a>          <span class="at">common.legend =</span> T,</span>
+<span id="cb49-23"><a href="applied-modeling.html#cb49-23" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" alt="" width="672"  /></p>
+<ul>
+<li>Some thoughts on missing data imputation.</li>
+<li>Use of multilevel models for missing data imputation</li>
+<li>Use of GAM models for missing data imputation</li>
+</ul>
+</div>
+<div id="modeling-time" class="section level4 hasAnchor" number="18.3.0.2">
+<h4><span class="header-section-number">18.3.0.2</span> Modeling time<a href="applied-modeling.html#modeling-time" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The data below come from an experiment aiming to test whether a diet treatment in cows can reduce the (GH) gas emmission.</p>
+<p>The experiment consists of 4 groups of cows that were hosted turns in the same facility. Each group contained similar cows and they were randomly divided into 2 subgroups. Those subgroups were assigned to a corral and each corral was assigned with a diet treatment.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="applied-modeling.html#cb50-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../data_confid/fluxes.csv&quot;</span>)</span>
+<span id="cb50-2"><a href="applied-modeling.html#cb50-2" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="applied-modeling.html#cb50-3" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb50-4"><a href="applied-modeling.html#cb50-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(doy, GHG_flux))<span class="sc">+</span></span>
+<span id="cb50-5"><a href="applied-modeling.html#cb50-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">fill =</span> diet), <span class="at">shape=</span> <span class="dv">21</span>)<span class="sc">+</span></span>
+<span id="cb50-6"><a href="applied-modeling.html#cb50-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#FFBC42&quot;</span>, <span class="st">&quot;#218380&quot;</span>))<span class="sc">+</span></span>
+<span id="cb50-7"><a href="applied-modeling.html#cb50-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill  =</span><span class="st">&quot;Diet&quot;</span>, </span>
+<span id="cb50-8"><a href="applied-modeling.html#cb50-8" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(gas<span class="sc">~</span>flux<span class="sc">~</span>cow<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}))<span class="sc">+</span></span>
+<span id="cb50-9"><a href="applied-modeling.html#cb50-9" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-66-1.png" alt="" width="672"  /></p>
+<p>We can generally describe any point as
+<span class="math display">\[y_{ijk} \sim D(\mu_{ijk}, \psi), \\ g(\mu_{ijk}) = \eta_{ijk}\]</span>
+where <span class="math inline">\(y_{ijk}\)</span> is the observation of the flux per head for the <span class="math inline">\(i\)</span>th diet, <span class="math inline">\(j\)</span>th group and <span class="math inline">\(l\)</span>th moment.</p>
+<ul>
+<li>Discussion of predictor <span class="math inline">\(\eta_{ijk}\)</span></li>
+</ul>
+<p>We can, for example, use
+<span class="math display">\[\eta_{ijk} = \mu_0 + D_i + f(t_{ij}) + b_{k} + u_{ik},\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\mu_0\)</span> is the overall mean,</li>
+<li><span class="math inline">\(D_i\)</span> is the effect of the <span class="math inline">\(i\)</span>th diet,<br />
+</li>
+<li><span class="math inline">\(f(t_{ij})\)</span> is the function of time,</li>
+<li><span class="math inline">\(b_{k}\)</span> is the effect of the <span class="math inline">\(k\)</span>th group.</li>
+</ul>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="applied-modeling.html#cb51-1" tabindex="-1"></a>dat<span class="sc">$</span>diet_group <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">paste</span>(dat<span class="sc">$</span>diet, dat<span class="sc">$</span>group))</span>
+<span id="cb51-2"><a href="applied-modeling.html#cb51-2" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">gam</span>(GHG_flux <span class="sc">~</span> diet <span class="sc">+</span> </span>
+<span id="cb51-3"><a href="applied-modeling.html#cb51-3" tabindex="-1"></a>            <span class="fu">s</span>(doy, <span class="at">bs =</span> <span class="st">&quot;tp&quot;</span>, <span class="at">k =</span><span class="dv">35</span>) <span class="sc">+</span> </span>
+<span id="cb51-4"><a href="applied-modeling.html#cb51-4" tabindex="-1"></a>            <span class="fu">s</span>(group, <span class="at">bs =</span> <span class="st">&quot;re&quot;</span>) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="applied-modeling.html#cb51-5" tabindex="-1"></a>            <span class="fu">s</span>(diet_group, <span class="at">bs =</span> <span class="st">&quot;re&quot;</span>) , </span>
+<span id="cb51-6"><a href="applied-modeling.html#cb51-6" tabindex="-1"></a>          <span class="at">data =</span> dat,</span>
+<span id="cb51-7"><a href="applied-modeling.html#cb51-7" tabindex="-1"></a>          <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
+<span id="cb51-8"><a href="applied-modeling.html#cb51-8" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="applied-modeling.html#cb51-9" tabindex="-1"></a>dat_plot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">doy =</span> <span class="fu">seq</span>(<span class="fu">min</span>(dat<span class="sc">$</span>doy), <span class="fu">max</span>(dat<span class="sc">$</span>doy), <span class="at">length.out =</span> <span class="dv">1000</span>), </span>
+<span id="cb51-10"><a href="applied-modeling.html#cb51-10" tabindex="-1"></a>                        <span class="at">diet =</span> <span class="fu">unique</span>(dat<span class="sc">$</span>diet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-11"><a href="applied-modeling.html#cb51-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">case_when</span>(doy <span class="sc">&lt;</span><span class="dv">35</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb51-12"><a href="applied-modeling.html#cb51-12" tabindex="-1"></a>                           <span class="fu">between</span>(doy, <span class="dv">37</span>, <span class="dv">61</span>) <span class="sc">~</span> <span class="dv">2</span>, </span>
+<span id="cb51-13"><a href="applied-modeling.html#cb51-13" tabindex="-1"></a>                           <span class="fu">between</span>(doy, <span class="dv">61</span>, <span class="fl">71.4</span>) <span class="sc">~</span> <span class="dv">3</span>, </span>
+<span id="cb51-14"><a href="applied-modeling.html#cb51-14" tabindex="-1"></a>                           <span class="fu">between</span>(doy, <span class="fl">71.4</span>, <span class="fl">117.8</span>) <span class="sc">~</span> <span class="dv">4</span>, </span>
+<span id="cb51-15"><a href="applied-modeling.html#cb51-15" tabindex="-1"></a>                           doy<span class="sc">&gt;</span><span class="fl">117.8</span> <span class="sc">~</span> <span class="dv">5</span>, </span>
+<span id="cb51-16"><a href="applied-modeling.html#cb51-16" tabindex="-1"></a>                           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-17"><a href="applied-modeling.html#cb51-17" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">%in%</span> <span class="fu">unique</span>(dat<span class="sc">$</span>group)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-18"><a href="applied-modeling.html#cb51-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>( diet), <span class="sc">~</span><span class="fu">as.factor</span>(.)), </span>
+<span id="cb51-19"><a href="applied-modeling.html#cb51-19" tabindex="-1"></a>         <span class="at">diet_group =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(diet, group)))</span>
+<span id="cb51-20"><a href="applied-modeling.html#cb51-20" tabindex="-1"></a></span>
+<span id="cb51-21"><a href="applied-modeling.html#cb51-21" tabindex="-1"></a>pred_plot <span class="ot">&lt;-</span> <span class="fu">predict</span>(m1, <span class="at">newdata =</span> dat_plot, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T)</span>
+<span id="cb51-22"><a href="applied-modeling.html#cb51-22" tabindex="-1"></a></span>
+<span id="cb51-23"><a href="applied-modeling.html#cb51-23" tabindex="-1"></a>dat_plot<span class="sc">$</span>pred_m1 <span class="ot">&lt;-</span> pred_plot<span class="sc">$</span>fit</span>
+<span id="cb51-24"><a href="applied-modeling.html#cb51-24" tabindex="-1"></a>dat_plot<span class="sc">$</span>se_m1 <span class="ot">&lt;-</span> pred_plot<span class="sc">$</span>se.fit</span>
+<span id="cb51-25"><a href="applied-modeling.html#cb51-25" tabindex="-1"></a></span>
+<span id="cb51-26"><a href="applied-modeling.html#cb51-26" tabindex="-1"></a>dat_plot <span class="sc">%&gt;%</span> </span>
+<span id="cb51-27"><a href="applied-modeling.html#cb51-27" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(doy, pred_m1))<span class="sc">+</span></span>
+<span id="cb51-28"><a href="applied-modeling.html#cb51-28" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(doy, GHG_flux, <span class="at">color =</span> diet), <span class="at">data =</span> dat, <span class="at">alpha =</span> .<span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb51-29"><a href="applied-modeling.html#cb51-29" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">paste</span>(diet, group),</span>
+<span id="cb51-30"><a href="applied-modeling.html#cb51-30" tabindex="-1"></a>                  <span class="at">fill =</span> diet,</span>
+<span id="cb51-31"><a href="applied-modeling.html#cb51-31" tabindex="-1"></a>                  <span class="at">ymin =</span> pred_m1 <span class="sc">-</span> (se_m1<span class="sc">*</span><span class="fl">1.96</span>) , <span class="at">ymax =</span> pred_m1 <span class="sc">+</span>(se_m1<span class="sc">*</span><span class="fl">1.96</span>)), </span>
+<span id="cb51-32"><a href="applied-modeling.html#cb51-32" tabindex="-1"></a>              <span class="at">alpha =</span> .<span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb51-33"><a href="applied-modeling.html#cb51-33" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">paste</span>(diet, group), <span class="at">color =</span> diet))<span class="sc">+</span></span>
+<span id="cb51-34"><a href="applied-modeling.html#cb51-34" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#FFBC42&quot;</span>, <span class="st">&quot;#218380&quot;</span>))<span class="sc">+</span></span>
+<span id="cb51-35"><a href="applied-modeling.html#cb51-35" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#FFBC42&quot;</span>, <span class="st">&quot;#218380&quot;</span>))<span class="sc">+</span></span>
+<span id="cb51-36"><a href="applied-modeling.html#cb51-36" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">800</span>))<span class="sc">+</span></span>
+<span id="cb51-37"><a href="applied-modeling.html#cb51-37" tabindex="-1"></a>  <span class="fu">theme_pubclean</span>()<span class="sc">+</span></span>
+<span id="cb51-38"><a href="applied-modeling.html#cb51-38" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill  =</span><span class="st">&quot;Diet&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Diet&quot;</span>,</span>
+<span id="cb51-39"><a href="applied-modeling.html#cb51-39" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(gas<span class="sc">~</span>flux<span class="sc">~</span>cow<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" alt="" width="672"  /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="applied-modeling.html#cb52-1" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code></pre></div>
+<pre><code>## 
+## Family: Gamma 
+## Link function: log 
+## 
+## Formula:
+## GHG_flux ~ diet + s(doy, bs = &quot;tp&quot;, k = 35) + s(group, bs = &quot;re&quot;) + 
+##     s(diet_group, bs = &quot;re&quot;)
+## 
+## Parametric coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    5.43170    0.03345 162.388  &lt; 2e-16 ***
+## dietTreatment -0.13537    0.04848  -2.792  0.00534 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Approximate significance of smooth terms:
+##                     edf Ref.df      F p-value    
+## s(doy)        3.217e+01  33.67 22.911 &lt; 2e-16 ***
+## s(group)      1.245e-05   1.00  0.000 0.52837    
+## s(diet_group) 2.212e+00   6.00  1.833 0.00177 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## R-sq.(adj) =  0.585   Deviance explained =   58%
+## GCV = 0.14934  Scale est. = 0.12529   n = 1000</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="splines-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="semester-project-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/stat870/fall2026/edit/main/18-splines2.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": "https://github.com/stat870/fall2026/blob/main/18-splines2.Rmd",
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
