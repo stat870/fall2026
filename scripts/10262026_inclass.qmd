@@ -1,0 +1,81 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r}
+library(tidyverse) # data wrangling 
+library(ggpubr) # data viz
+library(lme4) # fit LMMs (only supports simple random effects - sompound symmetry)
+library(mgcv) # fit GAMs (supports both random effects and splines)
+```
+
+```{r}
+dat <- drop_na(agridat::verbyla.lupin)
+str(dat)
+```
+
+```{r}
+dat %>% 
+  ggplot(aes(rate, yield))+
+  geom_point(aes(fill = rep), show.legend = F)+
+  facet_grid(year~loc)
+```
+
+```{r}
+dat %>% 
+  ggplot(aes(col, row))+
+  geom_tile(aes(fill = rep), show.legend = F)+
+  facet_grid(year~loc)+
+  coord_fixed()+
+  # scico::scale_fill_scico()+
+  theme_pubclean()
+```
+
+```{r}
+dat
+m <- lmer(yield ~ gen * factor(rate) +
+            (1|year) + (1|loc) + (1|year:loc) + (1|rep:year:loc),
+          data = dat)
+
+plot(predict(m), resid(m))
+DHARMa::simulateResiduals(m, plot = T)
+
+dat$resid <- resid(m)
+```
+
+```{r}
+dat %>% 
+  ggplot(aes(col, row))+
+  geom_tile(aes(fill = resid), show.legend = F)+
+  facet_grid(year~loc)+
+  coord_fixed()+
+  scico::scale_fill_scico()+
+  theme_pubclean()
+```
+
+```{r}
+library(DHARMa)
+res <- simulateResiduals(m)
+res2 <- recalculateResiduals(res, group = dat$site)
+
+testSpatialAutocorrelation(
+  res2,
+  x =  aggregate(dat$col, list(dat$site), mean)$x,
+  y = aggregate(dat$row, list(dat$site), mean)$x)
+
+```
+
+
+```{r}
+m2 <- gam(yield ~ gen * factor(rate) +
+            s(year, bs ="re") + 
+            s(loc, bs ="re") + 
+            s(site, bs= "re") + 
+            s(blockid, bs = "re") +
+       s(row, col, bs = "tp", by = site),
+          data = dat |> mutate(blockid = factor(paste(rep, site))))
+
+
+```
+
