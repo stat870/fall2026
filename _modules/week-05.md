@@ -16,5 +16,5 @@ October 26
 
 October 28 
 : Splines III  
-  : [](https://stat870.github.io/fall2026/notes/miscellaneous.html)
+  : [html](https://stat870.github.io/fall2026/notes/practice-1.html)
 

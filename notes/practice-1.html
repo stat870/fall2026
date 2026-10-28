@@ -416,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">18.2</span> Applied example – Weight of hens<a href="practice-1.html#applied-example-weight-of-hens" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>The common notion in poultry science is that hens show a slight drop in body weight when they are going through puberty (lay their first egg).</li>
-<li>Data below come from 10 hens with weight measured 2 times a week.</li>
+<li>Data below come from 3 hens with weight measured 2 times a week.</li>
 </ul>
 <p><strong>In-class exercises</strong></p>
 <ul>
@@ -425,9 +425,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Make sure you write out the statistical models that represent the structure in the data</strong></p>
 <p>This is how the data look like:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="practice-1.html#cb40-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="practice-1.html#cb41-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/hens.csv&quot;</span>) </span>
-<span id="cb41-2"><a href="practice-1.html#cb41-2" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="practice-1.html#cb36-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="practice-1.html#cb37-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/hens.csv&quot;</span>) </span>
+<span id="cb37-2"><a href="practice-1.html#cb37-2" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre><code>##   hen age       bw        adg
 ## 1   1 143 2.004141         NA
 ## 2   1 146 2.067207 0.02102210
@@ -435,12 +435,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4   1 153 2.280510 0.03934006
 ## 5   1 157 2.402646 0.03053388
 ## 6   1 160 2.411095 0.00281631</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="practice-1.html#cb43-1" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
-<span id="cb43-2"><a href="practice-1.html#cb43-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, bw))<span class="sc">+</span></span>
-<span id="cb43-3"><a href="practice-1.html#cb43-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(hen)))<span class="sc">+</span></span>
-<span id="cb43-4"><a href="practice-1.html#cb43-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color=</span> <span class="st">&quot;Hen ID&quot;</span>)<span class="sc">+</span></span>
-<span id="cb43-5"><a href="practice-1.html#cb43-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-66-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="practice-1.html#cb39-1" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href="practice-1.html#cb39-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, bw))<span class="sc">+</span></span>
+<span id="cb39-3"><a href="practice-1.html#cb39-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(hen)))<span class="sc">+</span></span>
+<span id="cb39-4"><a href="practice-1.html#cb39-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color=</span> <span class="st">&quot;Hen ID&quot;</span>)<span class="sc">+</span></span>
+<span id="cb39-5"><a href="practice-1.html#cb39-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" alt="" width="672" /></p>
 
 </div>
 </div>

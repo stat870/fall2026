@@ -11,7 +11,7 @@ October 28th, 2026
 ## Applied example -- Weight of hens 
 
 - The common notion in poultry science is that hens show a slight drop in body weight when they are going through puberty (lay their first egg). 
-- Data below come from 10 hens with weight measured 2 times a week. 
+- Data below come from 3 hens with weight measured 2 times a week. 
 
 **In-class exercises**
 

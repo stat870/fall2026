@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+```{r message=FALSE, warning=FALSE}
+df <- read.csv("https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/hens.csv") 
+head(df)
+
+df |> 
+  ggplot(aes(age, bw))+
+  geom_point(aes(color = factor(hen)))+
+  labs(color= "Hen ID")+
+  theme_classic()
+```
+
+```{r}
+m <- 
+```
+
+
+
