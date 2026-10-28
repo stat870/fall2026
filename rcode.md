@@ -23,3 +23,4 @@ Keep in mid that all the code to generate this website and the class notes can b
 - (09/21) [get code](scripts/09212026_inclass_ex_key.Rmd)
 - (09/28) [get code](scripts/09282026_inclass_ex_key.Rmd)
 
+- 10/26 [get code](scripts/10262026_inclass.qmd)
