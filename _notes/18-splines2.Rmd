@@ -13,10 +13,12 @@ October 28th, 2026
 - The common notion in poultry science is that hens show a slight drop in body weight when they are going through puberty (lay their first egg). 
 - Data below come from 10 hens with weight measured 2 times a week. 
 
-**Questions:**
+**In-class exercises**
 
 - Test the common belief that hens show a slight drop in body weight (i.e., ADG < 0) 
 - What is the moment the hen laid the first egg by looking at body weight data? 
+
+**Make sure you write out the statistical models that represent the structure in the data** 
 
 This is how the data look like: 
 
@@ -27,6 +29,12 @@ library(tidyverse)
 ```{r message=FALSE, warning=FALSE}
 df <- read.csv("https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/hens.csv") 
 head(df)
+
+df |> 
+  ggplot(aes(age, bw))+
+  geom_point(aes(color = factor(hen)))+
+  labs(color= "Hen ID")+
+  theme_classic()
 ```
 
 

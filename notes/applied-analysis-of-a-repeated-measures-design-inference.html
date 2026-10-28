@@ -444,12 +444,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-22"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb22-22" tabindex="-1"></a>        <span class="at">data =</span> dd_fecal)</span></code></pre></div>
 <p>How do we know what covariance function was the best?</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb23-1" tabindex="-1"></a>DHARMa<span class="sc">::</span><span class="fu">simulateResiduals</span>(m_ar1, <span class="at">plot =</span> T)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-43-1.png" alt="" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-46-1.png" alt="" width="672" /></p>
 <pre><code>## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
 ##  
 ## Scaled residual values: 0.676 0.684 0.116 0.672 0.856 0.82 0.284 0.8 0.828 0.532 0.348 0.224 0.688 0.356 0.444 0.336 0.928 0.32 0.012 0.612 ...</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="applied-analysis-of-a-repeated-measures-design-inference.html#cb25-1" tabindex="-1"></a>DHARMa<span class="sc">::</span><span class="fu">simulateResiduals</span>(m_toep, <span class="at">plot =</span> T)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-43-2.png" alt="" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-46-2.png" alt="" width="672" /></p>
 <pre><code>## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
 ##  
 ## Scaled residual values: 0.628 0.728 0.184 0.7 0.856 0.816 0.3 0.804 0.752 0.58 0.328 0.288 0.676 0.464 0.408 0.388 0.892 0.316 0.04 0.608 ...</code></pre>
@@ -472,7 +472,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In statistics, hypothesis tests evaluate whether a given statistic (i.e., a function of the data) is too extreme for the null hypothesis to be true.</li>
 <li>Normally, the null hypothesis is business as usual, and we want to evaluate if we just made a scientific discovery, or if there’s not enough evidence to say that there’s something different going on.</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-48"></span>
 <img src="../figures/error_types.jpg" alt="Types of errors in hypothesis tests." width="80%" />
 <p class="caption">
 Figure 11.1: Types of errors in hypothesis tests.
@@ -495,7 +495,7 @@ Figure 11.1: Types of errors in hypothesis tests.
 </div>
 <div id="t-tests" class="section level3 hasAnchor" number="11.3.3">
 <h3><span class="header-section-number">11.3.3</span> t-tests<a href="applied-analysis-of-a-repeated-measures-design-inference.html#t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-46-1.png" alt="" width="70%" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-49-1.png" alt="" width="70%" /></p>
 <ul>
 <li>Usually used to test whether <strong>one</strong> value/parameter/linear combination of parameters is different to a certain number.</li>
 <li>Steps:
@@ -517,7 +517,7 @@ Figure 11.1: Types of errors in hypothesis tests.
 </div>
 <div id="f-tests-are-multivariate-t-tests" class="section level3 hasAnchor" number="11.3.4">
 <h3><span class="header-section-number">11.3.4</span> F-tests are multivariate t-tests<a href="applied-analysis-of-a-repeated-measures-design-inference.html#f-tests-are-multivariate-t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-47-1.png" alt="" width="70%" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" alt="" width="70%" /></p>
 <ul>
 <li>Test the relevance of multiple factors at once.</li>
 <li>Consistent with the “bins” concept of ANOVA.</li>
