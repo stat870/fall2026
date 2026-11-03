@@ -5,22 +5,120 @@ format: html
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
+library(mgcv)
+library(emmeans)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-df <- read.csv("https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/hens.csv") 
+df <- read.csv("https://raw.githubusercontent.com/stat870/fall2026/refs/heads/main/data/hens.csv") |> 
+  mutate(hen =as.factor(hen))
 head(df)
 
 df |> 
   ggplot(aes(age, bw))+
   geom_point(aes(color = factor(hen)))+
-  labs(color= "Hen ID")+
+  labs(color= "Hen ID", y ="Body weight (lb)")+
+  coord_cartesian(ylim = c(1,3.5))+
   theme_classic()
 ```
 
+$$y_{ij} \sim N(\mu_{ij}, \sigma^2), \\ \mu_{ij} = 
+\beta_0 + hen_j + f(x_{ij}).$$
+
+
+
 ```{r}
-m <- 
+m <- gam(bw ~ 1 + hen + s(age, bs = "tp", k = 13), data = df)
+gam.check(m)
 ```
+
+
+```{r}
+df_pred <- expand.grid(age = min(df$age):max(df$age), 
+                       hen= unique(df$hen))
+df_pred$yhat <- predict(m, newdata = df_pred)
+```
+
+
+
+```{r}
+
+df |> 
+  ggplot(aes(age, bw))+
+  geom_line(aes(color = factor(hen), y = yhat), data = df_pred)+
+  geom_point(aes(color = factor(hen)))+
+  labs(color= "Hen ID")+
+  theme_classic()
+
+```
+
+```{r}
+plot(emtrends(m, ~age, "age", at =list(hen= factor(1), 
+                                  age =175:190)))
+```
+
+
+
+```{r}
+m2 <- gam(adg ~ 1 + hen + s(age, bs = "tp", k = 13), data = df)
+gam.check(m2)
+
+plot(emmeans(m2, ~ age, at =list(hen= factor(1), 
+                                  age =175:190)))
+```
+
+
+
+
+
+
+
+
+
+
+
+When = $f'(x) = 0$
+
+
+
+```{r}
+df_pred <- expand.grid(age = seq(175, 185, by = .1), 
+                       hen= factor(1))
+df_pred$yhat <- predict(m, newdata = df_pred)
+
+df_pred <- df_pred |> 
+  mutate(y_diff = (yhat - lag(yhat))/.1)
+
+df_pred |> 
+  ggplot(aes(age, y_diff))+
+  geom_line()
+```
+
+
+```{r}
+df_pred |> filter(y_diff == min(abs(df_pred$y_diff), na.rm = T))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
