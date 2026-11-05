@@ -87,7 +87,8 @@ df_pred <- expand.grid(age = seq(175, 185, by = .1),
 df_pred$yhat <- predict(m, newdata = df_pred)
 
 df_pred <- df_pred |> 
-  mutate(y_diff = (yhat - lag(yhat))/.1)
+  mutate(y_diff = (yhat - lag(yhat))/.1) |> 
+  filter(y_diff<0)
 
 df_pred |> 
   ggplot(aes(age, y_diff))+
@@ -96,11 +97,127 @@ df_pred |>
 
 
 ```{r}
-df_pred |> filter(y_diff == min(abs(df_pred$y_diff), na.rm = T))
+df_pred |> 
+  filter(y_diff == -min(abs(df_pred$y_diff), na.rm = T))
+```
+
+```{r}
+df_pred |> 
+  ggplot(aes(age, y_diff))+
+  geom_line()+
+  geom_vline(xintercept = (df_pred |> 
+                             filter(y_diff == -min(abs(df_pred$y_diff), 
+                                                   na.rm = T)))$age)
 ```
 
 
 
+## Uncertianty quantification  
+
+What is the uncertainty behind the value of x where $f'(x)$ becomes negative? 
+
+```{r}
+m <- gam(bw ~ 1 + hen + s(age, bs = "tp", k = 13), data = df)
+
+df_pred <- expand.grid(age = seq(175, 185, by = .1), 
+                       hen= factor(1))
+df_pred$yhat <- predict(m, newdata = df_pred)
+
+df_pred <- df_pred |> 
+  mutate(y_diff = (yhat - lag(yhat))/.1) |> 
+  filter(y_diff<0)
+
+(df_pred |> filter(y_diff == -min(abs(df_pred$y_diff), na.rm = T)))$age
+```
+
+```{r}
+# setting up
+B <- 1000
+n <- nrow(df)
+age_min_boot <- numeric(B)
+
+set.seed(42) # Set seed for reproducibility
+
+for (i in 1:B){
+  df_boot <- df[sample(1:n, replace = T),]
+  
+  m_boot <- gam(bw ~ 1 + hen + s(age, bs = "tp", k = 13), data = df_boot)
+  
+  df_pred_boot <- expand.grid(age = seq(175, 185, by = .1),
+                              hen= factor(1))
+  df_pred_boot$yhat <- predict(m_boot, newdata = df_pred_boot)
+  
+  df_pred_boot <- df_pred_boot |>
+    mutate(y_diff = (yhat - lag(yhat))/.1) |>
+    filter(y_diff<0)
+  
+  age_min_boot[i] <- 
+    (df_pred_boot |> 
+       filter(y_diff == -min(abs(df_pred_boot$y_diff), na.rm = T)))$age
+  
+}
+
+```
+
+```{r}
+hist(age_min_boot, breaks = 25)
+```
+
+
+
+
+
+
+
+
+
+```{r}
+B <- 500
+n <- nrow(df)
+age_min_boot <- numeric(B)
+
+set.seed(42) # Set seed for reproducibility
+
+for (i in 1:B) {
+  # obtain resampled data
+  df_boot <- df[sample(n, replace = TRUE), ]
+  
+  # fit the model again, but with the resampled data
+  m_boot <- gam(bw ~ 1 + hen + s(age, bs = "tp", k = 13), data = df_boot)
+  
+  #do everything again
+  df_pred_boot <- expand.grid(age = seq(175, 185, by = .1), 
+                              hen = factor(1))
+  df_pred_boot$yhat <- predict(m_boot, newdata = df_pred_boot)
+  
+  df_pred_boot <- df_pred_boot |> 
+    mutate(y_diff = (yhat - lag(yhat)) / .1) |> 
+    filter(y_diff < 0)
+  
+  res <- df_pred_boot |> filter(y_diff == -min(abs(df_pred_boot$y_diff), na.rm = TRUE))
+  age_min_boot[i] <- if(nrow(res) > 0) res$age[1] else NA
+}
+
+ci <- quantile(age_min_boot, probs = c(0.025, 0.975))
+```
+
+```{r}
+df_pred <- expand.grid(age = min(df$age):max(df$age), 
+                       hen= unique(df$hen))
+df_pred$yhat <- predict(m, newdata = df_pred)
+
+
+
+df |> 
+  ggplot(aes(age, bw))+
+annotate("rect", xmin = ci[1], xmax = ci[2], 
+         ymin = -Inf, ymax = Inf,
+         fill = "steelblue", alpha = 0.15) +  geom_vline(xintercept = mean(age_min_boot))+
+  geom_line(aes(color = factor(hen), y = yhat), data = df_pred)+
+  geom_point(aes(color = factor(hen)))+
+  labs(color= "Hen ID")+
+  theme_classic()
+```
 
 
 
