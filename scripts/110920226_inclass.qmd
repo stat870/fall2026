@@ -1,0 +1,131 @@
+---
+title: "Untitled"
+format: html
+---
+
+## Libraries
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(glmmTMB)
+library(emmeans)
+```
+
+## Data 
+
+```{r}
+url <- "https://raw.githubusercontent.com/stat870/fall2025/refs/heads/main/data/fecal_egg_counts.csv"
+dat <- read.csv(url) |>  
+  mutate(across(c(tx, lact, manure, past_lact), 
+                ~as.factor(.))) 
+dat |> 
+  ggplot(aes(fec))+
+  geom_histogram(aes(group = tx, fill = tx), 
+                 alpha = .5, color = "black", binwidth = 2)+
+  coord_cartesian(xlim = c(0, 100))+
+  scico::scale_fill_scico_d(palette = "hawaii")+
+  labs(fill = "Treatment")+
+  theme_pubclean()
+```
+
+
+```{r}
+hist(rpois(n = 10^6, lambda = 10))
+```
+
+```{r}
+hist(rpois(n = 10^6, lambda = .02))
+```
+
+
+
+```{r}
+dat |> 
+  group_by(province, herd, tx) |> 
+  summarise(n())
+```
+
+
+```{r}
+m_pois <- glmmTMB(fec ~ tx + lact + manure + tx:manure +
+                    (1|province/herd), 
+          family = poisson(link = "log"),
+          REML = TRUE,
+          data = dat)
+```
+
+```{r}
+plot(predict(m_pois), resid(m_pois))
+```
+
+
+```{r}
+DHARMa::simulateResiduals(m_pois, plot = T)
+```
+
+```{r}
+dat |> filter(fec == 0) |> nrow()
+```
+
+```{r}
+DHARMa::testZeroInflation(m_pois, plot = T)
+```
+
+
+```{r}
+m_pois_zi <- glmmTMB(fec ~ tx + lact + manure + tx:manure +
+                    (1|province/herd), 
+                    ziformula = ~1,
+          family = poisson(link = "log"),
+          REML = TRUE,
+          data = dat)
+```
+
+
+```{r}
+DHARMa::testZeroInflation(m_pois_zi, plot = T)
+```
+
+```{r}
+DHARMa::simulateResiduals(m_pois_zi, plot = T)
+```
+
+
+
+```{r}
+m_nb_zi <- glmmTMB(fec ~ tx + lact + manure + tx:manure +
+                    (1|province/herd), 
+                    ziformula = ~1,
+          family = nbinom2(link = "log"),
+          REML = TRUE,
+          data = dat)
+```
+
+
+
+```{r}
+DHARMa::testZeroInflation(m_nb_zi, plot = T)
+```
+
+```{r}
+DHARMa::simulateResiduals(m_nb_zi, plot = T)
+```
+
+## inference 
+
+```{r}
+summary(m_pois_zi)
+```
+
+```{r}
+plot(emmeans(m_pois_zi, ~ tx, type = "response"))
+```
+
+
+```{r}
+emmeans(m_pois_zi, ~ tx, type = "response", 
+        contr = list(c(1, -1)))
+```
+
+

@@ -27,3 +27,4 @@ Keep in mid that all the code to generate this website and the class notes can b
 
 - 10/26 [get code](scripts/10262026_inclass.qmd)
 - **Splines** 11/02 [get code](scripts/10282026_inclass.qmd)
+- **Zero-inflated models** 11/09 [get code](scripts/11092026_inclass.qmd)
