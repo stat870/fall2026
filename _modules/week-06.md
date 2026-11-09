@@ -2,21 +2,21 @@
 title: Applied Problems 
 ---
 
-November 2 
-: Zero-inflated models ((Online))  
-  : [html](https://stat870.github.io/fall2025/notes/zero-inflated-models.html)
-
-November 4 
-: Zero-inflated models II  ((Online))  
-  : [](https://stat870.github.io/fall2025/notes/zero-inflated-models-practice.html)
-
 November 9 
+: Zero-inflated models   
+  : [html](https://stat870.github.io/fall2026/notes/zero-inflated-models.html)
+
+November 11 
+: Zero-inflated models II   
+  : [](https://stat870.github.io/fall2026/notes/zero-inflated-models-practice.html)
+
+November 16 
 : Zero-inflated models practice 
   : []()
 
-November 11 
+November 19 
 : Missing data problems  
-  : [](https://stat870.github.io/fall2025/notes/missing-values.html)
+  : []()
 
 November 16 
 : Missing data problems II 
