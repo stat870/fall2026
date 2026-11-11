@@ -2,9 +2,6 @@
 
 November 9th, 2026
 
-## Announcements
-
-- Homework is posted
 
 ## Zero-inflated models 
 
