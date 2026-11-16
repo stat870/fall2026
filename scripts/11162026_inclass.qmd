@@ -16,6 +16,7 @@ library(cmdstanr)
 library(bayesplot)
 library(ggpubr)
 
+df_complete <- agridat::durban.splitplot
 df <- agridat::durban.splitplot
 set.seed(42)
 missing_idx <- sample(1:nrow(df), size = round(0.02 * nrow(df)), replace = FALSE)
@@ -167,6 +168,36 @@ merged_data <- df |>
 # Plot observed data alongside Bayesian imputed values (+/- 1 posterior SD)
 merged_data |>
   ggplot(aes(x = gen, y = yield_merged, color = fung)) +
+  geom_errorbar(
+    aes(ymin = yield_merged - yield_sd, ymax = yield_merged + yield_sd),
+    width = 0.15,
+    position = position_dodge(width = 0.4),
+    na.rm = TRUE
+  ) +
+  geom_point(
+    aes(fill = (y_missing == 0)),
+    shape = 21,
+    size = 3,
+    position = position_dodge(width = 0.4)
+  ) +
+  scale_fill_manual(
+    values = c("white", "grey20"),
+    labels = c("Imputed (with ±1 SD)", "Observed"),
+    name = "Data Status"
+  ) +
+  facet_wrap(~block, labeller = label_both) +
+  theme_pubclean() +
+  labs(
+    title = "Split-Plot Yield: Observed vs. Bayesian Imputed Values",
+    x = "Genotype (Subplot)",
+    y = expression(Yield~merged~(bu~ac^{-1})),
+    color = "Fungicide"
+  )
+```
+
+```{r}
+merged_data |>
+  ggplot(aes(x = yield_true, y = yield_merged, color = factor(y_missing_id))) +
   geom_errorbar(
     aes(ymin = yield_merged - yield_sd, ymax = yield_merged + yield_sd),
     width = 0.15,
