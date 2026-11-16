@@ -1,0 +1,279 @@
+---
+title: "In-class exercise: Bayesian imputation for a split-plot Design"
+format: html
+---
+
+In this exercise, we analyze a split-plot experiment investigating the effects of **fungicide** (`fung`, whole-plot factor) and **genotype** (`gen`, subplot factor) on crop **yield** (`yield`), arranged in randomized complete blocks (`block`).
+
+We will take `df`, artificially remove random yield observations (missing completely at random - MCAR), and use **Bayesian imputation** in Stan (`cmdstanr`) to jointly estimate the fixed/random effects and impute the missing yields.
+
+### 1. Load packages, inspect data, and induce missingness (MCAR)
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lme4)
+library(cmdstanr)
+library(bayesplot)
+library(ggpubr)
+
+df <- agridat::durban.splitplot
+set.seed(42)
+missing_idx <- sample(1:nrow(df), size = round(0.02 * nrow(df)), replace = FALSE)
+df$yield[missing_idx] <- NA
+
+df |>
+  filter(is.na(yield))
+```
+
+### 2. Fit the reference `lmer` model (Complete Case / Listwise Deletion)
+
+```{r message=FALSE, warning=FALSE}
+fit_lmer_cc <- lmer(yield ~ fung * gen + (1 | block) + (1 | block:fung), data = df)
+summary(fit_lmer_cc)
+```
+
+### 3. Bayesian Imputation in Stan
+
+Following the lecture workflow, we construct an index vector `y_missing` that maps each missing observation to its corresponding parameter in the `y_impute` vector inside Stan.
+
+```{r message=FALSE, warning=FALSE}
+stan_code_splitplot <- "
+data {
+  int<lower=1> N;
+  int<lower=1> K;                      // Number of fixed-effect parameters
+  matrix[N, K] X;                      // Fixed-effects design matrix (fung * gen)
+  int<lower=1> N_block;                // Number of blocks
+  int<lower=1> N_wp;                   // Number of whole-plots (block:fung)
+  array[N] int<lower=1, upper=N_block> block_id;
+  array[N] int<lower=1, upper=N_wp> wp_id;
+  
+  int<lower=0> y_num_missing;          // Count of missing yield observations
+  vector[N] y;                         // Yield vector (NAs replaced with 0)
+  array[N] int<lower=0, upper=y_num_missing> y_missing; // Running index of NAs
+}
+
+parameters {
+  vector[K] beta;                      // Fixed effects
+  real<lower=0> sigma_block;           // Block SD
+  real<lower=0> sigma_wp;              // Whole-plot SD (block:fung)
+  real<lower=0> sigma_eps;             // Subplot / residual SD
+  
+  vector[N_block] z_block;             // Non-centered block random effects
+  vector[N_wp] z_wp;                   // Non-centered whole-plot random effects
+  
+  vector[y_num_missing] y_impute;      // Imputed values for missing yields
+}
+
+transformed parameters {
+  vector[N_block] b_block = sigma_block * z_block;
+  vector[N_wp] b_wp = sigma_wp * z_wp;
+  vector[N] y_merged;                  // Combined observed + imputed yields
+  vector[N] mu;
+
+  for (i in 1:N) {
+    mu[i] = dot_product(X[i], beta) + b_block[block_id[i]] + b_wp[wp_id[i]];
+    if (y_missing[i] > 0) {
+      y_merged[i] = y_impute[y_missing[i]];
+    } else {
+      y_merged[i] = y[i];
+    }
+  }
+}
+
+model {
+  // Priors
+  beta[1] ~ normal(50, 25);
+  beta[2:K] ~ normal(0, 10);
+  sigma_block ~ exponential(0.5);
+  sigma_wp ~ exponential(0.5);
+  sigma_eps ~ exponential(0.5);
+  
+  z_block ~ std_normal();
+  z_wp ~ std_normal();
+
+  // Joint likelihood over observed and imputed yields
+  y_merged ~ normal(mu, sigma_eps);
+}
+"
+
+BI_splitplot_model <- cmdstan_model(write_stan_file(stan_code_splitplot))
+
+# Create running index for missing observations
+y_missing <- as.numeric(is.na(df$yield))
+y_missing <- sapply(1:length(y_missing),
+                    function(n) y_missing[n] * sum(y_missing[1:n]))
+y_missing
+
+# Build design matrix without dropping NAs
+options(na.action = "na.pass")
+X <- model.matrix(~ fung * gen, data = df)
+options(na.action = "na.omit")
+
+wp_factor <- interaction(df$block, df$fung, drop = TRUE)
+
+stan_data <- list(
+  N = nrow(df),
+  K = ncol(X),
+  X = X,
+  N_block = length(unique(df$block)),
+  N_wp = length(levels(wp_factor)),
+  block_id = as.numeric(factor(df$block)),
+  wp_id = as.numeric(wp_factor),
+  y_num_missing = sum(is.na(df$yield)),
+  y = replace_na(df$yield, 0),
+  y_missing = y_missing
+)
+
+samples <- BI_splitplot_model$sample(
+  data = stan_data,
+  seed = 33,
+  chains = 3,
+  parallel_chains = 3,
+  iter_warmup = 1500,
+  iter_sampling = 1000,
+  refresh = 0
+)
+
+mcmc_trace(samples$draws(c("beta[1]", "beta[2]", "sigma_block", "sigma_wp", "sigma_eps")))
+mcmc_pairs(samples$draws(c("sigma_block", "sigma_wp", "sigma_eps")))
+```
+
+### 4. Extract Imputed Values and Visualize Uncertainty
+
+```{r message=FALSE, warning=FALSE}
+# Summarize fixed effects and variance components
+fitted_params <- samples$summary(c("beta", "sigma_block", "sigma_wp", "sigma_eps"))
+fitted_params
+
+# Extract posterior means and SDs for imputed datapoints
+y_imputed <- samples$summary() |>
+  filter(str_detect(variable, "y_impute"))
+
+y_imputed_mean <- c(NA, y_imputed$mean)
+y_imputed_sd <- c(NA, y_imputed$sd)
+
+merged_data <- df |>
+  mutate(
+    y_missing_id = factor(y_missing),
+    yield_true = df_complete$yield,
+    yield_merged = ifelse(is.na(yield),
+                          y_imputed_mean[y_missing_id],
+                          yield),
+    yield_sd = ifelse(is.na(yield),
+                      y_imputed_sd[y_missing_id],
+                      NA)
+  )
+
+# Plot observed data alongside Bayesian imputed values (+/- 1 posterior SD)
+merged_data |>
+  ggplot(aes(x = gen, y = yield_merged, color = fung)) +
+  geom_errorbar(
+    aes(ymin = yield_merged - yield_sd, ymax = yield_merged + yield_sd),
+    width = 0.15,
+    position = position_dodge(width = 0.4),
+    na.rm = TRUE
+  ) +
+  geom_point(
+    aes(fill = (y_missing == 0)),
+    shape = 21,
+    size = 3,
+    position = position_dodge(width = 0.4)
+  ) +
+  scale_fill_manual(
+    values = c("white", "grey20"),
+    labels = c("Imputed (with ±1 SD)", "Observed"),
+    name = "Data Status"
+  ) +
+  facet_wrap(~block, labeller = label_both) +
+  theme_pubclean() +
+  labs(
+    title = "Split-Plot Yield: Observed vs. Bayesian Imputed Values",
+    x = "Genotype (Subplot)",
+    y = expression(Yield~merged~(bu~ac^{-1})),
+    color = "Fungicide"
+  )
+```
+
+### 5. What if we didn't impute and just dropped those rows?
+
+```{r message=FALSE, warning=FALSE}
+stan_code_small <- "
+data {
+  int<lower=1> N;
+  int<lower=1> K;
+  matrix[N, K] X;
+  int<lower=1> N_block;
+  int<lower=1> N_wp;
+  array[N] int<lower=1, upper=N_block> block_id;
+  array[N] int<lower=1, upper=N_wp> wp_id;
+  vector[N] y;
+}
+
+parameters {
+  vector[K] beta;
+  real<lower=0> sigma_block;
+  real<lower=0> sigma_wp;
+  real<lower=0> sigma_eps;
+  vector[N_block] z_block;
+  vector[N_wp] z_wp;
+}
+
+transformed parameters {
+  vector[N_block] b_block = sigma_block * z_block;
+  vector[N_wp] b_wp = sigma_wp * z_wp;
+  vector[N] mu;
+
+  for (i in 1:N) {
+    mu[i] = dot_product(X[i], beta) + b_block[block_id[i]] + b_wp[wp_id[i]];
+  }
+}
+
+model {
+  beta[1] ~ normal(50, 25);
+  beta[2:K] ~ normal(0, 10);
+  sigma_block ~ exponential(0.5);
+  sigma_wp ~ exponential(0.5);
+  sigma_eps ~ exponential(0.5);
+  
+  z_block ~ std_normal();
+  z_wp ~ std_normal();
+
+  y ~ normal(mu, sigma_eps);
+}
+"
+
+small_splitplot_model <- cmdstan_model(write_stan_file(stan_code_small))
+
+df_small <- drop_na(df)
+X_small <- model.matrix(~ fung * gen, data = df_small)
+wp_factor_small <- interaction(df_small$block, df_small$fung, drop = TRUE)
+
+stan_data_small <- list(
+  N = nrow(df_small),
+  K = ncol(X_small),
+  X = X_small,
+  N_block = length(unique(df_small$block)),
+  N_wp = length(levels(wp_factor_small)),
+  block_id = as.numeric(factor(df_small$block)),
+  wp_id = as.numeric(wp_factor_small),
+  y = df_small$yield
+)
+
+samples_small <- small_splitplot_model$sample(
+  data = stan_data_small,
+  seed = 33,
+  chains = 3,
+  parallel_chains = 3,
+  iter_warmup = 1500,
+  iter_sampling = 1000,
+  refresh = 0
+)
+
+# Compare parameter estimates: Imputed Model vs. Dropped-NA Model
+bind_rows(
+  samples$summary(c("beta", "sigma_block", "sigma_wp", "sigma_eps")) |> mutate(Model = "Full Bayesian Imputation"),
+  samples_small$summary(c("beta", "sigma_block", "sigma_wp", "sigma_eps")) |> mutate(Model = "Dropped NAs (Complete Case)")
+) |>
+  select(Model, variable, mean, sd, q5, q95) |>
+  arrange(variable, Model)
+```

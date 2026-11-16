@@ -26,6 +26,72 @@ d |>
   scico::scale_fill_scico_d(palette = "hawaii")
 ```
 
+```{r}
+d <- d |> arrange(herbicide, location) |> 
+  mutate(plot_id = paste(location, herbicide, sep ="_") |> as.factor())
+```
+
+```{r}
+library(mgcv)
+
+m1 <- gam(plant_count ~ herbicide + s(location, bs ="re")+ s(plot_id, bs = "re"),
+          family = poisson(link = "log"), 
+          data = d)
+
+res <- DHARMa::simulateResiduals(m1)
+
+DHARMa::testZeroInflation(res)
+```
+
+```{r}
+m1_zi <- gam(plant_count ~ 
+               herbicide + s(location, bs ="re")+ s(plot_id, bs = "re"),
+          family = ziP(link = "identity", b = 0.1), 
+          data = d)
+
+res <- DHARMa::simulateResiduals(m1_zi)
+
+DHARMa::testZeroInflation(res)
+
+plot(res)
+
+gam.check(m1_zi)
+
+```
+
+```{r}
+summary(m1_zi)
+
+
+anova(m1_zi)
+plot(emmeans(m1_zi, ~ herbicide, type = "response"))
+```
+
+```{r}
+emmeans(m1_zi, ~ herbicide, type = "response", contr = )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```{r}
 m_pois <- glmmTMB(plant_count ~ herbicide + (1|location/herbicide),
