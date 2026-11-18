@@ -1,0 +1,16 @@
+# Missing Data II
+
+## Announcements
+
+- Complete [this survey](https://forms.gle/pNT1xqsB17npuqa86) if you want to have a saying in what we study next.
+
+
+## More practice: in-class exercise 
+
+[Get R code](../scripts/11182026_inclass.qmd)
+
+
+
+
+
+
