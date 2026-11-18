@@ -8,23 +8,23 @@ November 9
 
 November 11 
 : Zero-inflated models II   
-  : [](https://stat870.github.io/fall2026/notes/zero-inflated-models-practice.html)
+  : [html](https://stat870.github.io/fall2026/notes/zero-inflated-models-2.html)
 
 November 16 
 : Zero-inflated models practice 
-  : []()
+  : [html](https://stat870.github.io/fall2026/notes/missing-data.html)
 
 November 19 
 : Missing data problems  
-  : []()
+  : [html](https://stat870.github.io/fall2026/notes/missing-data-ii.html)
 
 November 16 
 : Missing data problems II 
-  : [](https://stat870.github.io/fall2025/notes/missing-values.html)
+  : [](https://stat870.github.io/fall2026/notes/missing-values.html)
 
 November 18 
 : Missing data problems practice 
-  : [](https://stat870.github.io/fall2025/notes/missing-values.html)
+  : [](https://stat870.github.io/fall2026/notes/missing-values.html)
 
 November 23 
 : Fall Break -- no class 
